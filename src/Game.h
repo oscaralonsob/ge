@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SDL2/SDL.h>
+#include "Logger.h"
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;
@@ -11,6 +12,7 @@ class Game {
     private:
         SDL_Window* window;
         SDL_Renderer* renderer;
+        Logger* logger;
         bool isRunning;
         int milisecsPrevoiusFrame;
         int windowWidth;

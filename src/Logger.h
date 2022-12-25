@@ -4,6 +4,7 @@
 #include <string>
 
 class Logger {
+    //TODO: this will be an interface, once we have imgui a imguiLogger will be created
     
     struct LogEntry {
         std::string color;
@@ -12,20 +13,19 @@ class Logger {
     };
 
     private:
-        inline static const std::string GREY = "\033[1;90m";
-        inline static const std::string RED = "\033[1;32m";
-        inline static const std::string END = "\033[0m";
+        const std::string GREY = "\033[1;90m";
+        const std::string RED = "\033[1;31m";
+        const std::string END = "\033[0m";
 
 
-        inline static const std::string LOG = "LOG";
-        inline static const std::string ERR = "ERR";
+        const std::string LOG = "LOG";
+        const std::string ERR = "ERR";
 
-        static std::string TimeToString();
-        static void Print(LogEntry logEntry);
+        std::string TimeToString();
+        void Print(LogEntry logEntry);
     public:
-        //TODO: remove static modifier
-        static void Log(const std::string& message);
-        static void Err(const std::string& message);
+        void Log(const std::string& message);
+        void Err(const std::string& message);
 };
 
 #endif
