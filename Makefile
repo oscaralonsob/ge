@@ -1,8 +1,19 @@
+# Makefile variables
+CC = g++
+LANG_STD = -std=c++17
+COMPILER_FLAGS = -Wall -Wfatal-errors
+INCLUDE_PATH = -I"./libs"
+SRC_FOLDER = ./src/*.cpp\
+			 ./src/Game/*.cpp\
+			 ./src/Logger/*.cpp
+LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -llua5.3
+OBJ_NAME = build/gameengine
+
 compile:
-	g++ -Wall -std=c++17 -I"./libs" src/*.cpp -lSDL2 -lSDL2_image -lSDL2_ttf -llua5.3 -o build/gameengine
+	$(CC) $(COMPILER_FLAGS) $(LANG_STD) $(INCLUDE_PATH) $(SRC_FOLDER) $(LINKER_FLAGS) -o $(OBJ_NAME)
 
 run:
-	./build/gameengine
+	./$(OBJ_NAME)
 
 clean:
-	rm build/gameengine
+	rm $(OBJ_NAME)

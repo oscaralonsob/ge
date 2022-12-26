@@ -1,5 +1,5 @@
 #include <SDL2/SDL_image.h>
-#include "../libs/glm/glm.hpp"
+#include "../../libs/glm/glm.hpp"
 #include "Game.h"
 
 Game::Game() {
