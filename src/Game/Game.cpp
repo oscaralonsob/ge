@@ -4,12 +4,13 @@
 
 Game::Game() {
     logger = new Logger();
-    logger->Log("Game constructor called");
     isRunning = false;
+    logger->Log("Game constructor called");
 }
 
 Game::~Game() {
     logger->Log("Game destructor called");
+    delete logger;
 }
 
 void Game::Initialize() {
