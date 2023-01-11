@@ -8,6 +8,8 @@ class Entity {
     public:
         Entity(int id): id(id) {};
         int GetId() const;
+
+        bool operator ==(const Entity& other) const;
 };
 
 #endif
