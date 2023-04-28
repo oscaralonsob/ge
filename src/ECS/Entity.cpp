@@ -6,4 +6,16 @@ int Entity::GetId() const {
 
 bool Entity::operator ==(const Entity& other) const {
     return id == other.id;
-} 
+}
+
+bool Entity::operator !=(const Entity& other) const { 
+    return id != other.id; 
+}
+
+bool Entity::operator >(const Entity& other) const { 
+    return id > other.id; 
+}
+
+bool Entity::operator <(const Entity& other) const { 
+    return id < other.id; 
+}
