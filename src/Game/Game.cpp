@@ -4,6 +4,7 @@
 
 Game::Game() {
     logger = new Logger();
+    registry = new Registry();
     isRunning = false;
     logger->Log("Game constructor called");
 }
@@ -11,6 +12,7 @@ Game::Game() {
 Game::~Game() {
     logger->Log("Game destructor called");
     delete logger;
+    delete registry;
 }
 
 void Game::Initialize() {
@@ -75,6 +77,9 @@ void Game::Setup() {
     milisecsPrevoiusFrame = SDL_GetTicks();
     playerPosition = glm::vec2(10, 10);
     playerVelocity = glm::vec2(100, 50);
+
+    Entity tank = registry->CreateEntity();
+    Entity tank2 = registry->CreateEntity();
 }
 
 void Game::Update() {
@@ -90,6 +95,8 @@ void Game::Update() {
     //TODO update game objects
     playerPosition.x += playerVelocity.x * deltaTime;
     playerPosition.y += playerVelocity.y * deltaTime;
+
+    registry->Update();
 }
 
 void Game::Render() {

@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include "../Logger/Logger.h"
+#include "../ECS/Registry.h"
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;
@@ -17,6 +18,8 @@ class Game {
         int milisecsPrevoiusFrame;
         int windowWidth;
         int windowHeight;
+
+        Registry* registry;
 
         void ProcessInput();
         void Setup();

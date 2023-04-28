@@ -10,13 +10,21 @@ Entity Registry::CreateEntity() {
     Entity entity(entityId);
     entitiesToBeAdded.insert(entity);
 
+    if (entityId >= static_cast<int>(entityComponentSignatures.size())) {
+        entityComponentSignatures.resize(entityId + 1);
+    }
+
     logger->Log("Entity created with id: " + std::to_string(entityId));
 
     return entity;
 }
 
 void Registry::Update() {
-    //TODO: Add entites from entitiesToBeAdded
+    for (Entity entity: entitiesToBeAdded) {
+        AddEntityToSystems(entity);
+    }
+    entitiesToBeAdded.clear();
+
     //TODO: Remove entites from entitiesToBeRemoved
 }
 
