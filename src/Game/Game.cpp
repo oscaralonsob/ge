@@ -3,16 +3,14 @@
 #include "Game.h"
 
 Game::Game() {
-    logger = new Logger();
-    registry = new Registry();
+    logger = std::make_shared<Logger>();;
+    registry = std::make_unique<Registry>(logger);
     isRunning = false;
     logger->Log("Game constructor called");
 }
 
 Game::~Game() {
     logger->Log("Game destructor called");
-    delete logger;
-    delete registry;
 }
 
 void Game::Initialize() {

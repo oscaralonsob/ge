@@ -18,21 +18,20 @@ class Registry {
     private:
         int numEntities = 0;
 
-        std::vector<IPool*> componentPools;
+        std::vector<std::shared_ptr<IPool>> componentPools;
 
         std::vector<Signature> entityComponentSignatures;
 
-        std::unordered_map<std::type_index, System*> systems;
+        std::unordered_map<std::type_index, std::shared_ptr<System>> systems;
 
         std::set<Entity> entitiesToBeAdded;
         std::set<Entity> entitiesToBeRemoved;
 
-
-        Logger* logger; 
-        //TODO: duplicated logger, static? dependency injection?
+        std::shared_ptr<Logger> logger; 
 
     public:
-        Registry();
+       Registry(std::shared_ptr<Logger> l);
+       ~Registry() = default;
 
         Entity CreateEntity();
         //TODO: void KillEntity(Entity entity);

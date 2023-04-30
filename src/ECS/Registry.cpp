@@ -1,7 +1,7 @@
 #include "Registry.h"
 
-Registry::Registry() {
-    logger = new Logger();
+Registry::Registry(std::shared_ptr<Logger> l) {
+    logger = l;
 }
 
 Entity Registry::CreateEntity() {
@@ -38,11 +38,11 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args) {
     }
 
     if (!componentPools[componentId]) {
-        Pool<T>* newComponentPool = new Pool<T>();
+        std::shared_ptr<Pool<T>> newComponentPool = std::make_shared<Pool<T>>();
         componentPools[componentId] = newComponentPool;
     }
 
-    Pool<T>* componentPool = componentPools[componentId];
+    std::shared_ptr<Pool<T>> componentPool = std::static_pointer_cast<Pool<T>>(componentPools[componentId]);
 
     if (componentId >= componentPool->GetSize()) {
         componentPool->Resize(numEntities);
@@ -73,8 +73,7 @@ bool Registry::HasComponent(Entity entity) const {
 
 template <typename T, typename ...TArgs> 
 void Registry::AddSystem(TArgs&& ...args) {
-    T* newSystem = new T(std::forward<TArgs>(args)...);
-
+    std::shared_ptr<T> newSystem = std::make_shared<T>(std::forward<TArgs>(args)...);
     systems.insert(std::make_pair(std::type_index(typeid(T)), newSystem));
 }
 

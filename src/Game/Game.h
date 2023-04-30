@@ -13,13 +13,13 @@ class Game {
     private:
         SDL_Window* window;
         SDL_Renderer* renderer;
-        Logger* logger;
         bool isRunning;
         int milisecsPrevoiusFrame;
         int windowWidth;
         int windowHeight;
 
-        Registry* registry;
+        std::unique_ptr<Registry> registry;
+        std::shared_ptr<Logger> logger;
 
         void ProcessInput();
         void Setup();
