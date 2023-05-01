@@ -73,6 +73,14 @@ bool Registry::HasComponent(Entity entity) const {
     return entityComponentSignatures[entityId].test(componentId);
 }
 
+template <typename T> 
+T& Registry::GetComponent(Entity entity) const {
+    const int componentId = Component<T>::GetId();
+    const int entityId = entity.GetId();
+
+    return std::static_pointer_cast<Pool<T>>(componentPools[componentId])->Get(entityId);
+}
+
 template <typename T, typename ...TArgs> 
 void Registry::AddSystem(TArgs&& ...args) {
     std::shared_ptr<T> newSystem = std::make_shared<T>(std::forward<TArgs>(args)...);

@@ -42,6 +42,7 @@ class Registry {
         template <typename T, typename ...TArgs> void AddComponent(Entity entity, TArgs&& ...args);
         template <typename T> void RemoveComponent(Entity entity);
         template <typename T> bool HasComponent(Entity entity) const;
+        template <typename T> T& GetComponent(Entity entity) const;
 
         template <typename T, typename ...TArgs> void AddSystem(TArgs&& ...args);
         template <typename T> void RemoveSystem();
