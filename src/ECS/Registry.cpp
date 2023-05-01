@@ -53,6 +53,8 @@ void Registry::AddComponent(Entity entity, TArgs&& ...args) {
     componentPool->Set(entityId, newComponent);
 
     entityComponentSignatures[entityId].set(componentId);
+
+    logger->Log("Component id = " + std::to_string(componentId) + " was added to entity id = " + std::to_string(entityId));
 }
 
 template <typename T> 
@@ -108,3 +110,13 @@ void Registry::AddEntityToSystems(Entity entity) {
         }
     }
 }
+
+//TODO: look for tpp files
+template void Registry::AddComponent<TransformComponent, glm::vec2, glm::vec2, double>(Entity entity, glm::vec2&& pos, glm::vec2&& scale, double&& rotation);
+template void Registry::AddComponent<RigidBodyComponent, glm::vec2>(Entity entity, glm::vec2&&);
+
+template class Component<TransformComponent>;
+template class Component<RigidBodyComponent>;
+
+template class Pool<TransformComponent>;
+template class Pool<RigidBodyComponent>;

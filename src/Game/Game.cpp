@@ -1,5 +1,3 @@
-#include <SDL2/SDL_image.h>
-#include "../../libs/glm/glm.hpp"
 #include "Game.h"
 
 Game::Game() {
@@ -77,7 +75,9 @@ void Game::Setup() {
     playerVelocity = glm::vec2(100, 50);
 
     Entity tank = registry->CreateEntity();
-    Entity tank2 = registry->CreateEntity();
+
+    registry->AddComponent<TransformComponent>(tank, glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
+    registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(10.0,10.0));
 }
 
 void Game::Update() {

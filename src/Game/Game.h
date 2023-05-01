@@ -1,9 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "../../libs/glm/glm.hpp"
+#include <SDL2/SDL_image.h>
 #include <SDL2/SDL.h>
 #include "../Logger/Logger.h"
 #include "../ECS/Registry.h"
+#include "../Components/TransformComponent.h"
+#include "../Components/RigidBodyComponent.h"
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;

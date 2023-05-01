@@ -5,6 +5,7 @@
 
 #include "IPool.h"
 
+//TODO: look for tpp files
 template <typename T>
 class Pool: public IPool {
     private:
@@ -26,7 +27,7 @@ class Pool: public IPool {
         }
 
         void Resize(int size) {
-            data.resize();
+            data.resize(size);
         }
 
         void Clear() {

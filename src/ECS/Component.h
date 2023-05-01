@@ -8,7 +8,10 @@ class Component: public BaseComponent {
     private:
 
     public:
-        static int GetId();
+        static int GetId() {
+            static int id = nextId++;
+            return id;
+        }
 };
 
 #endif

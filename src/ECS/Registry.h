@@ -13,6 +13,8 @@
 #include "System.h"
 #include "Component.h"
 #include "../Logger/Logger.h"
+#include "../Components/RigidBodyComponent.h"
+#include "../Components/TransformComponent.h"
 
 class Registry {
     private:
