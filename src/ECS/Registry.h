@@ -13,8 +13,10 @@
 #include "System.h"
 #include "Component.h"
 #include "../Logger/Logger.h"
+//TODO: this is not needed once we change to tpp files
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/TransformComponent.h"
+#include "../Systems/MovementSystem.h"
 
 class Registry {
     private:

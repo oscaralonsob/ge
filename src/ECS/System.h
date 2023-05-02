@@ -5,6 +5,9 @@
 #include <vector>
 #include <algorithm>
 #include "Entity.h"
+//TODO: this is not needed once we change to tpp files
+#include "../Components/RigidBodyComponent.h"
+#include "../Components/TransformComponent.h"
 
 const unsigned int MAX_COMPONENTS = 32;
 

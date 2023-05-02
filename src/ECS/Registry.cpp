@@ -124,6 +124,11 @@ void Registry::AddEntityToSystems(Entity entity) {
 //TODO: look for tpp files
 template void Registry::AddComponent<TransformComponent, glm::vec2, glm::vec2, double>(Entity entity, glm::vec2&& pos, glm::vec2&& scale, double&& rotation);
 template void Registry::AddComponent<RigidBodyComponent, glm::vec2>(Entity entity, glm::vec2&&);
+template TransformComponent& Registry::GetComponent<TransformComponent>(Entity entity) const;
+template RigidBodyComponent& Registry::GetComponent<RigidBodyComponent>(Entity entity) const;
+
+template void Registry::AddSystem<MovementSystem>();
+template MovementSystem& Registry::GetSystem<MovementSystem>() const;
 
 template class Component<TransformComponent>;
 template class Component<RigidBodyComponent>;

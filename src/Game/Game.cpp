@@ -70,9 +70,7 @@ glm::vec2 playerPosition;
 glm::vec2 playerVelocity;
 
 void Game::Setup() {
-    milisecsPrevoiusFrame = SDL_GetTicks();
-    playerPosition = glm::vec2(10, 10);
-    playerVelocity = glm::vec2(100, 50);
+    registry->AddSystem<MovementSystem>();
 
     Entity tank = registry->CreateEntity();
 
@@ -90,9 +88,8 @@ void Game::Update() {
     double deltaTime = (SDL_GetTicks() - milisecsPrevoiusFrame) / MILISENCOS_TO_SECONDS;
     milisecsPrevoiusFrame = SDL_GetTicks();
 
-    //TODO update game objects
-    playerPosition.x += playerVelocity.x * deltaTime;
-    playerPosition.y += playerVelocity.y * deltaTime;
+    //TODO: update in registry maybe?
+    registry->GetSystem<MovementSystem>().Update(deltaTime);
 
     registry->Update();
 }

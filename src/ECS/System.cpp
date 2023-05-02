@@ -24,3 +24,7 @@ void System::RequireComponent() {
     const int componentId = Component<T>::GetId();
     componentSignature.set(componentId);
 }
+
+//TODO: look for tpp files
+template void System::RequireComponent<TransformComponent> ();
+template void System::RequireComponent<RigidBodyComponent>();
