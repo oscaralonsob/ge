@@ -47,7 +47,7 @@ class Registry {
         template <typename T, typename ...TArgs> void AddSystem(TArgs&& ...args);
         template <typename T> void RemoveSystem();
         template <typename T> bool HasSystem() const;
-        template <typename T> T GetSystem();
+        template <typename T> T& GetSystem() const;
 
         void AddEntityToSystems(Entity entity);
 };
