@@ -21,7 +21,7 @@ class System {
 
         void AddEntityToSystem(Entity entity);
         void RemoveEntityFromSystem(Entity entity);
-        std::vector<Entity> GetSystemEntityes() const;
+        std::vector<Entity> GetSystemEntities() const;
         const Signature& GetComponentSignature() const;
 
         template <typename T> void RequireComponent();
