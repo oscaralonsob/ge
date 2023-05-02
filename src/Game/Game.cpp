@@ -71,11 +71,17 @@ glm::vec2 playerVelocity;
 
 void Game::Setup() {
     registry->AddSystem<MovementSystem>();
+    registry->AddSystem<RenderSystem>();
 
     Entity tank = registry->CreateEntity();
-
     tank.AddComponent<TransformComponent>(glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
     tank.AddComponent<RigidBodyComponent>(glm::vec2(10.0,10.0));
+    tank.AddComponent<SpriteComponent>(glm::vec2(10.0,10.0));
+
+    Entity truck = registry->CreateEntity();
+    truck.AddComponent<TransformComponent>(glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
+    truck.AddComponent<RigidBodyComponent>(glm::vec2(15.0,10.0));
+    truck.AddComponent<SpriteComponent>(glm::vec2(20.0,10.0));
 }
 
 void Game::Update() {
@@ -98,23 +104,7 @@ void Game::Render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
 
-    //Draw a silly player
-    SDL_Rect destination = {
-        static_cast<int>(playerPosition.x), 
-        static_cast<int>(playerPosition.y), 
-        32, 
-        32
-    };
-    SDL_Surface* surface = IMG_Load("./assets/images/tank-tiger-right.png");
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-    SDL_RenderCopy(
-        renderer, 
-        texture, 
-        NULL, // Full rect (image)
-        &destination //Place where the texture will be drawn
-    );
-    SDL_FreeSurface(surface);
-    SDL_DestroyTexture(texture);
+    registry->GetSystem<RenderSystem>().Update(renderer);
 
     SDL_RenderPresent(renderer);
 }

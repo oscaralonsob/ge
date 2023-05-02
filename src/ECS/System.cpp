@@ -26,5 +26,6 @@ void System::RequireComponent() {
 }
 
 //TODO: look for tpp files
-template void System::RequireComponent<TransformComponent> ();
+template void System::RequireComponent<TransformComponent>();
 template void System::RequireComponent<RigidBodyComponent>();
+template void System::RequireComponent<SpriteComponent>();

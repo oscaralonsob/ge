@@ -8,6 +8,7 @@
 //TODO: this is not needed once we change to tpp files
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/TransformComponent.h"
+#include "../Components/SpriteComponent.h"
 
 const unsigned int MAX_COMPONENTS = 32;
 
