@@ -43,7 +43,7 @@ bool Entity::HasComponent() const {
 
 template <typename T> 
 T& Entity::GetComponent() const {
-    registry->GetComponent<T>(*this);
+    return registry->GetComponent<T>(*this);
 }
 
 //TODO: look for tpp files
