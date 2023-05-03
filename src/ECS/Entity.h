@@ -1,6 +1,11 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+//TODO: this is not needed once we change to tpp files
+#include "../Components/RigidBodyComponent.h"
+#include "../Components/TransformComponent.h"
+#include "../Components/SpriteComponent.h"
+
 class Entity {
     private:
         int id;
