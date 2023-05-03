@@ -18,14 +18,3 @@ std::vector<Entity> System::GetSystemEntities() const {
 const Signature& System::GetComponentSignature() const {
     return componentSignature;
 }
-
-template <typename T> 
-void System::RequireComponent() {
-    const int componentId = Component<T>::GetId();
-    componentSignature.set(componentId);
-}
-
-//TODO: look for tpp files
-template void System::RequireComponent<TransformComponent>();
-template void System::RequireComponent<RigidBodyComponent>();
-template void System::RequireComponent<SpriteComponent>();

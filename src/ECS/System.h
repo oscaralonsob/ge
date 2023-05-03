@@ -4,11 +4,8 @@
 #include <bitset>
 #include <vector>
 #include <algorithm>
+#include "Component.h"
 #include "Entity.h"
-//TODO: this is not needed once we change to tpp files
-#include "../Components/RigidBodyComponent.h"
-#include "../Components/TransformComponent.h"
-#include "../Components/SpriteComponent.h"
 
 const unsigned int MAX_COMPONENTS = 32;
 
@@ -30,5 +27,7 @@ class System {
 
         template <typename T> void RequireComponent();
 };
+
+#include "System.tpp"
 
 #endif
