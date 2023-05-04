@@ -15,8 +15,8 @@ class MovementSystem: public System {
         //TODO: cpp file pls
         void Update(double deltaTime) {
             for (Entity entity: GetSystemEntities()) {
-                TransformComponent& transform = entity.GetComponent<TransformComponent>();
-                const RigidBodyComponent& rigidBody = entity.GetComponent<RigidBodyComponent>();
+                TransformComponent& transform = entity.GetRegistry()->GetComponent<TransformComponent>(entity);
+                const RigidBodyComponent& rigidBody = entity.GetRegistry()->GetComponent<RigidBodyComponent>(entity);
 
                 transform.position.x += rigidBody.velocity.x * deltaTime;
                 transform.position.y += rigidBody.velocity.y * deltaTime;
