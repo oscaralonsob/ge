@@ -3,6 +3,7 @@
 Game::Game() {
     logger = std::make_shared<Logger>();;
     registry = std::make_unique<Registry>(logger);
+    assetStore = std::make_unique<AssetStore>(logger);
     isRunning = false;
     logger->Log("Game constructor called");
 }
@@ -73,15 +74,18 @@ void Game::Setup() {
     registry->AddSystem<MovementSystem>();
     registry->AddSystem<RenderSystem>();
 
+    assetStore->AddTexture(renderer, "tank-image", "./assets/images/tank-panther-right.png");
+    assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-right.png");
+
     Entity tank = registry->CreateEntity();
-    registry->AddComponent<TransformComponent>(tank, glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
-    registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(10.0,10.0));
-    registry->AddComponent<SpriteComponent>(tank, glm::vec2(10.0,10.0));
+    registry->AddComponent<TransformComponent>(tank, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
+    registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(0.0, 10.0));
+    registry->AddComponent<SpriteComponent>(tank, "tank-image", glm::vec2(32.0, 32.0));
 
     Entity truck = registry->CreateEntity();
-    registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
-    registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(15.0,10.0));
-    registry->AddComponent<SpriteComponent>(truck, glm::vec2(20.0,10.0));
+    registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, .0), glm::vec2(1.0, 1.0), 0.0);
+    registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(10.0, 0.0));
+    registry->AddComponent<SpriteComponent>(truck, "truck-image", glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
 }
 
 void Game::Update() {
@@ -104,7 +108,7 @@ void Game::Render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
 
-    registry->GetSystem<RenderSystem>().Update(renderer);
+    registry->GetSystem<RenderSystem>().Update(renderer, assetStore);
 
     SDL_RenderPresent(renderer);
 }

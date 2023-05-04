@@ -6,6 +6,7 @@
 #include <SDL2/SDL.h>
 #include "../Logger/Logger.h"
 #include "../ECS/Registry.h"
+#include "../AssetStore/AssetStore.h"
 #include "../Components/TransformComponent.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/SpriteComponent.h"
@@ -26,6 +27,7 @@ class Game {
         int windowHeight;
 
         std::unique_ptr<Registry> registry;
+        std::unique_ptr<AssetStore> assetStore;
         std::shared_ptr<Logger> logger;
 
         void ProcessInput();

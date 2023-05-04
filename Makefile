@@ -6,7 +6,8 @@ INCLUDE_PATH = -I"./libs"
 SRC_FOLDER = ./src/*.cpp\
 			 ./src/Game/*.cpp\
 			 ./src/Logger/*.cpp\
-			 ./src/ECS/*.cpp
+			 ./src/ECS/*.cpp\
+			 ./src/AssetStore/*.cpp
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -llua5.3
 OBJ_NAME = build/gameengine
 
