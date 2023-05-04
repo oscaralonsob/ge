@@ -1,6 +1,10 @@
 #include "System.h"
 #include "Component.h"
 
+System::System(Registry* registry) {
+    this->registry = registry;
+}
+
 void System::AddEntityToSystem(Entity entity) {
     entities.push_back(entity);
 }
@@ -15,17 +19,10 @@ std::vector<Entity> System::GetSystemEntities() const {
     return entities;
 }
 
+Registry* System::GetRegistry() const {
+    return registry;
+}
+
 const Signature& System::GetComponentSignature() const {
     return componentSignature;
 }
-
-template <typename T> 
-void System::RequireComponent() {
-    const int componentId = Component<T>::GetId();
-    componentSignature.set(componentId);
-}
-
-//TODO: look for tpp files
-template void System::RequireComponent<TransformComponent>();
-template void System::RequireComponent<RigidBodyComponent>();
-template void System::RequireComponent<SpriteComponent>();

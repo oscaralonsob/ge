@@ -4,21 +4,15 @@
 class Entity {
     private:
         int id;
-        class Registry* registry;
 
     public:
-        Entity(int id, Registry* registry);
+        Entity(int id);
         int GetId() const;
 
         bool operator ==(const Entity& other) const;
         bool operator !=(const Entity& other) const;
         bool operator <(const Entity& other) const;
         bool operator >(const Entity& other) const;
-
-        template <typename T, typename ...TArgs> void AddComponent(TArgs&& ...args);
-        template <typename T> void RemoveComponent();
-        template <typename T> bool HasComponent() const;
-        template <typename T> T& GetComponent() const;
 };
 
 #endif

@@ -7,8 +7,7 @@ Registry::Registry(std::shared_ptr<Logger> l) {
 Entity Registry::CreateEntity() {
     int entityId = numEntities++;
 
-    //TODO: parameter??
-    Entity entity(entityId, this);
+    Entity entity(entityId);
 
     entitiesToBeAdded.insert(entity);
 
@@ -30,81 +29,6 @@ void Registry::Update() {
     //TODO: Remove entites from entitiesToBeRemoved
 }
 
-template <typename T, typename ...TArgs> 
-void Registry::AddComponent(Entity entity, TArgs&& ...args) {
-    const int componentId = Component<T>::GetId();
-    const int entityId = entity.GetId();
-
-    if (componentId >= static_cast<int>(componentPools.size())) {
-        componentPools.resize(componentId + 1, nullptr);
-    }
-
-    if (!componentPools[componentId]) {
-        std::shared_ptr<Pool<T>> newComponentPool = std::make_shared<Pool<T>>();
-        componentPools[componentId] = newComponentPool;
-    }
-
-    std::shared_ptr<Pool<T>> componentPool = std::static_pointer_cast<Pool<T>>(componentPools[componentId]);
-
-    if (componentId >= componentPool->GetSize()) {
-        componentPool->Resize(numEntities);
-    }
-
-    T newComponent(std::forward<TArgs>(args)...);
-
-    componentPool->Set(entityId, newComponent);
-
-    entityComponentSignatures[entityId].set(componentId);
-
-    logger->Log("Component id = " + std::to_string(componentId) + " was added to entity id = " + std::to_string(entityId));
-}
-
-template <typename T> 
-void Registry::RemoveComponent(Entity entity) {
-    const int componentId = Component<T>::GetId();
-    const int entityId = entity.GetId();
-
-    entityComponentSignatures[entityId].set(componentId, false);
-}
-
-template <typename T> 
-bool Registry::HasComponent(Entity entity) const {
-    const int componentId = Component<T>::GetId();
-    const int entityId = entity.GetId();
-
-    return entityComponentSignatures[entityId].test(componentId);
-}
-
-template <typename T> 
-T& Registry::GetComponent(Entity entity) const {
-    const int componentId = Component<T>::GetId();
-    const int entityId = entity.GetId();
-
-    return std::static_pointer_cast<Pool<T>>(componentPools[componentId])->Get(entityId);
-}
-
-template <typename T, typename ...TArgs> 
-void Registry::AddSystem(TArgs&& ...args) {
-    std::shared_ptr<T> newSystem = std::make_shared<T>(std::forward<TArgs>(args)...);
-    systems.insert(std::make_pair(std::type_index(typeid(T)), newSystem));
-}
-
-template <typename T> 
-void Registry::RemoveSystem() {
-    systems.erase(systems.find(std::type_index(typeid(T))));
-}
-
-template <typename T> 
-bool Registry::HasSystem() const {
-    return systems.find(std::type_index(typeid(T))) != systems.end();
-}
-
-template <typename T> 
-T& Registry::GetSystem() const {
-    auto system = systems.find(std::type_index(typeid(T)));
-    return *(std::static_pointer_cast<T>(system->second));
-}
-
 void Registry::AddEntityToSystems(Entity entity) {
     const int entityId = entity.GetId();
 
@@ -120,24 +44,3 @@ void Registry::AddEntityToSystems(Entity entity) {
         }
     }
 }
-
-//TODO: look for tpp files
-template void Registry::AddComponent<TransformComponent, glm::vec2, glm::vec2, double>(Entity entity, glm::vec2&& pos, glm::vec2&& scale, double&& rotation);
-template void Registry::AddComponent<RigidBodyComponent, glm::vec2>(Entity entity, glm::vec2&&);
-template void Registry::AddComponent<SpriteComponent, glm::vec2>(Entity entity, glm::vec2&&);
-template TransformComponent& Registry::GetComponent<TransformComponent>(Entity entity) const;
-template RigidBodyComponent& Registry::GetComponent<RigidBodyComponent>(Entity entity) const;
-template SpriteComponent& Registry::GetComponent<SpriteComponent>(Entity entity) const;
-
-template void Registry::AddSystem<MovementSystem>();
-template MovementSystem& Registry::GetSystem<MovementSystem>() const;
-template void Registry::AddSystem<RenderSystem>();
-template RenderSystem& Registry::GetSystem<RenderSystem>() const;
-
-template class Component<TransformComponent>;
-template class Component<RigidBodyComponent>;
-template class Component<SpriteComponent>;
-
-template class Pool<TransformComponent>;
-template class Pool<RigidBodyComponent>;
-template class Pool<SpriteComponent>;

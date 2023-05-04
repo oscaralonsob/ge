@@ -74,14 +74,14 @@ void Game::Setup() {
     registry->AddSystem<RenderSystem>();
 
     Entity tank = registry->CreateEntity();
-    tank.AddComponent<TransformComponent>(glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
-    tank.AddComponent<RigidBodyComponent>(glm::vec2(10.0,10.0));
-    tank.AddComponent<SpriteComponent>(glm::vec2(10.0,10.0));
+    registry->AddComponent<TransformComponent>(tank, glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
+    registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(10.0,10.0));
+    registry->AddComponent<SpriteComponent>(tank, glm::vec2(10.0,10.0));
 
     Entity truck = registry->CreateEntity();
-    truck.AddComponent<TransformComponent>(glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
-    truck.AddComponent<RigidBodyComponent>(glm::vec2(15.0,10.0));
-    truck.AddComponent<SpriteComponent>(glm::vec2(20.0,10.0));
+    registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0,10.0), glm::vec2(1,1), 0.0);
+    registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(15.0,10.0));
+    registry->AddComponent<SpriteComponent>(truck, glm::vec2(20.0,10.0));
 }
 
 void Game::Update() {
