@@ -8,7 +8,7 @@
 
 class RenderSystem: public System {
     public:
-        RenderSystem() {
+        RenderSystem(Registry* registry): System(registry) {
             RequireComponent<TransformComponent>();
             RequireComponent<SpriteComponent>();
         }
@@ -16,8 +16,8 @@ class RenderSystem: public System {
         //TODO: cpp file pls
         void Update(SDL_Renderer* renderer) {
             for (Entity entity: GetSystemEntities()) {
-                TransformComponent& transform = entity.GetRegistry()->GetComponent<TransformComponent>(entity);
-                const SpriteComponent& sprite = entity.GetRegistry()->GetComponent<SpriteComponent>(entity);
+                TransformComponent& transform = GetRegistry()->GetComponent<TransformComponent>(entity);
+                const SpriteComponent& sprite = GetRegistry()->GetComponent<SpriteComponent>(entity);
 
                 SDL_Rect obj = {
                     static_cast<int>(transform.position.x), 

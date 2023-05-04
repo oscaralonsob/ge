@@ -1,8 +1,7 @@
 #include "Entity.h"
 
-Entity::Entity(int id, Registry* registry) {
+Entity::Entity(int id) {
     this->id = id;
-    this->registry = registry;
 }
 
 int Entity::GetId() const {
@@ -23,8 +22,4 @@ bool Entity::operator >(const Entity& other) const {
 
 bool Entity::operator <(const Entity& other) const { 
     return id < other.id; 
-}
-
-Registry* Entity::GetRegistry() const {
-    return registry;
 }

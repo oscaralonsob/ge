@@ -4,19 +4,15 @@
 class Entity {
     private:
         int id;
-        class Registry* registry;
 
     public:
-        Entity(int id, Registry* registry);
+        Entity(int id);
         int GetId() const;
 
         bool operator ==(const Entity& other) const;
         bool operator !=(const Entity& other) const;
         bool operator <(const Entity& other) const;
         bool operator >(const Entity& other) const;
-
-        //TODO: not a fan of this but it works.
-        Registry* GetRegistry() const;
 };
 
 #endif

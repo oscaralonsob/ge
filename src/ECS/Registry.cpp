@@ -7,8 +7,7 @@ Registry::Registry(std::shared_ptr<Logger> l) {
 Entity Registry::CreateEntity() {
     int entityId = numEntities++;
 
-    //TODO: parameter??
-    Entity entity(entityId, this);
+    Entity entity(entityId);
 
     entitiesToBeAdded.insert(entity);
 

@@ -15,14 +15,16 @@ class System {
     private:
         Signature componentSignature;
         std::vector<Entity> entities;
+        class Registry* registry;
 
     public:
-        System() = default;
+        System(Registry* registry);
         ~System() = default;
 
         void AddEntityToSystem(Entity entity);
         void RemoveEntityFromSystem(Entity entity);
         std::vector<Entity> GetSystemEntities() const;
+        Registry* GetRegistry() const;
         const Signature& GetComponentSignature() const;
 
         template <typename T> void RequireComponent();
