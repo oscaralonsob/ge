@@ -4,6 +4,7 @@
 #include "../../libs/glm/glm.hpp"
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL.h>
+#include <fstream>
 #include "../Logger/Logger.h"
 #include "../ECS/Registry.h"
 #include "../AssetStore/AssetStore.h"
@@ -32,6 +33,8 @@ class Game {
 
         void ProcessInput();
         void Setup();
+        void LoadLevel();
+        void LoadTileMap();
         void Update();
         void Render();
     public:

@@ -66,13 +66,12 @@ void Game::ProcessInput() {
     }
 }
 
-//TODO: remove
-glm::vec2 playerPosition;
-glm::vec2 playerVelocity;
-
-void Game::Setup() {
+//TODO: multiple levels for example
+void Game::LoadLevel() {
     registry->AddSystem<MovementSystem>();
-    registry->AddSystem<RenderSystem>();
+    registry->AddSystem<RenderSystem>();    
+    
+    LoadTileMap();
 
     assetStore->AddTexture(renderer, "tank-image", "./assets/images/tank-panther-right.png");
     assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-right.png");
@@ -86,6 +85,44 @@ void Game::Setup() {
     registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, .0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(10.0, 0.0));
     registry->AddComponent<SpriteComponent>(truck, "truck-image", glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
+}
+
+//TODO: tilemap component?
+void Game::LoadTileMap() {
+    assetStore->AddTexture(renderer, "tilemap-image", "./assets/tilemaps/jungle.png");
+
+    assetStore->AddTexture(renderer, "tilemap", "./assets/tilemaps/jungle.png");
+    std::ifstream myfile("./assets/tilemaps/jungle.map");
+    std::string line;
+    size_t pos = 0;
+    std::string token;
+    std::string delimiter = ",";
+    int tileSize = 32;
+    int x = 0;
+    int y = 0;
+    while (std::getline(myfile, line))
+    {
+        while ((pos = line.find(delimiter)) != std::string::npos) {
+            token = line.substr(0, pos);
+            line.erase(0, pos + delimiter.length());
+            Entity tile = registry->CreateEntity();
+            registry->AddComponent<TransformComponent>(tile, glm::vec2(x*tileSize, y*tileSize), glm::vec2(1.0, 1.0), 0.0);
+            registry->AddComponent<SpriteComponent>(
+                tile, 
+                "tilemap", 
+                glm::vec2(tileSize, tileSize), 
+                glm::vec2(std::stoi(token.substr(1,2)), std::stoi(token.substr(0,1)))
+            );
+            x++;
+        }
+        x = 0;
+        y++;
+    }
+
+}
+
+void Game::Setup() {
+    LoadLevel();
 }
 
 void Game::Update() {
