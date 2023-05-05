@@ -21,8 +21,8 @@ class RenderSystem: public System {
                 const SpriteComponent& sprite = GetRegistry()->GetComponent<SpriteComponent>(entity);
 
                 SDL_Rect srcRect = {
-                    static_cast<int>(sprite.offset.x), 
-                    static_cast<int>(sprite.offset.x), 
+                    static_cast<int>(sprite.offset.x * sprite.size.x), 
+                    static_cast<int>(sprite.offset.y * sprite.size.y), 
                     static_cast<int>(sprite.size.x), 
                     static_cast<int>(sprite.size.y)
                 };
