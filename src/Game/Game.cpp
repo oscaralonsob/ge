@@ -79,18 +79,16 @@ void Game::LoadLevel() {
     Entity tank = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(tank, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(0.0, 10.0));
-    registry->AddComponent<SpriteComponent>(tank, "tank-image", glm::vec2(32.0, 32.0));
+    registry->AddComponent<SpriteComponent>(tank, "tank-image", 1, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
 
     Entity truck = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, .0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(10.0, 0.0));
-    registry->AddComponent<SpriteComponent>(truck, "truck-image", glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
+    registry->AddComponent<SpriteComponent>(truck, "truck-image", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
 }
 
 //TODO: tilemap component?
 void Game::LoadTileMap() {
-    assetStore->AddTexture(renderer, "tilemap-image", "./assets/tilemaps/jungle.png");
-
     assetStore->AddTexture(renderer, "tilemap", "./assets/tilemaps/jungle.png");
     std::ifstream myfile("./assets/tilemaps/jungle.map");
     std::string line;
@@ -109,7 +107,8 @@ void Game::LoadTileMap() {
             registry->AddComponent<TransformComponent>(tile, glm::vec2(x*tileSize, y*tileSize), glm::vec2(1.0, 1.0), 0.0);
             registry->AddComponent<SpriteComponent>(
                 tile, 
-                "tilemap", 
+                "tilemap",
+                0,
                 glm::vec2(tileSize, tileSize), 
                 glm::vec2(std::stoi(token.substr(1,2)), std::stoi(token.substr(0,1)))
             );

@@ -16,7 +16,16 @@ class RenderSystem: public System {
 
         //TODO: cpp file pls
         void Update(SDL_Renderer* renderer, std::unique_ptr<AssetStore>& assetStore) {
-            for (Entity entity: GetSystemEntities()) {
+            std::vector<Entity> sortedEntites = GetSystemEntities();
+            std::sort(
+                sortedEntites.begin(), 
+                sortedEntites.end(), 
+                [this](const Entity entity1, const Entity entity2) -> bool {
+                    return GetRegistry()->GetComponent<SpriteComponent>(entity1) < GetRegistry()->GetComponent<SpriteComponent>(entity2);
+                } 
+            );
+
+            for (Entity entity: sortedEntites) {
                 TransformComponent& transform = GetRegistry()->GetComponent<TransformComponent>(entity);
                 const SpriteComponent& sprite = GetRegistry()->GetComponent<SpriteComponent>(entity);
 
