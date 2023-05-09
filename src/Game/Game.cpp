@@ -69,12 +69,14 @@ void Game::ProcessInput() {
 //TODO: multiple levels for example
 void Game::LoadLevel() {
     registry->AddSystem<MovementSystem>();
-    registry->AddSystem<RenderSystem>();    
+    registry->AddSystem<RenderSystem>();
+    registry->AddSystem<AnimationSystem>();
     
     LoadTileMap();
 
     assetStore->AddTexture(renderer, "tank-image", "./assets/images/tank-panther-right.png");
     assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-right.png");
+    assetStore->AddTexture(renderer, "chopper", "./assets/images/chopper.png");
 
     Entity tank = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(tank, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
@@ -82,9 +84,15 @@ void Game::LoadLevel() {
     registry->AddComponent<SpriteComponent>(tank, "tank-image", 1, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
 
     Entity truck = registry->CreateEntity();
-    registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, .0), glm::vec2(1.0, 1.0), 0.0);
+    registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(10.0, 0.0));
     registry->AddComponent<SpriteComponent>(truck, "truck-image", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
+
+    Entity helicopter = registry->CreateEntity();
+    registry->AddComponent<TransformComponent>(helicopter, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
+    registry->AddComponent<RigidBodyComponent>(helicopter, glm::vec2(10.0, 0.0));
+    registry->AddComponent<SpriteComponent>(helicopter, "chopper", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
+    registry->AddComponent<AnimationComponent>(helicopter, 2, 1, 5, true);
 }
 
 //TODO: tilemap component?
@@ -136,6 +144,7 @@ void Game::Update() {
 
     //TODO: update in registry maybe?
     registry->GetSystem<MovementSystem>().Update(deltaTime);
+    registry->GetSystem<AnimationSystem>().Update(deltaTime);
 
     registry->Update();
 }
