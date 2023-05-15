@@ -68,6 +68,7 @@ void Game::ProcessInput() {
 
 //TODO: multiple levels for example
 void Game::LoadLevel() {
+    registry->AddSystem<CollisionSystem>();
     registry->AddSystem<MovementSystem>();
     registry->AddSystem<RenderSystem>();
     registry->AddSystem<AnimationSystem>();
@@ -79,14 +80,16 @@ void Game::LoadLevel() {
     assetStore->AddTexture(renderer, "chopper", "./assets/images/chopper.png");
 
     Entity tank = registry->CreateEntity();
-    registry->AddComponent<TransformComponent>(tank, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
-    registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(0.0, 10.0));
+    registry->AddComponent<TransformComponent>(tank, glm::vec2(100.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
+    registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(-10.0, 0.0));
     registry->AddComponent<SpriteComponent>(tank, "tank-image", 1, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
+    registry->AddComponent<BoxColliderComponent>(tank, glm::vec2(32.0, 32.0));
 
     Entity truck = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(10.0, 0.0));
     registry->AddComponent<SpriteComponent>(truck, "truck-image", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
+    registry->AddComponent<BoxColliderComponent>(truck, glm::vec2(32.0, 32.0));
 
     Entity helicopter = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(helicopter, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
@@ -143,6 +146,7 @@ void Game::Update() {
     milisecsPrevoiusFrame = SDL_GetTicks();
 
     //TODO: update in registry maybe?
+    registry->GetSystem<CollisionSystem>().Update();
     registry->GetSystem<MovementSystem>().Update(deltaTime);
     registry->GetSystem<AnimationSystem>().Update(deltaTime);
 

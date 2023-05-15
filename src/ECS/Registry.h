@@ -27,11 +27,10 @@ class Registry {
         std::set<Entity> entitiesToBeAdded;
         std::set<Entity> entitiesToBeRemoved;
 
-        std::shared_ptr<Logger> logger; 
-
     public:
-       Registry(std::shared_ptr<Logger> l);
-       ~Registry() = default;
+        std::shared_ptr<Logger> logger;
+        Registry(std::shared_ptr<Logger> l);
+        ~Registry() = default;
 
         Entity CreateEntity();
         //TODO: void KillEntity(Entity entity);
