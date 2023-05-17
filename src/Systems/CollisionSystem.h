@@ -40,7 +40,9 @@ class CollisionSystem: public System {
                     bool collisionY = (bMinY <= aMaxY && bMinY >= aMinY) || (bMaxY <= aMaxY && bMaxY >= aMinY);
 
                     if (collisionX && collisionY) {
-                        GetRegistry()->logger->Log("Collision happens");
+                        //TODO: migrate to event systems
+                        GetRegistry()->KillEntity(aEntity);
+                        GetRegistry()->KillEntity(bEntity);
                     }
                 }
             }

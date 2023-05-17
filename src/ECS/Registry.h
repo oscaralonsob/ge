@@ -6,6 +6,7 @@
 #include <typeindex>
 #include <unordered_map>
 #include <memory>
+#include <deque>
 
 #include "IPool.h"
 #include "Pool.h"
@@ -27,13 +28,16 @@ class Registry {
         std::set<Entity> entitiesToBeAdded;
         std::set<Entity> entitiesToBeRemoved;
 
+        std::deque<int> freeIds;
+
     public:
         std::shared_ptr<Logger> logger;
         Registry(std::shared_ptr<Logger> l);
         ~Registry() = default;
 
         Entity CreateEntity();
-        //TODO: void KillEntity(Entity entity);
+        void KillEntity(Entity entity);
+
         void Update();
 
         template <typename T, typename ...TArgs> void AddComponent(Entity entity, TArgs&& ...args);
@@ -47,6 +51,7 @@ class Registry {
         template <typename T> T& GetSystem() const;
 
         void AddEntityToSystems(Entity entity);
+        void RemoveEntityFromSystems(Entity entity);
 };
 
 #include "Registry.tpp"

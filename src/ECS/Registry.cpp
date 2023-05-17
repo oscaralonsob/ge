@@ -5,19 +5,32 @@ Registry::Registry(std::shared_ptr<Logger> l) {
 }
 
 Entity Registry::CreateEntity() {
-    int entityId = numEntities++;
+    int entityId;
+
+    if (freeIds.empty()){
+        entityId = numEntities++;
+
+        if (entityId >= static_cast<int>(entityComponentSignatures.size())) {
+            entityComponentSignatures.resize(entityId + 1);
+        }
+    } else {
+        entityId = freeIds.front();
+        freeIds.pop_front();
+    } 
 
     Entity entity(entityId);
 
     entitiesToBeAdded.insert(entity);
 
-    if (entityId >= static_cast<int>(entityComponentSignatures.size())) {
-        entityComponentSignatures.resize(entityId + 1);
-    }
 
     logger->Log("Entity created with id: " + std::to_string(entityId));
 
     return entity;
+}
+
+void Registry::KillEntity(Entity entity) {
+    entitiesToBeRemoved.insert(entity);
+    logger->Log("Entity destroyed with id: " + std::to_string(entity.GetId()));
 }
 
 void Registry::Update() {
@@ -26,7 +39,13 @@ void Registry::Update() {
     }
     entitiesToBeAdded.clear();
 
-    //TODO: Remove entites from entitiesToBeRemoved
+    for (Entity entity: entitiesToBeRemoved) {
+        RemoveEntityFromSystems(entity);
+        entityComponentSignatures[entity.GetId()].reset();
+
+        freeIds.push_back(entity.GetId());
+    }
+    entitiesToBeRemoved.clear();
 }
 
 void Registry::AddEntityToSystems(Entity entity) {
@@ -42,5 +61,11 @@ void Registry::AddEntityToSystems(Entity entity) {
         if (isInterested) { 
             system.second->AddEntityToSystem(entity);
         }
+    }
+}
+
+void Registry::RemoveEntityFromSystems(Entity entity) {
+    for(auto& system: systems) {
+        system.second->RemoveEntityFromSystem(entity);
     }
 }
