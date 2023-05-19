@@ -7,6 +7,7 @@
 #include <fstream>
 #include "../Logger/Logger.h"
 #include "../ECS/Registry.h"
+#include "../Events/EventBus.h"
 #include "../AssetStore/AssetStore.h"
 #include "../Components/TransformComponent.h"
 #include "../Components/RigidBodyComponent.h"
@@ -17,6 +18,7 @@
 #include "../Systems/RenderSystem.h"
 #include "../Systems/AnimationSystem.h"
 #include "../Systems/CollisionSystem.h"
+#include "../Systems/DamageSystem.h"
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;
@@ -33,6 +35,7 @@ class Game {
 
         std::unique_ptr<Registry> registry;
         std::unique_ptr<AssetStore> assetStore;
+        std::unique_ptr<EventBus> eventBus;
         std::shared_ptr<Logger> logger;
 
         void ProcessInput();

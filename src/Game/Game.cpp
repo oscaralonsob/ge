@@ -4,6 +4,7 @@ Game::Game() {
     logger = std::make_shared<Logger>();;
     registry = std::make_unique<Registry>(logger);
     assetStore = std::make_unique<AssetStore>(logger);
+    eventBus = std::make_unique<EventBus>(logger);
     isRunning = false;
     logger->Log("Game constructor called");
 }
@@ -68,6 +69,7 @@ void Game::ProcessInput() {
 
 //TODO: multiple levels for example
 void Game::LoadLevel() {
+    registry->AddSystem<DamageSystem>();
     registry->AddSystem<CollisionSystem>();
     registry->AddSystem<MovementSystem>();
     registry->AddSystem<RenderSystem>();
@@ -145,8 +147,12 @@ void Game::Update() {
     double deltaTime = (SDL_GetTicks() - milisecsPrevoiusFrame) / MILISENCOS_TO_SECONDS;
     milisecsPrevoiusFrame = SDL_GetTicks();
 
+    //TODO: do not subscribe every time
+    eventBus->Reset();
+    registry->GetSystem<DamageSystem>().SubscribeToEvents(eventBus);
+
     //TODO: update in registry maybe?
-    registry->GetSystem<CollisionSystem>().Update();
+    registry->GetSystem<CollisionSystem>().Update(eventBus);
     registry->GetSystem<MovementSystem>().Update(deltaTime);
     registry->GetSystem<AnimationSystem>().Update(deltaTime);
 

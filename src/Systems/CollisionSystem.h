@@ -4,6 +4,7 @@
 #include "../ECS/System.h"
 #include "../Components/TransformComponent.h"
 #include "../Components/BoxColliderComponent.h"
+#include "../Events/CollisionEvent.h"
 
 class CollisionSystem: public System {
     public:
@@ -13,7 +14,8 @@ class CollisionSystem: public System {
         }
 
         //TODO: cpp file pls
-        void Update() {
+        //TODO: I don't like passing this all the time, feels innecesary
+        void Update(std::unique_ptr<EventBus>& eventBus) {
             std::vector<Entity> entities = GetSystemEntities();
             for (std::vector<Entity>::iterator i = entities.begin(); i != entities.end(); i++) {
                 Entity aEntity = *i;
@@ -40,9 +42,7 @@ class CollisionSystem: public System {
                     bool collisionY = (bMinY <= aMaxY && bMinY >= aMinY) || (bMaxY <= aMaxY && bMaxY >= aMinY);
 
                     if (collisionX && collisionY) {
-                        //TODO: migrate to event systems
-                        GetRegistry()->KillEntity(aEntity);
-                        GetRegistry()->KillEntity(bEntity);
+                        eventBus->EmitEvent<CollisionEvent>(aEntity, bEntity);
                     }
                 }
             }

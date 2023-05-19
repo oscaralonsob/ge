@@ -15,7 +15,7 @@ class System {
     private:
         Signature componentSignature;
         std::vector<Entity> entities;
-        class Registry* registry;
+        class Registry* registry; //TODO: migrate to protected
 
     public:
         System(Registry* registry);
