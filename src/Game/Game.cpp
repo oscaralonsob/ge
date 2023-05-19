@@ -59,6 +59,7 @@ void Game::ProcessInput() {
             isRunning = false;
             break;
         case SDL_KEYDOWN:
+            eventBus->EmitEvent<KeyPressedEvent>(event.key.keysym.sym);
             if (event.key.keysym.sym == SDLK_ESCAPE) {
                 isRunning = false;
             }
@@ -69,6 +70,7 @@ void Game::ProcessInput() {
 
 //TODO: multiple levels for example
 void Game::LoadLevel() {
+    registry->AddSystem<KeyboardMovementSystem>();
     registry->AddSystem<DamageSystem>();
     registry->AddSystem<CollisionSystem>();
     registry->AddSystem<MovementSystem>();
@@ -150,6 +152,7 @@ void Game::Update() {
     //TODO: do not subscribe every time
     eventBus->Reset();
     registry->GetSystem<DamageSystem>().SubscribeToEvents(eventBus);
+    registry->GetSystem<KeyboardMovementSystem>().SubscribeToEvents(eventBus);
 
     //TODO: update in registry maybe?
     registry->GetSystem<CollisionSystem>().Update(eventBus);

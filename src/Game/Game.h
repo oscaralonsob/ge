@@ -8,6 +8,7 @@
 #include "../Logger/Logger.h"
 #include "../ECS/Registry.h"
 #include "../Events/EventBus.h"
+#include "../Events/KeyPressedEvent.h"
 #include "../AssetStore/AssetStore.h"
 #include "../Components/TransformComponent.h"
 #include "../Components/RigidBodyComponent.h"
@@ -19,6 +20,7 @@
 #include "../Systems/AnimationSystem.h"
 #include "../Systems/CollisionSystem.h"
 #include "../Systems/DamageSystem.h"
+#include "../Systems/KeyboardMovementSystem.h"
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;
