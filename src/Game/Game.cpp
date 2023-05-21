@@ -81,7 +81,7 @@ void Game::LoadLevel() {
 
     assetStore->AddTexture(renderer, "tank-image", "./assets/images/tank-panther-right.png");
     assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-right.png");
-    assetStore->AddTexture(renderer, "chopper", "./assets/images/chopper.png");
+    assetStore->AddTexture(renderer, "chopper", "./assets/images/chopper-spritesheet.png");
 
     Entity tank = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(tank, glm::vec2(100.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
@@ -97,9 +97,10 @@ void Game::LoadLevel() {
 
     Entity helicopter = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(helicopter, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
-    registry->AddComponent<RigidBodyComponent>(helicopter, glm::vec2(10.0, 0.0));
-    registry->AddComponent<SpriteComponent>(helicopter, "chopper", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0));
+    registry->AddComponent<RigidBodyComponent>(helicopter, glm::vec2(0.0, 0.0));
+    registry->AddComponent<SpriteComponent>(helicopter, "chopper", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 1.0));
     registry->AddComponent<AnimationComponent>(helicopter, 2, 1, 5, true);
+    registry->AddComponent<KeyboardControllerComponent>(helicopter, glm::vec2(0.0, -40.0), glm::vec2(40.0, 0.0), glm::vec2(0, 40.0), glm::vec2(-40.0, 0.0));
 }
 
 //TODO: tilemap component?
