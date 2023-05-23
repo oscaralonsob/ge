@@ -1,7 +1,13 @@
 #include "Game.h"
+#include "../Systems/CameraMovementSystem.h"
+
+int Game::windowWidth;
+int Game::windowHeight;
+int Game::mapWidth;
+int Game::mapHeight;
 
 Game::Game() {
-    logger = std::make_shared<Logger>();;
+    logger = std::make_shared<Logger>();
     registry = std::make_unique<Registry>(logger);
     assetStore = std::make_unique<AssetStore>(logger);
     eventBus = std::make_unique<EventBus>(logger);
@@ -49,6 +55,11 @@ void Game::Initialize() {
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 
     isRunning = true;
+
+    camera.x = 0;
+    camera.y = 0;
+    camera.w = windowWidth;
+    camera.h = windowHeight;
 }
 
 void Game::ProcessInput() {
@@ -76,6 +87,7 @@ void Game::LoadLevel() {
     registry->AddSystem<MovementSystem>();
     registry->AddSystem<RenderSystem>();
     registry->AddSystem<AnimationSystem>();
+    registry->AddSystem<CameraMovementSystem>();
     
     LoadTileMap();
 
@@ -100,7 +112,8 @@ void Game::LoadLevel() {
     registry->AddComponent<RigidBodyComponent>(helicopter, glm::vec2(0.0, 0.0));
     registry->AddComponent<SpriteComponent>(helicopter, "chopper", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 1.0));
     registry->AddComponent<AnimationComponent>(helicopter, 2, 1, 5, true);
-    registry->AddComponent<KeyboardControllerComponent>(helicopter, glm::vec2(0.0, -40.0), glm::vec2(40.0, 0.0), glm::vec2(0, 40.0), glm::vec2(-40.0, 0.0));
+    registry->AddComponent<KeyboardControllerComponent>(helicopter, glm::vec2(0.0, -100.0), glm::vec2(100.0, 0.0), glm::vec2(0, 100.0), glm::vec2(-100.0, 0.0));
+    registry->AddComponent<CameraFollowComponent>(helicopter);
 }
 
 //TODO: tilemap component?
@@ -120,7 +133,7 @@ void Game::LoadTileMap() {
             token = line.substr(0, pos);
             line.erase(0, pos + delimiter.length());
             Entity tile = registry->CreateEntity();
-            registry->AddComponent<TransformComponent>(tile, glm::vec2(x*tileSize, y*tileSize), glm::vec2(1.0, 1.0), 0.0);
+            registry->AddComponent<TransformComponent>(tile, glm::vec2(x*tileSize*3.0, y*tileSize*3.0), glm::vec2(3.0, 3.0), 0.0);
             registry->AddComponent<SpriteComponent>(
                 tile, 
                 "tilemap",
@@ -130,9 +143,11 @@ void Game::LoadTileMap() {
             );
             x++;
         }
+        mapWidth = x * tileSize * 3;
         x = 0;
         y++;
     }
+    mapHeight = y * tileSize * 3;
 
 }
 
@@ -159,6 +174,7 @@ void Game::Update() {
     registry->GetSystem<CollisionSystem>().Update(eventBus);
     registry->GetSystem<MovementSystem>().Update(deltaTime);
     registry->GetSystem<AnimationSystem>().Update(deltaTime);
+    registry->GetSystem<CameraMovementSystem>().Update(camera);
 
     registry->Update();
 }
@@ -167,7 +183,7 @@ void Game::Render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
 
-    registry->GetSystem<RenderSystem>().Update(renderer, assetStore);
+    registry->GetSystem<RenderSystem>().Update(renderer, assetStore, camera);
 
     SDL_RenderPresent(renderer);
 }

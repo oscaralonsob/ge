@@ -16,6 +16,7 @@
 #include "../Components/AnimationComponent.h"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/KeyboardControllerComponent.h"
+#include "../Components/CameraFollowComponent.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/AnimationSystem.h"
@@ -31,10 +32,9 @@ class Game {
     private:
         SDL_Window* window;
         SDL_Renderer* renderer;
+        SDL_Rect camera;
         bool isRunning;
         int milisecsPrevoiusFrame;
-        int windowWidth;
-        int windowHeight;
 
         std::unique_ptr<Registry> registry;
         std::unique_ptr<AssetStore> assetStore;
@@ -50,6 +50,11 @@ class Game {
     public:
         Game();
         ~Game();
+
+        static int mapWidth;
+        static int mapHeight;
+        static int windowWidth;
+        static int windowHeight;
 
         void Initialize();
         void Run();

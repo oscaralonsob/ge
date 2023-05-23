@@ -15,7 +15,7 @@ class RenderSystem: public System {
         }
 
         //TODO: cpp file pls
-        void Update(SDL_Renderer* renderer, std::unique_ptr<AssetStore>& assetStore) {
+        void Update(SDL_Renderer* renderer, std::unique_ptr<AssetStore>& assetStore, SDL_Rect& camera) {
             std::vector<Entity> sortedEntites = GetSystemEntities();
             std::sort(
                 sortedEntites.begin(), 
@@ -37,8 +37,8 @@ class RenderSystem: public System {
                 };
 
                 SDL_Rect dstRect = {
-                    static_cast<int>(transform.position.x), 
-                    static_cast<int>(transform.position.y), 
+                    static_cast<int>(transform.position.x - camera.x), 
+                    static_cast<int>(transform.position.y - camera.y), 
                     static_cast<int>(sprite.size.x * transform.scale.x), 
                     static_cast<int>(sprite.size.y * transform.scale.y)
                 };
