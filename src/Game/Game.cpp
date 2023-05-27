@@ -89,6 +89,7 @@ void Game::LoadLevel() {
     registry->AddSystem<AnimationSystem>();
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
+    registry->AddSystem<ProjectileLifeCycleSystem>();
     
     LoadTileMap();
 
@@ -182,6 +183,7 @@ void Game::Update() {
     registry->GetSystem<AnimationSystem>().Update(deltaTime);
     registry->GetSystem<CameraMovementSystem>().Update(camera);
     registry->GetSystem<ProjectileEmitterSystem>().Update(deltaTime);
+    registry->GetSystem<ProjectileLifeCycleSystem>().Update();
 
     registry->Update();
 }

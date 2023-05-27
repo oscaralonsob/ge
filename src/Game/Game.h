@@ -26,6 +26,7 @@
 #include "../Systems/DamageSystem.h"
 #include "../Systems/KeyboardMovementSystem.h"
 #include "../Systems/ProjectileEmitterSystem.h"
+#include "../Systems/ProjectileLifeCycleSystem.h"
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;
