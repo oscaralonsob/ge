@@ -30,7 +30,6 @@ class CameraMovementSystem: public System {
                 camera.y = camera.y < 0 ? 0 : camera.y;
                 camera.x = camera.x > camera.w ? camera.w : camera.x;
                 camera.y = camera.y > camera.h ? camera.h : camera.y;
-                //GetRegistry()->logger->Log(std::to_string(camera.x));
             }
         }
 };

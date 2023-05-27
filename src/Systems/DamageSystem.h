@@ -21,8 +21,8 @@ class DamageSystem: public System {
         //TODO: cpp file pls
         void OnCollision(CollisionEvent& event) {
             GetRegistry()->logger->Log("Collision event subscribed with entity " + std::to_string(event.a.GetId()) + " and entity " + std::to_string(event.b.GetId()));
-            GetRegistry()->KillEntity(event.a);
-            GetRegistry()->KillEntity(event.b);
+            //GetRegistry()->KillEntity(event.a); For a while, until health is implemented
+            //GetRegistry()->KillEntity(event.b);
         }
 
         //TODO: cpp file pls

@@ -17,12 +17,14 @@
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/KeyboardControllerComponent.h"
 #include "../Components/CameraFollowComponent.h"
+#include "../Components/ProjectileEmitterComponent.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/AnimationSystem.h"
 #include "../Systems/CollisionSystem.h"
 #include "../Systems/DamageSystem.h"
 #include "../Systems/KeyboardMovementSystem.h"
+#include "../Systems/ProjectileEmitterSystem.h"
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;

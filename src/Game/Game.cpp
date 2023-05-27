@@ -88,12 +88,14 @@ void Game::LoadLevel() {
     registry->AddSystem<RenderSystem>();
     registry->AddSystem<AnimationSystem>();
     registry->AddSystem<CameraMovementSystem>();
+    registry->AddSystem<ProjectileEmitterSystem>();
     
     LoadTileMap();
 
     assetStore->AddTexture(renderer, "tank-image", "./assets/images/tank-panther-right.png");
     assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-right.png");
     assetStore->AddTexture(renderer, "chopper", "./assets/images/chopper-spritesheet.png");
+    assetStore->AddTexture(renderer, "bullet-image", "./assets/images/bullet.png");
 
     Entity tank = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(tank, glm::vec2(100.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
@@ -114,6 +116,7 @@ void Game::LoadLevel() {
     registry->AddComponent<AnimationComponent>(helicopter, 2, 1, 5, true);
     registry->AddComponent<KeyboardControllerComponent>(helicopter, glm::vec2(0.0, -100.0), glm::vec2(100.0, 0.0), glm::vec2(0, 100.0), glm::vec2(-100.0, 0.0));
     registry->AddComponent<CameraFollowComponent>(helicopter);
+    registry->AddComponent<ProjectileEmitterComponent>(helicopter, glm::vec2(100.0, 0.0), 1000, 10000);
 }
 
 //TODO: tilemap component?
@@ -175,6 +178,7 @@ void Game::Update() {
     registry->GetSystem<MovementSystem>().Update(deltaTime);
     registry->GetSystem<AnimationSystem>().Update(deltaTime);
     registry->GetSystem<CameraMovementSystem>().Update(camera);
+    registry->GetSystem<ProjectileEmitterSystem>().Update(deltaTime);
 
     registry->Update();
 }
