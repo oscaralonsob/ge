@@ -102,12 +102,14 @@ void Game::LoadLevel() {
     registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(-10.0, 0.0));
     registry->AddComponent<SpriteComponent>(tank, "tank-image", 1, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0), false);
     registry->AddComponent<BoxColliderComponent>(tank, glm::vec2(32.0, 32.0));
+    registry->AddComponent<HealthComponent>(tank, 100, 100);
 
     Entity truck = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(10.0, 0.0));
     registry->AddComponent<SpriteComponent>(truck, "truck-image", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0), false);
     registry->AddComponent<BoxColliderComponent>(truck, glm::vec2(32.0, 32.0));
+    registry->AddComponent<HealthComponent>(truck, 100, 100);
 
     Entity helicopter = registry->CreateEntity();
     registry->AddComponent<TransformComponent>(helicopter, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
@@ -117,6 +119,7 @@ void Game::LoadLevel() {
     registry->AddComponent<KeyboardControllerComponent>(helicopter, glm::vec2(0.0, -100.0), glm::vec2(100.0, 0.0), glm::vec2(0, 100.0), glm::vec2(-100.0, 0.0));
     registry->AddComponent<CameraFollowComponent>(helicopter);
     registry->AddComponent<ProjectileEmitterComponent>(helicopter, glm::vec2(100.0, 0.0), 1000, 10000);
+    registry->AddComponent<HealthComponent>(helicopter, 100, 100);
 }
 
 //TODO: tilemap component?
