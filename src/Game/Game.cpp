@@ -119,7 +119,7 @@ void Game::LoadLevel() {
     registry->AddComponent<AnimationComponent>(helicopter, 2, 1, 5, true);
     registry->AddComponent<KeyboardControllerComponent>(helicopter, glm::vec2(0.0, -100.0), glm::vec2(100.0, 0.0), glm::vec2(0, 100.0), glm::vec2(-100.0, 0.0));
     registry->AddComponent<CameraFollowComponent>(helicopter);
-    registry->AddComponent<ProjectileEmitterComponent>(helicopter, glm::vec2(100.0, 0.0), 1000, 10000);
+    registry->AddComponent<ProjectileEmitterComponent>(helicopter, glm::vec2(100.0, 100.0), 1000, 10000);
     registry->AddComponent<HealthComponent>(helicopter, 100, 100);
 }
 
@@ -176,6 +176,7 @@ void Game::Update() {
     eventBus->Reset();
     registry->GetSystem<DamageSystem>().SubscribeToEvents(eventBus);
     registry->GetSystem<KeyboardMovementSystem>().SubscribeToEvents(eventBus);
+    registry->GetSystem<ProjectileEmitterSystem>().SubscribeToEvents(eventBus);
 
     //TODO: update in registry maybe?
     registry->GetSystem<CollisionSystem>().Update(eventBus);
