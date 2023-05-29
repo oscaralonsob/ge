@@ -12,7 +12,7 @@
 
 class KeyboardMovementSystem: public System {
     public:
-        KeyboardMovementSystem(Registry* registry): System(registry) {
+        KeyboardMovementSystem(Registry* registry, std::shared_ptr<Logger> logger): System(registry, logger) {
             RequireComponent<KeyboardControllerComponent>();
             RequireComponent<SpriteComponent>();
             RequireComponent<RigidBodyComponent>();
@@ -30,9 +30,9 @@ class KeyboardMovementSystem: public System {
 
             std::string keySymbol(1, event.symbol);
             for (Entity entity: GetSystemEntities()) {
-                const KeyboardControllerComponent keyboardControllerComponent = GetRegistry()->GetComponent<KeyboardControllerComponent>(entity);
-                SpriteComponent& spriteComponent = GetRegistry()->GetComponent<SpriteComponent>(entity);
-                RigidBodyComponent& rigidBodyComponent = GetRegistry()->GetComponent<RigidBodyComponent>(entity);
+                const KeyboardControllerComponent keyboardControllerComponent = registry->GetComponent<KeyboardControllerComponent>(entity);
+                SpriteComponent& spriteComponent = registry->GetComponent<SpriteComponent>(entity);
+                RigidBodyComponent& rigidBodyComponent = registry->GetComponent<RigidBodyComponent>(entity);
 
                 switch (event.symbol){
                     case SDLK_UP:

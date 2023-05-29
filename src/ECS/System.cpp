@@ -1,8 +1,9 @@
 #include "System.h"
 #include "Component.h"
 
-System::System(Registry* registry) {
+System::System(Registry* registry, std::shared_ptr<Logger> logger) {
     this->registry = registry;
+    this->logger = logger;
 }
 
 void System::AddEntityToSystem(Entity entity) {
@@ -17,10 +18,6 @@ void System::RemoveEntityFromSystem(Entity entity) {
 
 std::vector<Entity> System::GetSystemEntities() const {
     return entities;
-}
-
-Registry* System::GetRegistry() const {
-    return registry;
 }
 
 const Signature& System::GetComponentSignature() const {

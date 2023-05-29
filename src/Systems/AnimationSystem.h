@@ -7,7 +7,7 @@
 
 class AnimationSystem: public System {
     public:
-        AnimationSystem(Registry* registry): System(registry) {
+        AnimationSystem(Registry* registry, std::shared_ptr<Logger> logger): System(registry, logger) {
             RequireComponent<AnimationComponent>();
             RequireComponent<SpriteComponent>();
         }
@@ -15,8 +15,8 @@ class AnimationSystem: public System {
         //TODO: cpp file pls
         void Update(double deltaTime) {
             for (Entity entity: GetSystemEntities()) {
-                AnimationComponent& animationComponent = GetRegistry()->GetComponent<AnimationComponent>(entity);
-                SpriteComponent& spriteComponent = GetRegistry()->GetComponent<SpriteComponent>(entity);
+                AnimationComponent& animationComponent = registry->GetComponent<AnimationComponent>(entity);
+                SpriteComponent& spriteComponent = registry->GetComponent<SpriteComponent>(entity);
                 
                 animationComponent.animationFrame += deltaTime * animationComponent.frameRate;
                 animationComponent.currentFrame = (int)(animationComponent.animationFrame) % animationComponent.numFrames;

@@ -8,7 +8,7 @@
 
 class CameraMovementSystem: public System {
     public:
-        CameraMovementSystem(Registry* registry): System(registry) {
+        CameraMovementSystem(Registry* registry, std::shared_ptr<Logger> logger): System(registry, logger) {
             RequireComponent<CameraFollowComponent>();
             RequireComponent<TransformComponent>();
         }
@@ -16,7 +16,7 @@ class CameraMovementSystem: public System {
         //TODO: cpp file pls
         void Update(SDL_Rect& camera) {
             for (Entity entity: GetSystemEntities()) {
-                TransformComponent& transformComponent = GetRegistry()->GetComponent<TransformComponent>(entity);
+                TransformComponent& transformComponent = registry->GetComponent<TransformComponent>(entity);
 
                 if (transformComponent.position.x + (camera.w/2) < Game::mapWidth) {
                     camera.x = transformComponent.position.x - Game::windowWidth /2;

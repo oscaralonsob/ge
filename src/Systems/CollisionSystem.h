@@ -8,7 +8,7 @@
 
 class CollisionSystem: public System {
     public:
-        CollisionSystem(Registry* registry): System(registry) {
+        CollisionSystem(Registry* registry, std::shared_ptr<Logger> logger): System(registry, logger) {
             RequireComponent<TransformComponent>();
             RequireComponent<BoxColliderComponent>();
         }
@@ -19,8 +19,8 @@ class CollisionSystem: public System {
             std::vector<Entity> entities = GetSystemEntities();
             for (std::vector<Entity>::iterator i = entities.begin(); i != entities.end(); i++) {
                 Entity aEntity = *i;
-                TransformComponent& aTransformComponent = GetRegistry()->GetComponent<TransformComponent>(aEntity);
-                BoxColliderComponent& aBoxColliderComponent = GetRegistry()->GetComponent<BoxColliderComponent>(aEntity);
+                TransformComponent& aTransformComponent = registry->GetComponent<TransformComponent>(aEntity);
+                BoxColliderComponent& aBoxColliderComponent = registry->GetComponent<BoxColliderComponent>(aEntity);
 
                 double aMinX = aTransformComponent.position.x + aBoxColliderComponent.offset.x;;
                 double aMinY = aTransformComponent.position.y + aBoxColliderComponent.offset.y;
@@ -30,8 +30,8 @@ class CollisionSystem: public System {
                 for (std::vector<Entity>::iterator j = i + 1; j != entities.end(); j++) {
                     Entity bEntity = *j;
                     
-                    TransformComponent& bOtherTransformComponent = GetRegistry()->GetComponent<TransformComponent>(bEntity);
-                    BoxColliderComponent& bOtherBoxColliderComponent = GetRegistry()->GetComponent<BoxColliderComponent>(bEntity);
+                    TransformComponent& bOtherTransformComponent = registry->GetComponent<TransformComponent>(bEntity);
+                    BoxColliderComponent& bOtherBoxColliderComponent = registry->GetComponent<BoxColliderComponent>(bEntity);
                     
                     double bMinX = bOtherTransformComponent.position.x + bOtherBoxColliderComponent.offset.x;;
                     double bMinY = bOtherTransformComponent.position.y + bOtherBoxColliderComponent.offset.y;

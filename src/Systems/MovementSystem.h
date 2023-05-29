@@ -7,7 +7,7 @@
 
 class MovementSystem: public System {
     public:
-        MovementSystem(Registry* registry): System(registry) {
+        MovementSystem(Registry* registry, std::shared_ptr<Logger> logger): System(registry, logger) {
             RequireComponent<TransformComponent>();
             RequireComponent<RigidBodyComponent>();
         }
@@ -15,8 +15,8 @@ class MovementSystem: public System {
         //TODO: cpp file pls
         void Update(double deltaTime) {
             for (Entity entity: GetSystemEntities()) {
-                TransformComponent& transform = GetRegistry()->GetComponent<TransformComponent>(entity);
-                const RigidBodyComponent& rigidBody = GetRegistry()->GetComponent<RigidBodyComponent>(entity);
+                TransformComponent& transform = registry->GetComponent<TransformComponent>(entity);
+                const RigidBodyComponent& rigidBody = registry->GetComponent<RigidBodyComponent>(entity);
 
                 transform.position.x += rigidBody.velocity.x * deltaTime;
                 transform.position.y += rigidBody.velocity.y * deltaTime;

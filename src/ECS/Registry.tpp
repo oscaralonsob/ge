@@ -55,7 +55,7 @@ T& Registry::GetComponent(Entity entity) const {
 
 template <typename T, typename ...TArgs> 
 void Registry::AddSystem(TArgs&& ...args) {
-    std::shared_ptr<T> newSystem = std::make_shared<T>(this, std::forward<TArgs>(args)...);
+    std::shared_ptr<T> newSystem = std::make_shared<T>(this, logger, std::forward<TArgs>(args)...);
     systems.insert(std::make_pair(std::type_index(typeid(T)), newSystem));
 }
 

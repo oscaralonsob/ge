@@ -12,7 +12,7 @@
 
 class DamageSystem: public System {
     public:
-        DamageSystem(Registry* registry): System(registry) {
+        DamageSystem(Registry* registry, std::shared_ptr<Logger> logger): System(registry, logger) {
             RequireComponent<BoxColliderComponent>();
         }
 
@@ -22,19 +22,19 @@ class DamageSystem: public System {
 
         //TODO: cpp file pls
         void OnCollision(CollisionEvent& event) {           
-            if (GetRegistry()->EntityBelongToGroup(event.b, "Projectiles") && GetRegistry()->EntityHasTag(event.a, "Player")){
+            if (registry->EntityBelongToGroup(event.b, "Projectiles") && registry->EntityHasTag(event.a, "Player")){
                 OnCollisionProjectileWithPlayer(event.b, event.a);
             }
 
-            if (GetRegistry()->EntityBelongToGroup(event.a, "Projectiles") && GetRegistry()->EntityHasTag(event.b, "Player")){
+            if (registry->EntityBelongToGroup(event.a, "Projectiles") && registry->EntityHasTag(event.b, "Player")){
                 OnCollisionProjectileWithPlayer(event.a, event.b);
             }
 
-            if (GetRegistry()->EntityBelongToGroup(event.b, "Projectiles") && GetRegistry()->EntityBelongToGroup(event.a, "Enemies")){
+            if (registry->EntityBelongToGroup(event.b, "Projectiles") && registry->EntityBelongToGroup(event.a, "Enemies")){
                OnCollisionProjectileWithEnemies(event.b, event.a);
             }
 
-            if (GetRegistry()->EntityBelongToGroup(event.a, "Projectiles") && GetRegistry()->EntityBelongToGroup(event.b, "Enemies")){
+            if (registry->EntityBelongToGroup(event.a, "Projectiles") && registry->EntityBelongToGroup(event.b, "Enemies")){
                 OnCollisionProjectileWithEnemies(event.a, event.b);
             }
         }
@@ -45,32 +45,32 @@ class DamageSystem: public System {
         }
 
         void OnCollisionProjectileWithPlayer(Entity projectile, Entity player) {
-            ProjectileComponent projectileComponent = GetRegistry()->GetComponent<ProjectileComponent>(projectile);
+            ProjectileComponent projectileComponent = registry->GetComponent<ProjectileComponent>(projectile);
 
             if (!projectileComponent.isFriendly) {
-                HealthComponent& healthComponent = GetRegistry()->GetComponent<HealthComponent>(player);
+                HealthComponent& healthComponent = registry->GetComponent<HealthComponent>(player);
                 healthComponent.currentHealth -= projectileComponent.hitDamage;
 
                 if (healthComponent.currentHealth <= 0) {
-                    GetRegistry()->KillEntity(player);
+                    registry->KillEntity(player);
                 }
 
-                GetRegistry()->KillEntity(projectile);
+                registry->KillEntity(projectile);
             }
         }
 
         void OnCollisionProjectileWithEnemies(Entity projectile, Entity enemy) {
-            ProjectileComponent projectileComponent = GetRegistry()->GetComponent<ProjectileComponent>(projectile);
+            ProjectileComponent projectileComponent = registry->GetComponent<ProjectileComponent>(projectile);
 
             if (projectileComponent.isFriendly) {
-                HealthComponent& healthComponent = GetRegistry()->GetComponent<HealthComponent>(enemy);
+                HealthComponent& healthComponent = registry->GetComponent<HealthComponent>(enemy);
                 healthComponent.currentHealth -= projectileComponent.hitDamage;
 
                 if (healthComponent.currentHealth <= 0) {
-                    GetRegistry()->KillEntity(enemy);
+                    registry->KillEntity(enemy);
                 }
 
-                GetRegistry()->KillEntity(projectile);
+                registry->KillEntity(projectile);
             }
         }
 };

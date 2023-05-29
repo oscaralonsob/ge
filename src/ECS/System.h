@@ -4,7 +4,9 @@
 #include <bitset>
 #include <vector>
 #include <algorithm>
+#include <memory>
 #include "Component.h"
+#include "../Logger/Logger.h"
 #include "Entity.h"
 
 const unsigned int MAX_COMPONENTS = 32;
@@ -15,16 +17,18 @@ class System {
     private:
         Signature componentSignature;
         std::vector<Entity> entities;
-        class Registry* registry; //TODO: migrate to protected
+
+    protected:
+        class Registry* registry;
+        std::shared_ptr<Logger> logger;
 
     public:
-        System(Registry* registry);
+        System(Registry* registry, std::shared_ptr<Logger> logger);
         ~System() = default;
 
         void AddEntityToSystem(Entity entity);
         void RemoveEntityFromSystem(Entity entity);
         std::vector<Entity> GetSystemEntities() const;
-        Registry* GetRegistry() const;
         const Signature& GetComponentSignature() const;
 
         template <typename T> void RequireComponent();

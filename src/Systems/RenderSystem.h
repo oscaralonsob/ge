@@ -9,7 +9,7 @@
 
 class RenderSystem: public System {
     public:
-        RenderSystem(Registry* registry): System(registry) {
+        RenderSystem(Registry* registry, std::shared_ptr<Logger> logger): System(registry, logger) {
             RequireComponent<TransformComponent>();
             RequireComponent<SpriteComponent>();
         }
@@ -21,13 +21,13 @@ class RenderSystem: public System {
                 sortedEntites.begin(), 
                 sortedEntites.end(), 
                 [this](const Entity entity1, const Entity entity2) -> bool {
-                    return GetRegistry()->GetComponent<SpriteComponent>(entity1) < GetRegistry()->GetComponent<SpriteComponent>(entity2);
+                    return registry->GetComponent<SpriteComponent>(entity1) < registry->GetComponent<SpriteComponent>(entity2);
                 } 
             );
 
             for (Entity entity: sortedEntites) {
-                TransformComponent& transform = GetRegistry()->GetComponent<TransformComponent>(entity);
-                const SpriteComponent& sprite = GetRegistry()->GetComponent<SpriteComponent>(entity);
+                TransformComponent& transform = registry->GetComponent<TransformComponent>(entity);
+                const SpriteComponent& sprite = registry->GetComponent<SpriteComponent>(entity);
 
                 SDL_Rect srcRect = {
                     static_cast<int>(sprite.offset.x * sprite.size.x), 
