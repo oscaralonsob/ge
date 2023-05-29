@@ -103,16 +103,24 @@ void Registry::RemoveTagFromEntity(Entity entity) {
 void Registry::AddGroupToEntity(Entity entity, const std::string& group) {
     entitiesPerGroup.emplace(group, std::set<Entity>()); //TODO: creates a group???
     entitiesPerGroup[group].emplace(entity);
-    tagPerEntites.emplace(entity.GetId(), group);
+    groupPerEntites.emplace(entity.GetId(), group);
 }
 
 bool Registry::EntityBelongToGroup(Entity entity, const std::string& group) const {
-    auto setOfEntites = entitiesPerGroup.at(group); //TODO: make sure exists?
+    if (entitiesPerGroup.find(group) == entitiesPerGroup.end()) {
+        return false;
+    }
+
+    auto setOfEntites = entitiesPerGroup.at(group);
     return setOfEntites.find(entity.GetId()) != setOfEntites.end();
 }
 
 std::vector<Entity> Registry::GetEntityByGroup(const std::string& group) {
-    std::set<Entity>& setOfEntites = entitiesPerGroup.at(group); //TODO: make sure exists?
+    if (entitiesPerGroup.find(group) == entitiesPerGroup.end()) {
+        return std::vector<Entity>();
+    }
+
+    std::set<Entity>& setOfEntites = entitiesPerGroup.at(group);
     return std::vector<Entity>(setOfEntites.begin(), setOfEntites.end());
 }
 
