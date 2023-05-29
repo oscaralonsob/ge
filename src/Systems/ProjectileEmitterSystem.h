@@ -64,11 +64,13 @@ class ProjectileEmitterSystem: public System {
             projectileDirection.y = (rigidBodyComponent.velocity.y > 0) ? projectileEmitterComponent.projectileVelocity.y : 0.0;
             projectileDirection.y = (rigidBodyComponent.velocity.y < 0) ? -projectileEmitterComponent.projectileVelocity.y : projectileDirection.y;
 
+            
             if (projectileDirection.x == projectileDirection.y && projectileDirection.x == 0) {
                 projectileDirection.x = projectileEmitterComponent.projectileVelocity.x;
             } 
 
             Entity projectile = GetRegistry()->CreateEntity();
+            GetRegistry()->AddGroupToEntity(projectile, "Projectiles");
             GetRegistry()->AddComponent<TransformComponent>(projectile, transformComponent.position, glm::vec2(1.0, 1.0), 0.0);
             GetRegistry()->AddComponent<RigidBodyComponent>(projectile, projectileDirection);
             GetRegistry()->AddComponent<SpriteComponent>(projectile, "bullet-image", 4, glm::vec2(3.0, 3.0));
