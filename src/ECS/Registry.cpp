@@ -44,6 +44,9 @@ void Registry::Update() {
         entityComponentSignatures[entity.GetId()].reset();
 
         freeIds.push_back(entity.GetId());
+
+        RemoveTagFromEntity(entity);
+        RemoveEntityFromGroup(entity);
     }
     entitiesToBeRemoved.clear();
 }
@@ -67,5 +70,62 @@ void Registry::AddEntityToSystems(Entity entity) {
 void Registry::RemoveEntityFromSystems(Entity entity) {
     for(auto& system: systems) {
         system.second->RemoveEntityFromSystem(entity);
+    }
+}
+
+void Registry::AddTagToEntity(Entity entity, const std::string& tag) {
+    entitiesPerTag.emplace(tag, entity);
+    tagPerEntites.emplace(entity.GetId(), tag);
+}
+
+bool Registry::EntityHasTag(Entity entity, const std::string& tag) const {
+    if (tagPerEntites.find(entity.GetId()) == tagPerEntites.end()) {
+        return false;
+    }
+
+    return entitiesPerTag.find(tag)->second == entity;
+}
+
+Entity Registry::GetEntityByTag(const std::string& tag) {
+    return entitiesPerTag.at(tag); //TODO: make sure exists?
+}
+
+void Registry::RemoveTagFromEntity(Entity entity) {
+    auto taggedEntity = tagPerEntites.find(entity.GetId());
+    if (taggedEntity != tagPerEntites.end()) {
+        std::string tag = taggedEntity->second;
+        entitiesPerTag.erase(tag);
+        tagPerEntites.erase(taggedEntity);
+    }
+}
+
+
+void Registry::AddGroupToEntity(Entity entity, const std::string& group) {
+    entitiesPerGroup.emplace(group, std::set<Entity>()); //TODO: creates a group???
+    entitiesPerGroup[group].emplace(entity);
+    tagPerEntites.emplace(entity.GetId(), group);
+}
+
+bool Registry::EntityBelongToGroup(Entity entity, const std::string& group) const {
+    auto setOfEntites = entitiesPerGroup.at(group); //TODO: make sure exists?
+    return setOfEntites.find(entity.GetId()) != setOfEntites.end();
+}
+
+std::vector<Entity> Registry::GetEntityByGroup(const std::string& group) {
+    std::set<Entity>& setOfEntites = entitiesPerGroup.at(group); //TODO: make sure exists?
+    return std::vector<Entity>(setOfEntites.begin(), setOfEntites.end());
+}
+
+void Registry::RemoveEntityFromGroup(Entity entity) {
+    auto groupedEntity = groupPerEntites.find(entity.GetId());
+    if (groupedEntity != groupPerEntites.end()) {
+        auto group = entitiesPerGroup.find(groupedEntity->second);
+        if (group != entitiesPerGroup.end()) {
+            auto entityInGroup = group->second.find(entity);
+            if (entityInGroup != group->second.end()) {  
+                group->second.erase(entityInGroup);
+            } 
+        }
+        groupPerEntites.erase(groupedEntity);
     }
 }

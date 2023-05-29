@@ -99,6 +99,7 @@ void Game::LoadLevel() {
     assetStore->AddTexture(renderer, "bullet-image", "./assets/images/bullet.png");
 
     Entity tank = registry->CreateEntity();
+    registry->AddGroupToEntity(tank, "Enemies");
     registry->AddComponent<TransformComponent>(tank, glm::vec2(100.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(-10.0, 0.0));
     registry->AddComponent<SpriteComponent>(tank, "tank-image", 1, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0), false);
@@ -106,6 +107,7 @@ void Game::LoadLevel() {
     registry->AddComponent<HealthComponent>(tank, 100, 100);
 
     Entity truck = registry->CreateEntity();
+    registry->AddGroupToEntity(truck, "Enemies");
     registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(10.0, 0.0));
     registry->AddComponent<SpriteComponent>(truck, "truck-image", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0), false);
@@ -113,6 +115,7 @@ void Game::LoadLevel() {
     registry->AddComponent<HealthComponent>(truck, 100, 100);
 
     Entity helicopter = registry->CreateEntity();
+    registry->AddTagToEntity(helicopter, "Player");
     registry->AddComponent<TransformComponent>(helicopter, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(helicopter, glm::vec2(0.0, 0.0));
     registry->AddComponent<SpriteComponent>(helicopter, "chopper", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 1.0), false);
@@ -140,6 +143,7 @@ void Game::LoadTileMap() {
             token = line.substr(0, pos);
             line.erase(0, pos + delimiter.length());
             Entity tile = registry->CreateEntity();
+            registry->AddGroupToEntity(tile, "tiles");
             registry->AddComponent<TransformComponent>(tile, glm::vec2(x*tileSize*3.0, y*tileSize*3.0), glm::vec2(3.0, 3.0), 0.0);
             registry->AddComponent<SpriteComponent>(
                 tile, 

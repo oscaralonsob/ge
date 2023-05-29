@@ -28,6 +28,12 @@ class Registry {
         std::set<Entity> entitiesToBeAdded;
         std::set<Entity> entitiesToBeRemoved;
 
+        std::unordered_map<std::string, Entity> entitiesPerTag;
+        std::unordered_map<int, std::string> tagPerEntites;
+
+        std::unordered_map<std::string, std::set<Entity>> entitiesPerGroup;
+        std::unordered_map<int, std::string> groupPerEntites;
+
         std::deque<int> freeIds;
 
     public:
@@ -52,6 +58,16 @@ class Registry {
 
         void AddEntityToSystems(Entity entity);
         void RemoveEntityFromSystems(Entity entity);
+
+        void AddTagToEntity(Entity entity, const std::string& tag);
+        bool EntityHasTag(Entity entity, const std::string& tag) const;
+        Entity GetEntityByTag(const std::string& tag);
+        void RemoveTagFromEntity(Entity entity);
+
+        void AddGroupToEntity(Entity entity, const std::string& group);
+        bool EntityBelongToGroup(Entity entity, const std::string& group) const;
+        std::vector<Entity> GetEntityByGroup(const std::string& group);
+        void RemoveEntityFromGroup(Entity entity);
 };
 
 #include "Registry.tpp"
