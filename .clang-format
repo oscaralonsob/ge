@@ -1,0 +1,22 @@
+---
+Language:       Cpp
+BasedOnStyle:  LLVM
+
+IndentWidth:           4
+AccessModifierOffset: -4
+
+IncludeBlocks:   Regroup
+
+AllowShortEnumsOnASingleLine: true
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false
+AllowShortLambdasOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+PointerAlignment: Left
+
+AlwaysBreakTemplateDeclarations: Yes
+...
+
