@@ -7,7 +7,7 @@ Registry::Registry(std::shared_ptr<Logger> l) {
 Entity Registry::CreateEntity() {
     int entityId;
 
-    if (freeIds.empty()){
+    if (freeIds.empty()) {
         entityId = numEntities++;
 
         if (entityId >= static_cast<int>(entityComponentSignatures.size())) {
@@ -16,12 +16,11 @@ Entity Registry::CreateEntity() {
     } else {
         entityId = freeIds.front();
         freeIds.pop_front();
-    } 
+    }
 
     Entity entity(entityId);
 
     entitiesToBeAdded.insert(entity);
-
 
     logger->Log("Entity created with id: " + std::to_string(entityId));
 
@@ -34,12 +33,12 @@ void Registry::KillEntity(Entity entity) {
 }
 
 void Registry::Update() {
-    for (Entity entity: entitiesToBeAdded) {
+    for (Entity entity : entitiesToBeAdded) {
         AddEntityToSystems(entity);
     }
     entitiesToBeAdded.clear();
 
-    for (Entity entity: entitiesToBeRemoved) {
+    for (Entity entity : entitiesToBeRemoved) {
         RemoveEntityFromSystems(entity);
         entityComponentSignatures[entity.GetId()].reset();
 
@@ -54,21 +53,25 @@ void Registry::Update() {
 void Registry::AddEntityToSystems(Entity entity) {
     const int entityId = entity.GetId();
 
-    const Signature& entityComponentSignature = entityComponentSignatures[entityId];
+    const Signature& entityComponentSignature =
+        entityComponentSignatures[entityId];
 
-    for(auto& system: systems) {
-        const Signature& sytemComponentSignature = system.second->GetComponentSignature();
+    for (auto& system : systems) {
+        const Signature& sytemComponentSignature =
+            system.second->GetComponentSignature();
 
-        bool isInterested = (entityComponentSignature & sytemComponentSignature) == sytemComponentSignature;
+        bool isInterested =
+            (entityComponentSignature & sytemComponentSignature) ==
+            sytemComponentSignature;
 
-        if (isInterested) { 
+        if (isInterested) {
             system.second->AddEntityToSystem(entity);
         }
     }
 }
 
 void Registry::RemoveEntityFromSystems(Entity entity) {
-    for(auto& system: systems) {
+    for (auto& system : systems) {
         system.second->RemoveEntityFromSystem(entity);
     }
 }
@@ -87,7 +90,7 @@ bool Registry::EntityHasTag(Entity entity, const std::string& tag) const {
 }
 
 Entity Registry::GetEntityByTag(const std::string& tag) {
-    return entitiesPerTag.at(tag); //TODO: make sure exists?
+    return entitiesPerTag.at(tag); // TODO: make sure exists?
 }
 
 void Registry::RemoveTagFromEntity(Entity entity) {
@@ -99,14 +102,15 @@ void Registry::RemoveTagFromEntity(Entity entity) {
     }
 }
 
-
 void Registry::AddGroupToEntity(Entity entity, const std::string& group) {
-    entitiesPerGroup.emplace(group, std::set<Entity>()); //TODO: creates a group???
+    entitiesPerGroup.emplace(group,
+                             std::set<Entity>()); // TODO: creates a group???
     entitiesPerGroup[group].emplace(entity);
     groupPerEntites.emplace(entity.GetId(), group);
 }
 
-bool Registry::EntityBelongToGroup(Entity entity, const std::string& group) const {
+bool Registry::EntityBelongToGroup(Entity entity,
+                                   const std::string& group) const {
     if (entitiesPerGroup.find(group) == entitiesPerGroup.end()) {
         return false;
     }
@@ -130,9 +134,9 @@ void Registry::RemoveEntityFromGroup(Entity entity) {
         auto group = entitiesPerGroup.find(groupedEntity->second);
         if (group != entitiesPerGroup.end()) {
             auto entityInGroup = group->second.find(entity);
-            if (entityInGroup != group->second.end()) {  
+            if (entityInGroup != group->second.end()) {
                 group->second.erase(entityInGroup);
-            } 
+            }
         }
         groupPerEntites.erase(groupedEntity);
     }

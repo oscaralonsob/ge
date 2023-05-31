@@ -2,8 +2,9 @@
 #define IPOOL_H
 
 class IPool {
-    public:
-        virtual ~IPool() {}
+public:
+    virtual ~IPool() {
+    }
 };
 
 #endif
