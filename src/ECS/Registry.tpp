@@ -17,10 +17,6 @@ void Registry::AddComponent(Entity entity, TArgs&&... args) {
     std::shared_ptr<Pool<T>> componentPool =
         std::static_pointer_cast<Pool<T>>(componentPools[componentId]);
 
-    if (entityId >= componentPool->GetSize()) {
-        componentPool->Resize(numEntities);
-    }
-
     T newComponent(std::forward<TArgs>(args)...);
 
     componentPool->Set(entityId, newComponent);
@@ -37,6 +33,10 @@ void Registry::RemoveComponent(Entity entity) {
     const int entityId = entity.GetId();
 
     entityComponentSignatures[entityId].set(componentId, false);
+
+    std::shared_ptr<Pool<T>> componentPool =
+        std::static_pointer_cast<Pool<T>>(componentPools[componentId]);
+    componentPool->Remove(entityId);
 }
 
 template <typename T>
