@@ -11,15 +11,17 @@ AssetStore::~AssetStore() {
 }
 
 void AssetStore::ClearAssets() {
-    for (auto texture: textures) {
+    for (auto texture : textures) {
         SDL_DestroyTexture(texture.second);
         logger->Log("Removed texture with id = " + texture.first);
     }
     textures.clear();
 }
 
-void AssetStore::AddTexture(SDL_Renderer* renderer, const std::string& textureId, const std::string& filePath) {
-    //TODO convert filepath to texture
+void AssetStore::AddTexture(SDL_Renderer* renderer,
+                            const std::string& textureId,
+                            const std::string& filePath) {
+    // TODO convert filepath to texture
     SDL_Surface* surface = IMG_Load(filePath.c_str());
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);
