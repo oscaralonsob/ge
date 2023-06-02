@@ -40,6 +40,7 @@ SDL_Texture* AssetStore::GetTexture(const std::string& textureId) {
     return textures[textureId];
 }
 
+// TODO: create texture directly?
 void AssetStore::AddFont(const std::string& fontId, const std::string& filePath,
                          const int size) {
     fonts.emplace(fontId, TTF_OpenFont(filePath.c_str(), size));
