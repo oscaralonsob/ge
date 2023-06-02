@@ -26,6 +26,11 @@ void Game::Initialize() {
         return;
     }
 
+    if (TTF_Init() != 0) {
+        logger->Err("Error initializing TTF");
+        return;
+    }
+
     SDL_DisplayMode displayMode;
     SDL_GetCurrentDisplayMode(0, &displayMode);
     windowWidth = displayMode.w;
@@ -79,6 +84,8 @@ void Game::LoadLevel() {
     registry->AddSystem<CollisionSystem>();
     registry->AddSystem<MovementSystem>();
     registry->AddSystem<RenderSystem>();
+    registry->AddSystem<TextRenderSystem>();
+    registry->AddSystem<HealthBarRenderSystem>();
     registry->AddSystem<AnimationSystem>();
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
@@ -94,6 +101,9 @@ void Game::LoadLevel() {
                            "./assets/images/chopper-spritesheet.png");
     assetStore->AddTexture(renderer, "bullet-image",
                            "./assets/images/bullet.png");
+    assetStore->AddFont("charriot-font", "./assets/fonts/charriot.ttf", 32);
+    assetStore->AddFont("charriot-font-mini", "./assets/fonts/charriot.ttf",
+                        12);
 
     Entity tank = registry->CreateEntity();
     registry->AddGroupToEntity(tank, "Enemies");
@@ -134,9 +144,17 @@ void Game::LoadLevel() {
     registry->AddComponent<CameraFollowComponent>(helicopter);
     registry->AddComponent<ProjectileEmitterComponent>(
         helicopter, glm::vec2(100.0, 100.0), 1000, 10000, 10, true);
-    registry->AddComponent<HealthComponent>(helicopter, 20, 20);
+    registry->AddComponent<HealthComponent>(helicopter, 100, 100);
     registry->AddComponent<BoxColliderComponent>(helicopter,
                                                  glm::vec2(32.0, 32.0));
+    registry->AddComponent<HealthBarComponent>(helicopter,
+                                               "charriot-font-mini");
+
+    Entity textLabel = registry->CreateEntity();
+    SDL_Color color = {255, 255, 255};
+    registry->AddComponent<TextLabelComponent>(
+        textLabel, glm::vec2(100.0, 100.0), "Text test", "charriot-font", color,
+        true);
 }
 
 // TODO: tilemap component?
@@ -210,6 +228,10 @@ void Game::Render() {
     SDL_RenderClear(renderer);
 
     registry->GetSystem<RenderSystem>().Update(renderer, assetStore, camera);
+    registry->GetSystem<TextRenderSystem>().Update(renderer, assetStore,
+                                                   camera);
+    registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
+                                                        camera);
 
     SDL_RenderPresent(renderer);
 }

@@ -11,6 +11,7 @@
 #include "../Components/ProjectileEmitterComponent.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/SpriteComponent.h"
+#include "../Components/TextLabelComponent.h"
 #include "../Components/TransformComponent.h"
 #include "../ECS/Registry.h"
 #include "../Events/EventBus.h"
@@ -19,11 +20,13 @@
 #include "../Systems/AnimationSystem.h"
 #include "../Systems/CollisionSystem.h"
 #include "../Systems/DamageSystem.h"
+#include "../Systems/HealthBarRenderSystem.h"
 #include "../Systems/KeyboardMovementSystem.h"
 #include "../Systems/MovementSystem.h"
 #include "../Systems/ProjectileEmitterSystem.h"
 #include "../Systems/ProjectileLifeCycleSystem.h"
 #include "../Systems/RenderSystem.h"
+#include "../Systems/TextRenderSystem.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
