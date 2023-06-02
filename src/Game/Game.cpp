@@ -1,4 +1,5 @@
 #include "Game.h"
+
 #include "../Systems/CameraMovementSystem.h"
 
 int Game::windowWidth;
@@ -30,24 +31,16 @@ void Game::Initialize() {
     windowWidth = displayMode.w;
     windowHeight = displayMode.h;
 
-    window = SDL_CreateWindow(
-        "Game", 
-        SDL_WINDOWPOS_CENTERED, 
-        SDL_WINDOWPOS_CENTERED, 
-        windowWidth, 
-        windowHeight,
-        SDL_WINDOW_BORDERLESS
-    );
+    window =
+        SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                         windowWidth, windowHeight, SDL_WINDOW_BORDERLESS);
     if (!window) {
         logger->Err("Error creating SDL window");
         return;
     }
 
     renderer = SDL_CreateRenderer(
-        window, 
-        -1, 
-        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
-    );
+        window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!renderer) {
         logger->Err("Error creating SDL renderer");
         return;
@@ -79,7 +72,7 @@ void Game::ProcessInput() {
     }
 }
 
-//TODO: multiple levels for example
+// TODO: multiple levels for example
 void Game::LoadLevel() {
     registry->AddSystem<KeyboardMovementSystem>();
     registry->AddSystem<DamageSystem>();
@@ -90,45 +83,63 @@ void Game::LoadLevel() {
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
     registry->AddSystem<ProjectileLifeCycleSystem>();
-    
+
     LoadTileMap();
 
-    assetStore->AddTexture(renderer, "tank-image", "./assets/images/tank-panther-right.png");
-    assetStore->AddTexture(renderer, "truck-image", "./assets/images/truck-ford-right.png");
-    assetStore->AddTexture(renderer, "chopper", "./assets/images/chopper-spritesheet.png");
-    assetStore->AddTexture(renderer, "bullet-image", "./assets/images/bullet.png");
+    assetStore->AddTexture(renderer, "tank-image",
+                           "./assets/images/tank-panther-right.png");
+    assetStore->AddTexture(renderer, "truck-image",
+                           "./assets/images/truck-ford-right.png");
+    assetStore->AddTexture(renderer, "chopper",
+                           "./assets/images/chopper-spritesheet.png");
+    assetStore->AddTexture(renderer, "bullet-image",
+                           "./assets/images/bullet.png");
 
     Entity tank = registry->CreateEntity();
     registry->AddGroupToEntity(tank, "Enemies");
-    registry->AddComponent<TransformComponent>(tank, glm::vec2(100.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
+    registry->AddComponent<TransformComponent>(tank, glm::vec2(100.0, 1.0),
+                                               glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(0.0, 0.0));
-    registry->AddComponent<SpriteComponent>(tank, "tank-image", 1, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0), false);
+    registry->AddComponent<SpriteComponent>(tank, "tank-image", 1,
+                                            glm::vec2(32.0, 32.0),
+                                            glm::vec2(0.0, 0.0), false);
     registry->AddComponent<BoxColliderComponent>(tank, glm::vec2(32.0, 32.0));
     registry->AddComponent<HealthComponent>(tank, 100, 100);
-    registry->AddComponent<ProjectileEmitterComponent>(tank, glm::vec2(100.0, 100.0), 1000, 10000, 10, false);
+    registry->AddComponent<ProjectileEmitterComponent>(
+        tank, glm::vec2(100.0, 100.0), 1000, 10000, 10, false);
 
     Entity truck = registry->CreateEntity();
     registry->AddGroupToEntity(truck, "Enemies");
-    registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
+    registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, 1.0),
+                                               glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(0.0, 0.0));
-    registry->AddComponent<SpriteComponent>(truck, "truck-image", 1, glm::vec2(32.0, 32.0), glm::vec2(0.0, 0.0), false);
+    registry->AddComponent<SpriteComponent>(truck, "truck-image", 1,
+                                            glm::vec2(32.0, 32.0),
+                                            glm::vec2(0.0, 0.0), false);
     registry->AddComponent<BoxColliderComponent>(truck, glm::vec2(32.0, 32.0));
     registry->AddComponent<HealthComponent>(truck, 100, 100);
 
     Entity helicopter = registry->CreateEntity();
     registry->AddTagToEntity(helicopter, "Player");
-    registry->AddComponent<TransformComponent>(helicopter, glm::vec2(10.0, 1.0), glm::vec2(1.0, 1.0), 0.0);
+    registry->AddComponent<TransformComponent>(helicopter, glm::vec2(10.0, 1.0),
+                                               glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(helicopter, glm::vec2(0.0, 0.0));
-    registry->AddComponent<SpriteComponent>(helicopter, "chopper", 2, glm::vec2(32.0, 32.0), glm::vec2(0.0, 1.0), false);
+    registry->AddComponent<SpriteComponent>(helicopter, "chopper", 2,
+                                            glm::vec2(32.0, 32.0),
+                                            glm::vec2(0.0, 1.0), false);
     registry->AddComponent<AnimationComponent>(helicopter, 2, 1, 5, true);
-    registry->AddComponent<KeyboardControllerComponent>(helicopter, glm::vec2(0.0, -100.0), glm::vec2(100.0, 0.0), glm::vec2(0, 100.0), glm::vec2(-100.0, 0.0));
+    registry->AddComponent<KeyboardControllerComponent>(
+        helicopter, glm::vec2(0.0, -100.0), glm::vec2(100.0, 0.0),
+        glm::vec2(0, 100.0), glm::vec2(-100.0, 0.0));
     registry->AddComponent<CameraFollowComponent>(helicopter);
-    registry->AddComponent<ProjectileEmitterComponent>(helicopter, glm::vec2(100.0, 100.0), 1000, 10000, 10, true);
+    registry->AddComponent<ProjectileEmitterComponent>(
+        helicopter, glm::vec2(100.0, 100.0), 1000, 10000, 10, true);
     registry->AddComponent<HealthComponent>(helicopter, 20, 20);
-    registry->AddComponent<BoxColliderComponent>(helicopter, glm::vec2(32.0, 32.0));
+    registry->AddComponent<BoxColliderComponent>(helicopter,
+                                                 glm::vec2(32.0, 32.0));
 }
 
-//TODO: tilemap component?
+// TODO: tilemap component?
 void Game::LoadTileMap() {
     assetStore->AddTexture(renderer, "tilemap", "./assets/tilemaps/jungle.png");
     std::ifstream myfile("./assets/tilemaps/jungle.map");
@@ -139,21 +150,19 @@ void Game::LoadTileMap() {
     int tileSize = 32;
     int x = 0;
     int y = 0;
-    while (std::getline(myfile, line))
-    {
+    while (std::getline(myfile, line)) {
         while ((pos = line.find(delimiter)) != std::string::npos) {
             token = line.substr(0, pos);
             line.erase(0, pos + delimiter.length());
             Entity tile = registry->CreateEntity();
             registry->AddGroupToEntity(tile, "tiles");
-            registry->AddComponent<TransformComponent>(tile, glm::vec2(x*tileSize*3.0, y*tileSize*3.0), glm::vec2(3.0, 3.0), 0.0);
+            registry->AddComponent<TransformComponent>(
+                tile, glm::vec2(x * tileSize * 3.0, y * tileSize * 3.0),
+                glm::vec2(3.0, 3.0), 0.0);
             registry->AddComponent<SpriteComponent>(
-                tile, 
-                "tilemap",
-                0,
-                glm::vec2(tileSize, tileSize), 
-                glm::vec2(std::stoi(token.substr(1,2)), std::stoi(token.substr(0,1)))
-            );
+                tile, "tilemap", 0, glm::vec2(tileSize, tileSize),
+                glm::vec2(std::stoi(token.substr(1, 2)),
+                          std::stoi(token.substr(0, 1))));
             x++;
         }
         mapWidth = x * tileSize * 3;
@@ -161,7 +170,6 @@ void Game::LoadTileMap() {
         y++;
     }
     mapHeight = y * tileSize * 3;
-
 }
 
 void Game::Setup() {
@@ -169,22 +177,24 @@ void Game::Setup() {
 }
 
 void Game::Update() {
-    //TODO: improve this...
-    int timeTowait = MILISECONDS_PER_FRAME - (SDL_GetTicks() - milisecsPrevoiusFrame);
+    // TODO: improve this...
+    int timeTowait =
+        MILISECONDS_PER_FRAME - (SDL_GetTicks() - milisecsPrevoiusFrame);
     if (timeTowait > 0 && timeTowait <= MILISECONDS_PER_FRAME) {
         SDL_Delay(timeTowait);
     }
-    
-    double deltaTime = (SDL_GetTicks() - milisecsPrevoiusFrame) / MILISENCOS_TO_SECONDS;
+
+    double deltaTime =
+        (SDL_GetTicks() - milisecsPrevoiusFrame) / MILISENCOS_TO_SECONDS;
     milisecsPrevoiusFrame = SDL_GetTicks();
 
-    //TODO: do not subscribe every time
+    // TODO: do not subscribe every time
     eventBus->Reset();
     registry->GetSystem<DamageSystem>().SubscribeToEvents(eventBus);
     registry->GetSystem<KeyboardMovementSystem>().SubscribeToEvents(eventBus);
     registry->GetSystem<ProjectileEmitterSystem>().SubscribeToEvents(eventBus);
 
-    //TODO: update in registry maybe?
+    // TODO: update in registry maybe?
     registry->GetSystem<CollisionSystem>().Update(eventBus);
     registry->GetSystem<MovementSystem>().Update(deltaTime);
     registry->GetSystem<AnimationSystem>().Update(deltaTime);
@@ -218,4 +228,3 @@ void Game::Destroy() {
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
-
