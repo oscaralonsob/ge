@@ -58,11 +58,24 @@ void Game::Initialize() {
     camera.y = 0;
     camera.w = windowWidth;
     camera.h = windowHeight;
+
+    ImGui::CreateContext();
+    ImGuiSDL::Initialize(renderer, windowWidth, windowHeight);
 }
 
 void Game::ProcessInput() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
+        ImGui_ImplSDL2_ProcessEvent(&event);
+        ImGuiIO& io = ImGui::GetIO();
+
+        int mouseX, mouseY;
+        const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+
+        io.MousePos = ImVec2(mouseX, mouseY);
+        io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
+        io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+
         switch (event.type) {
         case SDL_QUIT:
             isRunning = false;
@@ -90,6 +103,7 @@ void Game::LoadLevel() {
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
     registry->AddSystem<ProjectileLifeCycleSystem>();
+    registry->AddSystem<RenderEngineGUISystem>();
 
     LoadTileMap();
 
@@ -233,6 +247,7 @@ void Game::Render() {
     registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
                                                         camera);
 
+    registry->GetSystem<RenderEngineGUISystem>().Update();
     SDL_RenderPresent(renderer);
 }
 
@@ -246,6 +261,8 @@ void Game::Run() {
 }
 
 void Game::Destroy() {
+    ImGuiSDL::Deinitialize();
+    ImGui::DestroyContext();
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

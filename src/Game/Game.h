@@ -25,12 +25,16 @@
 #include "../Systems/MovementSystem.h"
 #include "../Systems/ProjectileEmitterSystem.h"
 #include "../Systems/ProjectileLifeCycleSystem.h"
+#include "../Systems/RenderEngineGUISystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/TextRenderSystem.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <fstream>
+#include <imgui/imgui.h>
+#include <imgui/imgui_impl_sdl.h>
+#include <imgui/imgui_sdl.h>
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;
