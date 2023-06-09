@@ -49,7 +49,7 @@ private:
 
     std::unique_ptr<Registry> registry;
     std::unique_ptr<AssetStore> assetStore;
-    std::unique_ptr<EventBus> eventBus;
+    std::shared_ptr<EventBus> eventBus;
     std::shared_ptr<Logger> logger;
 
     void ProcessInput();
