@@ -8,8 +8,9 @@
 
 class CollisionSystem : public System {
 public:
-    CollisionSystem(Registry* registry, std::shared_ptr<Logger> logger)
-        : System(registry, logger) {
+    CollisionSystem(Registry* registry, std::shared_ptr<Logger> logger,
+                    std::shared_ptr<EventBus> eventBus)
+        : System(registry, logger, eventBus) {
         RequireComponent<TransformComponent>();
         RequireComponent<BoxColliderComponent>();
     }

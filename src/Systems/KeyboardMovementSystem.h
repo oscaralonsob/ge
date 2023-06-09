@@ -13,8 +13,9 @@
 
 class KeyboardMovementSystem : public System {
 public:
-    KeyboardMovementSystem(Registry* registry, std::shared_ptr<Logger> logger)
-        : System(registry, logger) {
+    KeyboardMovementSystem(Registry* registry, std::shared_ptr<Logger> logger,
+                           std::shared_ptr<EventBus> eventBus)
+        : System(registry, logger, eventBus) {
         RequireComponent<KeyboardControllerComponent>();
         RequireComponent<SpriteComponent>();
         RequireComponent<RigidBodyComponent>();

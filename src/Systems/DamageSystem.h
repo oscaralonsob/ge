@@ -13,8 +13,9 @@
 
 class DamageSystem : public System {
 public:
-    DamageSystem(Registry* registry, std::shared_ptr<Logger> logger)
-        : System(registry, logger) {
+    DamageSystem(Registry* registry, std::shared_ptr<Logger> logger,
+                 std::shared_ptr<EventBus> eventBus)
+        : System(registry, logger, eventBus) {
         RequireComponent<BoxColliderComponent>();
     }
 

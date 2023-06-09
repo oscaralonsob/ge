@@ -9,9 +9,9 @@ int Game::mapHeight;
 
 Game::Game() {
     logger = std::make_shared<Logger>();
-    registry = std::make_unique<Registry>(logger);
+    eventBus = std::make_shared<EventBus>(logger);
+    registry = std::make_unique<Registry>(logger, eventBus);
     assetStore = std::make_unique<AssetStore>(logger);
-    eventBus = std::make_unique<EventBus>(logger);
     isRunning = false;
     logger->Log("Game constructor called");
 }

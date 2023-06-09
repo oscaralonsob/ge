@@ -1,6 +1,7 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include "../Events/EventBus.h"
 #include "../Logger/Logger.h"
 #include "Component.h"
 #include "Entity.h"
@@ -22,9 +23,11 @@ private:
 protected:
     class Registry* registry;
     std::shared_ptr<Logger> logger;
+    std::shared_ptr<EventBus> eventBus;
 
 public:
-    System(Registry* registry, std::shared_ptr<Logger> logger);
+    System(Registry* registry, std::shared_ptr<Logger> logger,
+           std::shared_ptr<EventBus> eventBus);
     ~System() = default;
 
     void AddEntityToSystem(Entity entity);

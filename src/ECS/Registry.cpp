@@ -1,7 +1,9 @@
 #include "Registry.h"
 
-Registry::Registry(std::shared_ptr<Logger> l) {
+Registry::Registry(std::shared_ptr<Logger> l,
+                   std::shared_ptr<EventBus> eventBus) {
     logger = l;
+    this->eventBus = eventBus;
 }
 
 Entity Registry::CreateEntity() {

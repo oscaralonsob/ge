@@ -2,9 +2,11 @@
 
 #include "Component.h"
 
-System::System(Registry* registry, std::shared_ptr<Logger> logger) {
+System::System(Registry* registry, std::shared_ptr<Logger> logger,
+               std::shared_ptr<EventBus> eventBus) {
     this->registry = registry;
     this->logger = logger;
+    this->eventBus = eventBus;
 }
 
 void System::AddEntityToSystem(Entity entity) {
