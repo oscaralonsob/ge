@@ -103,7 +103,6 @@ void Game::LoadLevel() {
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
     registry->AddSystem<ProjectileLifeCycleSystem>();
-    registry->AddSystem<RenderEngineGUISystem>();
 
     LoadTileMap();
 
@@ -247,7 +246,6 @@ void Game::Render() {
     registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
                                                         camera);
 
-    registry->GetSystem<RenderEngineGUISystem>().Update();
     SDL_RenderPresent(renderer);
 }
 

@@ -25,7 +25,6 @@
 #include "../Systems/MovementSystem.h"
 #include "../Systems/ProjectileEmitterSystem.h"
 #include "../Systems/ProjectileLifeCycleSystem.h"
-#include "../Systems/RenderEngineGUISystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/TextRenderSystem.h"
 
