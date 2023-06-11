@@ -1,4 +1,4 @@
-#include "AssetStore.h"
+#include "AssetStore.hpp"
 
 AssetStore::AssetStore(std::shared_ptr<EventBus> eventBus) {
     this->eventBus = eventBus;

@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "../../libs/glm/glm.hpp"
-#include "../AssetStore/AssetStore.h"
+#include "../Common/AssetStore/AssetStore.hpp"
 #include "../Components/AnimationComponent.h"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/CameraFollowComponent.h"

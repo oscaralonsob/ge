@@ -3,7 +3,6 @@
 
 #include "../Debug/Events/LogRequestEvent.hpp"
 #include "../Events/EventBus.h"
-#include "../Logger/Logger.h"
 #include "Component.h"
 #include "Entity.h"
 #include "IPool.h"

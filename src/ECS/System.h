@@ -2,7 +2,6 @@
 #define SYSTEM_H
 
 #include "../Events/EventBus.h"
-#include "../Logger/Logger.h"
 #include "Component.h"
 #include "Entity.h"
 

@@ -1,8 +1,8 @@
 #ifndef ASSETSTORE_H
 #define ASSETSTORE_H
 
-#include "../Debug/Events/LogRequestEvent.hpp"
-#include "../Events/EventBus.h"
+#include "../../Debug/Events/LogRequestEvent.hpp"
+#include "../../Events/EventBus.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

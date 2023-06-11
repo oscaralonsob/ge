@@ -2,7 +2,6 @@
 #define EVENTBUS_H
 
 #include "../Debug/Events/LogRequestEvent.hpp"
-#include "../Logger/Logger.h"
 #include "Event.h"
 
 #include <functional>
