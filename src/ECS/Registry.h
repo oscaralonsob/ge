@@ -1,9 +1,9 @@
 #ifndef REGISTRY_H
 #define REGISTRY_H
 
+#include "../Common/ECS/Component.hpp"
 #include "../Debug/Events/LogRequestEvent.hpp"
 #include "../Events/EventBus.h"
-#include "Component.h"
 #include "Entity.h"
 #include "IPool.h"
 #include "Pool.h"

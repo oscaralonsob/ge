@@ -1,8 +1,8 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
+#include "../Common/ECS/Component.hpp"
 #include "../Events/EventBus.h"
-#include "Component.h"
 #include "Entity.h"
 
 #include <algorithm>

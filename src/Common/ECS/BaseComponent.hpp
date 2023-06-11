@@ -2,8 +2,8 @@
 #define BASECOMPONENT_H
 
 class BaseComponent {
-    protected:
-        static int nextId;
+protected:
+    static int nextId;
 };
 
 #endif

@@ -1,7 +1,5 @@
 #include "System.h"
 
-#include "Component.h"
-
 System::System(Registry* registry, std::shared_ptr<EventBus> eventBus) {
     this->registry = registry;
     this->eventBus = eventBus;
