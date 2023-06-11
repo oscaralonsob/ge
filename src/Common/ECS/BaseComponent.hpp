@@ -1,5 +1,5 @@
-#ifndef BASECOMPONENT_H
-#define BASECOMPONENT_H
+#ifndef BASECOMPONENT_HPP
+#define BASECOMPONENT_HPP
 
 class BaseComponent {
 protected:

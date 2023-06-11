@@ -1,5 +1,5 @@
-#ifndef ASSETSTORE_H
-#define ASSETSTORE_H
+#ifndef ASSETSTORE_HPP
+#define ASSETSTORE_HPP
 
 #include "../../Debug/Events/LogRequestEvent.hpp"
 #include "../../Events/EventBus.h"
