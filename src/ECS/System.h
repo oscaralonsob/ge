@@ -2,8 +2,8 @@
 #define SYSTEM_H
 
 #include "../Common/ECS/Component.hpp"
+#include "../Common/ECS/Entity.hpp"
 #include "../Events/EventBus.h"
-#include "Entity.h"
 
 #include <algorithm>
 #include <bitset>
