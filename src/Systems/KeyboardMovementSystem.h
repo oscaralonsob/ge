@@ -13,15 +13,15 @@
 
 class KeyboardMovementSystem : public System {
 public:
-    KeyboardMovementSystem(Registry* registry, std::shared_ptr<Logger> logger,
+    KeyboardMovementSystem(Registry* registry,
                            std::shared_ptr<EventBus> eventBus)
-        : System(registry, logger, eventBus) {
+        : System(registry, eventBus) {
         RequireComponent<KeyboardControllerComponent>();
         RequireComponent<SpriteComponent>();
         RequireComponent<RigidBodyComponent>();
     }
 
-    void SubscribeToEvents(std::shared_ptr<EventBus>& eventBus) {
+    void SubscribeToEvents() {
         eventBus->SubscribeToEvent<KeyPressedEvent>(
             this, &KeyboardMovementSystem::OnKeyPressed);
     }

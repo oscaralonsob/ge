@@ -21,11 +21,11 @@ private:
     }
 
 public:
-    LogSystem(Registry* registry, std::shared_ptr<Logger> logger)
-        : System(registry, logger) {
+    LogSystem(Registry* registry, std::shared_ptr<EventBus> eventBus)
+        : System(registry, eventBus) {
     }
 
-    void SubscribeToEvents(std::shared_ptr<EventBus>& eventBus) {
+    void SubscribeToEvents() {
         eventBus->SubscribeToEvent<LogRequestEvent>(this,
                                                     &LogSystem::LogRequested);
     }

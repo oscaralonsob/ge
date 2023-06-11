@@ -22,12 +22,10 @@ private:
 
 protected:
     class Registry* registry;
-    std::shared_ptr<Logger> logger;
     std::shared_ptr<EventBus> eventBus;
 
 public:
-    System(Registry* registry, std::shared_ptr<Logger> logger,
-           std::shared_ptr<EventBus> eventBus);
+    System(Registry* registry, std::shared_ptr<EventBus> eventBus);
     ~System() = default;
 
     void AddEntityToSystem(Entity entity);

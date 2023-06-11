@@ -10,9 +10,8 @@
 
 class RenderSystem : public System {
 public:
-    RenderSystem(Registry* registry, std::shared_ptr<Logger> logger,
-                 std::shared_ptr<EventBus> eventBus)
-        : System(registry, logger, eventBus) {
+    RenderSystem(Registry* registry, std::shared_ptr<EventBus> eventBus)
+        : System(registry, eventBus) {
         RequireComponent<TransformComponent>();
         RequireComponent<SpriteComponent>();
     }

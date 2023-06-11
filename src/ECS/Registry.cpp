@@ -1,8 +1,6 @@
 #include "Registry.h"
 
-Registry::Registry(std::shared_ptr<Logger> l,
-                   std::shared_ptr<EventBus> eventBus) {
-    logger = l;
+Registry::Registry(std::shared_ptr<EventBus> eventBus) {
     this->eventBus = eventBus;
 }
 
@@ -24,14 +22,16 @@ Entity Registry::CreateEntity() {
 
     entitiesToBeAdded.insert(entity);
 
-    logger->Log("Entity created with id: " + std::to_string(entityId));
+    eventBus->EmitEvent<LogRequestEvent>("Entity created with id: " +
+                                         std::to_string(entityId));
 
     return entity;
 }
 
 void Registry::KillEntity(Entity entity) {
     entitiesToBeRemoved.insert(entity);
-    logger->Log("Entity destroyed with id: " + std::to_string(entity.GetId()));
+    eventBus->EmitEvent<LogRequestEvent>("Entity destroyed with id: " +
+                                         std::to_string(entity.GetId()));
 }
 
 void Registry::Update() {

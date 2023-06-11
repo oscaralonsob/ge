@@ -13,13 +13,12 @@
 
 class DamageSystem : public System {
 public:
-    DamageSystem(Registry* registry, std::shared_ptr<Logger> logger,
-                 std::shared_ptr<EventBus> eventBus)
-        : System(registry, logger, eventBus) {
+    DamageSystem(Registry* registry, std::shared_ptr<EventBus> eventBus)
+        : System(registry, eventBus) {
         RequireComponent<BoxColliderComponent>();
     }
 
-    void SubscribeToEvents(std::shared_ptr<EventBus>& eventBus) {
+    void SubscribeToEvents() {
         eventBus->SubscribeToEvent<CollisionEvent>(this,
                                                    &DamageSystem::OnCollision);
     }

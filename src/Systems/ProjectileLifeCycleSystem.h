@@ -9,9 +9,8 @@
 class ProjectileLifeCycleSystem : public System {
 public:
     ProjectileLifeCycleSystem(Registry* registry,
-                              std::shared_ptr<Logger> logger,
                               std::shared_ptr<EventBus> eventBus)
-        : System(registry, logger, eventBus) {
+        : System(registry, eventBus) {
         RequireComponent<ProjectileComponent>();
     }
 

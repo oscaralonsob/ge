@@ -8,26 +8,21 @@ int Game::mapWidth;
 int Game::mapHeight;
 
 Game::Game() {
-    logger = std::make_shared<Logger>();
-    eventBus = std::make_shared<EventBus>(logger);
-    registry = std::make_unique<Registry>(logger, eventBus);
-    assetStore = std::make_unique<AssetStore>(logger);
+    eventBus = std::make_shared<EventBus>();
+    registry = std::make_unique<Registry>(eventBus);
+    assetStore = std::make_unique<AssetStore>(eventBus);
     isRunning = false;
-    logger->Log("Game constructor called");
 }
 
 Game::~Game() {
-    logger->Log("Game destructor called");
 }
 
 void Game::Initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-        logger->Err("Error initializing SDL");
         return;
     }
 
     if (TTF_Init() != 0) {
-        logger->Err("Error initializing TTF");
         return;
     }
 
@@ -40,14 +35,12 @@ void Game::Initialize() {
         SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                          windowWidth, windowHeight, SDL_WINDOW_BORDERLESS);
     if (!window) {
-        logger->Err("Error creating SDL window");
         return;
     }
 
     renderer = SDL_CreateRenderer(
         window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (!renderer) {
-        logger->Err("Error creating SDL renderer");
         return;
     }
     SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
@@ -103,6 +96,14 @@ void Game::LoadLevel() {
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
     registry->AddSystem<ProjectileLifeCycleSystem>();
+    registry->AddSystem<LogSystem>();
+
+    // TODO: should be necesary just once, not in every update
+    eventBus->Reset();
+    registry->GetSystem<DamageSystem>().SubscribeToEvents();
+    registry->GetSystem<KeyboardMovementSystem>().SubscribeToEvents();
+    registry->GetSystem<ProjectileEmitterSystem>().SubscribeToEvents();
+    registry->GetSystem<LogSystem>().SubscribeToEvents();
 
     LoadTileMap();
 
@@ -221,9 +222,10 @@ void Game::Update() {
 
     // TODO: do not subscribe every time
     eventBus->Reset();
-    registry->GetSystem<DamageSystem>().SubscribeToEvents(eventBus);
-    registry->GetSystem<KeyboardMovementSystem>().SubscribeToEvents(eventBus);
-    registry->GetSystem<ProjectileEmitterSystem>().SubscribeToEvents(eventBus);
+    registry->GetSystem<DamageSystem>().SubscribeToEvents();
+    registry->GetSystem<KeyboardMovementSystem>().SubscribeToEvents();
+    registry->GetSystem<ProjectileEmitterSystem>().SubscribeToEvents();
+    registry->GetSystem<LogSystem>().SubscribeToEvents();
 
     // TODO: update in registry maybe?
     registry->GetSystem<CollisionSystem>().Update(eventBus);
@@ -245,6 +247,13 @@ void Game::Render() {
                                                    camera);
     registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
                                                         camera);
+
+    ImGui::NewFrame();
+
+    registry->GetSystem<LogSystem>().Update();
+
+    ImGui::Render();
+    ImGuiSDL::Render(ImGui::GetDrawData());
 
     SDL_RenderPresent(renderer);
 }

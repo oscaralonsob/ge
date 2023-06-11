@@ -2,10 +2,8 @@
 
 #include "Component.h"
 
-System::System(Registry* registry, std::shared_ptr<Logger> logger,
-               std::shared_ptr<EventBus> eventBus) {
+System::System(Registry* registry, std::shared_ptr<EventBus> eventBus) {
     this->registry = registry;
-    this->logger = logger;
     this->eventBus = eventBus;
 }
 

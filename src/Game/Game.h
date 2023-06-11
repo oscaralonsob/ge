@@ -13,10 +13,10 @@
 #include "../Components/SpriteComponent.h"
 #include "../Components/TextLabelComponent.h"
 #include "../Components/TransformComponent.h"
+#include "../Debug/Systems/LogSystem.hpp"
 #include "../ECS/Registry.h"
 #include "../Events/EventBus.h"
 #include "../Events/KeyPressedEvent.h"
-#include "../Logger/Logger.h"
 #include "../Systems/AnimationSystem.h"
 #include "../Systems/CollisionSystem.h"
 #include "../Systems/DamageSystem.h"
@@ -50,7 +50,6 @@ private:
     std::unique_ptr<Registry> registry;
     std::unique_ptr<AssetStore> assetStore;
     std::shared_ptr<EventBus> eventBus;
-    std::shared_ptr<Logger> logger;
 
     void ProcessInput();
     void Setup();

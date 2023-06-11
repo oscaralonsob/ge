@@ -16,14 +16,14 @@
 
 class ProjectileEmitterSystem : public System {
 public:
-    ProjectileEmitterSystem(Registry* registry, std::shared_ptr<Logger> logger,
+    ProjectileEmitterSystem(Registry* registry,
                             std::shared_ptr<EventBus> eventBus)
-        : System(registry, logger, eventBus) {
+        : System(registry, eventBus) {
         RequireComponent<TransformComponent>();
         RequireComponent<ProjectileEmitterComponent>();
     }
 
-    void SubscribeToEvents(std::shared_ptr<EventBus>& eventBus) {
+    void SubscribeToEvents() {
         eventBus->SubscribeToEvent<KeyPressedEvent>(
             this, &ProjectileEmitterSystem::OnKeyPressed);
     }

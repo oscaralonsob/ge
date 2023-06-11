@@ -1,6 +1,7 @@
 #ifndef REGISTRY_H
 #define REGISTRY_H
 
+#include "../Debug/Events/LogRequestEvent.hpp"
 #include "../Events/EventBus.h"
 #include "../Logger/Logger.h"
 #include "Component.h"
@@ -40,8 +41,7 @@ private:
     std::shared_ptr<EventBus> eventBus;
 
 public:
-    std::shared_ptr<Logger> logger;
-    Registry(std::shared_ptr<Logger> l, std::shared_ptr<EventBus> eventBus);
+    Registry(std::shared_ptr<EventBus> eventBus);
     ~Registry() = default;
 
     Entity CreateEntity();

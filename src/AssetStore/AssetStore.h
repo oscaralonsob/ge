@@ -1,7 +1,8 @@
 #ifndef ASSETSTORE_H
 #define ASSETSTORE_H
 
-#include "../Logger/Logger.h"
+#include "../Debug/Events/LogRequestEvent.hpp"
+#include "../Events/EventBus.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -12,14 +13,14 @@
 
 class AssetStore {
 private:
-    std::shared_ptr<Logger> logger;
+    std::shared_ptr<EventBus> eventBus;
 
     std::map<std::string, SDL_Texture*> textures;
     std::map<std::string, TTF_Font*> fonts;
     // TODO: map for audio...
 
 public:
-    AssetStore(std::shared_ptr<Logger> logger);
+    AssetStore(std::shared_ptr<EventBus> eventBus);
     ~AssetStore();
 
     void ClearAssets();

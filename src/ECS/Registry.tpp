@@ -23,8 +23,9 @@ void Registry::AddComponent(Entity entity, TArgs&&... args) {
 
     entityComponentSignatures[entityId].set(componentId);
 
-    logger->Log("Component id = " + std::to_string(componentId) +
-                " was added to entity id = " + std::to_string(entityId));
+    eventBus->EmitEvent<LogRequestEvent>(
+        "Component id = " + std::to_string(componentId) +
+        " was added to entity id = " + std::to_string(entityId));
 }
 
 template <typename T>
@@ -58,8 +59,8 @@ T& Registry::GetComponent(Entity entity) const {
 
 template <typename T, typename... TArgs>
 void Registry::AddSystem(TArgs&&... args) {
-    std::shared_ptr<T> newSystem = std::make_shared<T>(
-        this, logger, eventBus, std::forward<TArgs>(args)...);
+    std::shared_ptr<T> newSystem =
+        std::make_shared<T>(this, eventBus, std::forward<TArgs>(args)...);
     systems.insert(std::make_pair(std::type_index(typeid(T)), newSystem));
 }
 
