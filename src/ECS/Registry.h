@@ -3,10 +3,10 @@
 
 #include "../Common/ECS/Component.hpp"
 #include "../Common/ECS/Entity.hpp"
+#include "../Common/ECS/IPool.hpp"
+#include "../Common/ECS/Pool.hpp"
 #include "../Debug/Events/LogRequestEvent.hpp"
 #include "../Events/EventBus.h"
-#include "IPool.h"
-#include "Pool.h"
 #include "System.h"
 
 #include <deque>

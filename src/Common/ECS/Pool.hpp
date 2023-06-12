@@ -1,7 +1,7 @@
-#ifndef POOL_H
-#define POOL_H
+#ifndef POOL_HPP
+#define POOL_HPP
 
-#include "IPool.h"
+#include "IPool.hpp"
 
 #include <unordered_map>
 #include <vector>

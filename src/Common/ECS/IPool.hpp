@@ -1,5 +1,5 @@
-#ifndef IPOOL_H
-#define IPOOL_H
+#ifndef IPOOL_HPP
+#define IPOOL_HPP
 
 // TODO: can be modified and avoid interface
 class IPool {
