@@ -5,7 +5,6 @@ COMPILER_FLAGS = -Wall -Wfatal-errors
 INCLUDE_PATH = -I"./libs"
 SRC_FOLDER = ./src/*.cpp\
 			 ./src/Game/*.cpp\
-			 ./src/ECS/*.cpp\
 			 ./src/Events/*.cpp\
 			 ./src/Common/AssetStore/*.cpp\
 			 ./src/Common/ECS/*.cpp\

@@ -3,6 +3,7 @@
 
 #include "../../libs/glm/glm.hpp"
 #include "../Common/AssetStore/AssetStore.hpp"
+#include "../Common/ECS/Registry.hpp"
 #include "../Components/AnimationComponent.h"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/CameraFollowComponent.h"
@@ -14,7 +15,6 @@
 #include "../Components/TextLabelComponent.h"
 #include "../Components/TransformComponent.h"
 #include "../Debug/Systems/LogSystem.hpp"
-#include "../ECS/Registry.h"
 #include "../Events/EventBus.h"
 #include "../Events/KeyPressedEvent.h"
 #include "../Systems/AnimationSystem.h"

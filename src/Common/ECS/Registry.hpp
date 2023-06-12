@@ -1,13 +1,13 @@
-#ifndef REGISTRY_H
-#define REGISTRY_H
+#ifndef REGISTRY_HPP
+#define REGISTRY_HPP
 
-#include "../Common/ECS/Component.hpp"
-#include "../Common/ECS/Entity.hpp"
-#include "../Common/ECS/IPool.hpp"
-#include "../Common/ECS/Pool.hpp"
-#include "../Common/ECS/System.hpp"
-#include "../Debug/Events/LogRequestEvent.hpp"
-#include "../Events/EventBus.h"
+#include "../../Debug/Events/LogRequestEvent.hpp"
+#include "../../Events/EventBus.h"
+#include "Component.hpp"
+#include "Entity.hpp"
+#include "IPool.hpp"
+#include "Pool.hpp"
+#include "System.hpp"
 
 #include <deque>
 #include <memory>

@@ -1,4 +1,4 @@
-#include "Registry.h"
+#include "Registry.hpp"
 
 Registry::Registry(std::shared_ptr<EventBus> eventBus) {
     this->eventBus = eventBus;

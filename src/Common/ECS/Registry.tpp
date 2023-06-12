@@ -1,5 +1,3 @@
-#include "Registry.h"
-
 template <typename T, typename... TArgs>
 void Registry::AddComponent(Entity entity, TArgs&&... args) {
     const int componentId = Component<T>::GetId();
