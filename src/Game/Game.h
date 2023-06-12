@@ -28,6 +28,8 @@
 #include "../Systems/ProjectileLifeCycleSystem.h"
 #include "../Systems/RenderSystem.h"
 #include "../Systems/TextRenderSystem.h"
+#include "../World/Tile/Components/SpriteBorderOverlayComponent.hpp"
+#include "../World/Tile/Systems/SpriteBorderOverlayRenderSystem.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

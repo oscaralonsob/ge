@@ -102,6 +102,7 @@ void Game::LoadLevel() {
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
     registry->AddSystem<ProjectileLifeCycleSystem>();
+    registry->AddSystem<SpriteBorderOverlayRenderSystem>();
 
     // TODO: should be necesary just once, not in every update
     eventBus->Reset();
@@ -204,6 +205,7 @@ void Game::LoadTileMap() {
                 tile, "tilemap", 0, glm::vec2(tileSize, tileSize),
                 glm::vec2(std::stoi(token.substr(1, 2)),
                           std::stoi(token.substr(0, 1))));
+            registry->AddComponent<SpriteBorderOverlayComponent>(tile);
             x++;
         }
         mapWidth = x * tileSize * 3;
@@ -256,6 +258,8 @@ void Game::Render() {
                                                    camera);
     registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
                                                         camera);
+    registry->GetSystem<SpriteBorderOverlayRenderSystem>().Update(renderer,
+                                                                  camera);
     if (isDebug) {
         ImGui::NewFrame();
 
