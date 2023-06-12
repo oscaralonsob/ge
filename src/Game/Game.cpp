@@ -102,7 +102,6 @@ void Game::LoadLevel() {
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
     registry->AddSystem<ProjectileLifeCycleSystem>();
-    registry->AddSystem<LogSystem>();
 
     // TODO: should be necesary just once, not in every update
     eventBus->Reset();
@@ -110,6 +109,8 @@ void Game::LoadLevel() {
     registry->GetSystem<KeyboardMovementSystem>().SubscribeToEvents();
     registry->GetSystem<ProjectileEmitterSystem>().SubscribeToEvents();
     if (isDebug) {
+        registry->AddSystem<LogSystem>();
+        registry->AddSystem<LogMousePositionSystem>();
         registry->GetSystem<LogSystem>().SubscribeToEvents();
     }
 
@@ -259,6 +260,7 @@ void Game::Render() {
         ImGui::NewFrame();
 
         registry->GetSystem<LogSystem>().Update();
+        registry->GetSystem<LogMousePositionSystem>().Update(camera);
 
         ImGui::Render();
         ImGuiSDL::Render(ImGui::GetDrawData());

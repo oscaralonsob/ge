@@ -14,6 +14,7 @@
 #include "../Components/SpriteComponent.h"
 #include "../Components/TextLabelComponent.h"
 #include "../Components/TransformComponent.h"
+#include "../Debug/Systems/LogMousePositionSystem.hpp"
 #include "../Debug/Systems/LogSystem.hpp"
 #include "../Events/EventBus.h"
 #include "../Events/KeyPressedEvent.h"
