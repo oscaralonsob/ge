@@ -2,14 +2,8 @@
 #define LOGSYSTEM_HPP
 
 #include "../../Common/ECS/System.hpp"
-#include "../../Events/EventBus.h"
-#include "../Events/LogRequestEvent.hpp"
 
-#include <SDL2/SDL.h>
 #include <imgui/imgui.h>
-#include <imgui/imgui_impl_sdl.h>
-#include <imgui/imgui_sdl.h>
-#include <memory>
 
 class LogSystem : public System {
 private:
@@ -25,29 +19,9 @@ public:
         : System(registry, eventBus) {
     }
 
-    void SubscribeToEvents() {
-        eventBus->SubscribeToEvent<LogRequestEvent>(this,
-                                                    &LogSystem::LogRequested);
-    }
-
-    // TODO: cpp file pls
-    void LogRequested(LogRequestEvent& event) {
-        AddLog(event.message.c_str());
-    }
-
-    void Update() {
-        if (!ImGui::Begin("Log")) {
-            ImGui::End();
-            return;
-        }
-
-        ImGui::BeginChild("scrolling", ImVec2(0, 0), false,
-                          ImGuiWindowFlags_HorizontalScrollbar);
-        ImGui::TextUnformatted(Buf.begin());
-
-        ImGui::EndChild();
-        ImGui::End();
-    }
+    void SubscribeToEvents();
+    void LogRequested(LogRequestEvent& event);
+    void Update();
 };
 
 #endif
