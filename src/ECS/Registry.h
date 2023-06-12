@@ -5,9 +5,9 @@
 #include "../Common/ECS/Entity.hpp"
 #include "../Common/ECS/IPool.hpp"
 #include "../Common/ECS/Pool.hpp"
+#include "../Common/ECS/System.hpp"
 #include "../Debug/Events/LogRequestEvent.hpp"
 #include "../Events/EventBus.h"
-#include "System.h"
 
 #include <deque>
 #include <memory>

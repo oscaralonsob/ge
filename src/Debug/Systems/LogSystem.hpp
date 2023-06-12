@@ -1,7 +1,7 @@
 #ifndef LOGSYSTEM_HPP
 #define LOGSYSTEM_HPP
 
-#include "../../ECS/System.h"
+#include "../../Common/ECS/System.hpp"
 #include "../../Events/EventBus.h"
 #include "../Events/LogRequestEvent.hpp"
 

@@ -1,8 +1,8 @@
 #ifndef PROJECTILELIFECYCLESYSTEM_H
 #define PROJECTILELIFECYCLESYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/ProjectileComponent.h"
-#include "../ECS/System.h"
 
 #include <SDL2/SDL.h>
 

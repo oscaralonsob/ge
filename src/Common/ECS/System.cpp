@@ -1,4 +1,4 @@
-#include "System.h"
+#include "System.hpp"
 
 System::System(Registry* registry, std::shared_ptr<EventBus> eventBus) {
     this->registry = registry;

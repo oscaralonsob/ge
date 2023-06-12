@@ -1,8 +1,8 @@
 #ifndef TEXTRENDERSYSTEM_H
 #define TEXTRENDERSYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/TextLabelComponent.h"
-#include "../ECS/System.h"
 
 #include <SDL2/SDL.h>
 

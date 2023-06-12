@@ -1,13 +1,13 @@
 #ifndef PROJECTILEEMITTERSYSTEM_H
 #define PROJECTILEEMITTERSYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/ProjectileComponent.h"
 #include "../Components/ProjectileEmitterComponent.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/SpriteComponent.h"
 #include "../Components/TransformComponent.h"
-#include "../ECS/System.h"
 #include "../Events/EventBus.h"
 #include "../Events/KeyPressedEvent.h"
 #include "SDL2/SDL.h"

@@ -1,10 +1,10 @@
 #ifndef DAMAGESYSTEM_H
 #define DAMAGESYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/HealthComponent.h"
 #include "../Components/ProjectileComponent.h"
-#include "../ECS/System.h"
 #include "../Events/CollisionEvent.h"
 #include "../Events/EventBus.h"
 

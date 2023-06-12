@@ -1,9 +1,9 @@
 #ifndef MOVEMENTSYSTEM_H
 #define MOVEMENTSYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/TransformComponent.h"
-#include "../ECS/System.h"
 
 class MovementSystem : public System {
 public:

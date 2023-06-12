@@ -1,9 +1,9 @@
-#ifndef SYSTEM_H
-#define SYSTEM_H
+#ifndef SYSTEM_HPP
+#define SYSTEM_HPP
 
-#include "../Common/ECS/Component.hpp"
-#include "../Common/ECS/Entity.hpp"
-#include "../Events/EventBus.h"
+#include "../../Events/EventBus.h"
+#include "Component.hpp"
+#include "Entity.hpp"
 
 #include <algorithm>
 #include <bitset>

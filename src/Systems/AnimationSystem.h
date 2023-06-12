@@ -1,9 +1,9 @@
 #ifndef ANIMATIONSYSTEM_H
 #define ANIMATIONSYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/AnimationComponent.h"
 #include "../Components/SpriteComponent.h"
-#include "../ECS/System.h"
 
 class AnimationSystem : public System {
 public:

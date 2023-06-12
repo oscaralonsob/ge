@@ -1,9 +1,9 @@
 #ifndef COLLISIONSYSTEM_H
 #define COLLISIONSYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/TransformComponent.h"
-#include "../ECS/System.h"
 #include "../Events/CollisionEvent.h"
 
 class CollisionSystem : public System {

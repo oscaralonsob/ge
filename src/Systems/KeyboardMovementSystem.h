@@ -1,10 +1,10 @@
 #ifndef KEYBOARDMOVEMENTSYSTEM_H
 #define KEYBOARDMOVEMENTSYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/KeyboardControllerComponent.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/SpriteComponent.h"
-#include "../ECS/System.h"
 #include "../Events/EventBus.h"
 #include "../Events/KeyPressedEvent.h"
 

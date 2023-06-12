@@ -1,9 +1,9 @@
 #ifndef RENDERSYSTEM_H
 #define RENDERSYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/SpriteComponent.h"
 #include "../Components/TransformComponent.h"
-#include "../ECS/System.h"
 
 #include <SDL2/SDL.h>
 #include <memory>

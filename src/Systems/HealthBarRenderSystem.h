@@ -1,10 +1,10 @@
 #ifndef HEALTHBARRENDERSYSTEM_H
 #define HEALTHBARRENDERSYSTEM_H
 
+#include "../Common/ECS/System.hpp"
 #include "../Components/HealthBarComponent.h"
 #include "../Components/HealthComponent.h"
 #include "../Components/TransformComponent.h"
-#include "../ECS/System.h"
 
 #include <SDL2/SDL.h>
 
