@@ -17,7 +17,8 @@ Game::Game() {
 Game::~Game() {
 }
 
-void Game::Initialize() {
+void Game::Initialize(bool debugMode) {
+    isDebug = debugMode;
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         return;
     }
@@ -52,22 +53,27 @@ void Game::Initialize() {
     camera.w = windowWidth;
     camera.h = windowHeight;
 
-    ImGui::CreateContext();
-    ImGuiSDL::Initialize(renderer, windowWidth, windowHeight);
+    if (isDebug) {
+        ImGui::CreateContext();
+        ImGuiSDL::Initialize(renderer, windowWidth, windowHeight);
+    }
 }
 
 void Game::ProcessInput() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
-        ImGui_ImplSDL2_ProcessEvent(&event);
-        ImGuiIO& io = ImGui::GetIO();
 
-        int mouseX, mouseY;
-        const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+        if (isDebug) {
+            ImGui_ImplSDL2_ProcessEvent(&event);
+            ImGuiIO& io = ImGui::GetIO();
 
-        io.MousePos = ImVec2(mouseX, mouseY);
-        io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
-        io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+            int mouseX, mouseY;
+            const int buttons = SDL_GetMouseState(&mouseX, &mouseY);
+
+            io.MousePos = ImVec2(mouseX, mouseY);
+            io.MouseDown[0] = buttons & SDL_BUTTON(SDL_BUTTON_LEFT);
+            io.MouseDown[1] = buttons & SDL_BUTTON(SDL_BUTTON_RIGHT);
+        }
 
         switch (event.type) {
         case SDL_QUIT:
@@ -103,7 +109,9 @@ void Game::LoadLevel() {
     registry->GetSystem<DamageSystem>().SubscribeToEvents();
     registry->GetSystem<KeyboardMovementSystem>().SubscribeToEvents();
     registry->GetSystem<ProjectileEmitterSystem>().SubscribeToEvents();
-    registry->GetSystem<LogSystem>().SubscribeToEvents();
+    if (isDebug) {
+        registry->GetSystem<LogSystem>().SubscribeToEvents();
+    }
 
     LoadTileMap();
 
@@ -247,13 +255,14 @@ void Game::Render() {
                                                    camera);
     registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
                                                         camera);
+    if (isDebug) {
+        ImGui::NewFrame();
 
-    ImGui::NewFrame();
+        registry->GetSystem<LogSystem>().Update();
 
-    registry->GetSystem<LogSystem>().Update();
-
-    ImGui::Render();
-    ImGuiSDL::Render(ImGui::GetDrawData());
+        ImGui::Render();
+        ImGuiSDL::Render(ImGui::GetDrawData());
+    }
 
     SDL_RenderPresent(renderer);
 }
@@ -268,8 +277,10 @@ void Game::Run() {
 }
 
 void Game::Destroy() {
-    ImGuiSDL::Deinitialize();
-    ImGui::DestroyContext();
+    if (isDebug) {
+        ImGuiSDL::Deinitialize();
+        ImGui::DestroyContext();
+    }
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

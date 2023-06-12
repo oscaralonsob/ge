@@ -34,6 +34,7 @@
 #include <imgui/imgui.h>
 #include <imgui/imgui_impl_sdl.h>
 #include <imgui/imgui_sdl.h>
+#include <iostream>
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;
 const int FPS = 30;
@@ -45,6 +46,7 @@ private:
     SDL_Renderer* renderer;
     SDL_Rect camera;
     bool isRunning;
+    bool isDebug;
     int milisecsPrevoiusFrame;
 
     std::unique_ptr<Registry> registry;
@@ -67,7 +69,7 @@ public:
     static int windowWidth;
     static int windowHeight;
 
-    void Initialize();
+    void Initialize(bool debugMode);
     void Run();
     void Destroy();
 };
