@@ -96,13 +96,13 @@ void Game::LoadLevel() {
     registry->AddSystem<CollisionSystem>();
     registry->AddSystem<MovementSystem>();
     registry->AddSystem<RenderSystem>();
-    registry->AddSystem<TextRenderSystem>();
     registry->AddSystem<HealthBarRenderSystem>();
     registry->AddSystem<AnimationSystem>();
     registry->AddSystem<CameraMovementSystem>();
     registry->AddSystem<ProjectileEmitterSystem>();
     registry->AddSystem<ProjectileLifeCycleSystem>();
     registry->AddSystem<SpriteBorderOverlayRenderSystem>();
+    registry->AddSystem<GUITextLabelRenderSystem>();
 
     // TODO: should be necesary just once, not in every update
     eventBus->Reset();
@@ -174,11 +174,10 @@ void Game::LoadLevel() {
     registry->AddComponent<HealthBarComponent>(helicopter,
                                                "charriot-font-mini");
 
-    Entity textLabel = registry->CreateEntity();
-    SDL_Color color = {255, 255, 255};
-    registry->AddComponent<TextLabelComponent>(
-        textLabel, glm::vec2(100.0, 100.0), "Text test", "charriot-font", color,
-        true);
+    Entity GUIViewLabel = registry->CreateEntity();
+    registry->AddComponent<GUITextLabelComponent>(
+        GUIViewLabel, glm::vec2(100.0, 100.0), glm::vec2(100.0, 100.0),
+        "Text test", "charriot-font");
 }
 
 // TODO: tilemap component?
@@ -254,12 +253,12 @@ void Game::Render() {
     SDL_RenderClear(renderer);
 
     registry->GetSystem<RenderSystem>().Update(renderer, assetStore, camera);
-    registry->GetSystem<TextRenderSystem>().Update(renderer, assetStore,
-                                                   camera);
     registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
                                                         camera);
     registry->GetSystem<SpriteBorderOverlayRenderSystem>().Update(renderer,
                                                                   camera);
+    registry->GetSystem<GUITextLabelRenderSystem>().Update(renderer, assetStore,
+                                                           camera);
     if (isDebug) {
         ImGui::NewFrame();
 

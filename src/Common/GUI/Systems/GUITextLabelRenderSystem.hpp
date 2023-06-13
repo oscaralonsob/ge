@@ -1,0 +1,20 @@
+#ifndef GUITEXTLABELRENDERSYSTEM_HPP
+#define GUITEXTLABELRENDERSYSTEM_HPP
+
+#include "../../AssetStore/AssetStore.hpp"
+#include "../../ECS/System.hpp"
+#include "../Components/GUITextLabelComponent.hpp"
+
+class GUITextLabelRenderSystem : public System {
+public:
+    GUITextLabelRenderSystem(Registry* registry,
+                             std::shared_ptr<EventBus> eventBus)
+        : System(registry, eventBus) {
+        RequireComponent<GUITextLabelComponent>();
+    }
+
+    void Update(SDL_Renderer* renderer, std::unique_ptr<AssetStore>& assetStore,
+                SDL_Rect& camera);
+};
+
+#endif

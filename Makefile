@@ -8,6 +8,7 @@ SRC_FOLDER = ./src/*.cpp\
 			 ./src/Events/*.cpp\
 			 ./src/Common/AssetStore/*.cpp\
 			 ./src/Common/ECS/*.cpp\
+			 ./src/Common/GUI/Systems/*.cpp\
 			 ./src/Debug/Systems/*.cpp\
 			 ./src/World/Tile/Systems/*.cpp\
 			 ./libs/imgui/*.cpp
