@@ -32,6 +32,19 @@ public:
             const SpriteComponent& sprite =
                 registry->GetComponent<SpriteComponent>(entity);
 
+            float spriteSizeX = sprite.size.x * transform.scale.x;
+            float spriteSizeY = sprite.size.y * transform.scale.y;
+
+            bool outsideScreen =
+                transform.position.x < camera.x &&
+                transform.position.x + spriteSizeX > camera.x + camera.w &&
+                transform.position.y < camera.y &&
+                transform.position.y + spriteSizeY > camera.y + camera.h;
+
+            if (!sprite.isFixed && outsideScreen) {
+                continue;
+            }
+
             SDL_Rect srcRect = {
                 static_cast<int>(sprite.offset.x * sprite.size.x),
                 static_cast<int>(sprite.offset.y * sprite.size.y),
