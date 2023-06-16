@@ -102,6 +102,7 @@ void Game::LoadLevel() {
     registry->AddSystem<ProjectileEmitterSystem>();
     registry->AddSystem<ProjectileLifeCycleSystem>();
     registry->AddSystem<SpriteBorderOverlayRenderSystem>();
+    registry->AddSystem<GUIWindowRenderSystem>();
     registry->AddSystem<GUITextLabelRenderSystem>();
 
     // TODO: should be necesary just once, not in every update
@@ -173,6 +174,10 @@ void Game::LoadLevel() {
                                                  glm::vec2(32.0, 32.0));
     registry->AddComponent<HealthBarComponent>(helicopter,
                                                "charriot-font-mini");
+
+    Entity GUIWindow = registry->CreateEntity();
+    registry->AddComponent<GUIWindowComponent>(
+        GUIWindow, glm::vec2(200.0, 200.0), glm::vec2(100.0, 500.0));
 
     Entity GUIViewLabel = registry->CreateEntity();
     registry->AddComponent<GUITextLabelComponent>(
@@ -251,6 +256,7 @@ void Game::Update() {
 void Game::Render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     registry->GetSystem<RenderSystem>().Update(renderer, assetStore, camera);
     registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
@@ -259,6 +265,7 @@ void Game::Render() {
                                                                   camera);
     registry->GetSystem<GUITextLabelRenderSystem>().Update(renderer, assetStore,
                                                            camera);
+    registry->GetSystem<GUIWindowRenderSystem>().Update(renderer, camera);
     if (isDebug) {
         ImGui::NewFrame();
 
