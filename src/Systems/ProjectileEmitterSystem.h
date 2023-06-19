@@ -9,7 +9,7 @@
 #include "../Components/SpriteComponent.h"
 #include "../Components/TransformComponent.h"
 #include "../Events/EventBus.h"
-#include "../Events/KeyPressedEvent.h"
+#include "../Player/Events/KeyPressedEvent.hpp"
 #include "SDL2/SDL.h"
 
 #include <glm/glm.hpp>

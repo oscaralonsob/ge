@@ -85,6 +85,9 @@ void Game::ProcessInput() {
                 isRunning = false;
             }
             break;
+        case SDL_KEYUP:
+            eventBus->EmitEvent<KeyReleasedEvent>(event.key.keysym.sym);
+            break;
         }
     }
 }
@@ -122,10 +125,9 @@ void Game::LoadLevel() {
                            "./assets/images/tank-panther-right.png");
     assetStore->AddTexture(renderer, "truck-image",
                            "./assets/images/truck-ford-right.png");
-    assetStore->AddTexture(renderer, "chopper",
-                           "./assets/images/chopper-spritesheet.png");
     assetStore->AddTexture(renderer, "bullet-image",
                            "./assets/images/bullet.png");
+    assetStore->AddTexture(renderer, "hero-image", "./assets/images/hero.png");
     assetStore->AddFont("charriot-font", "./assets/fonts/charriot.ttf", 32);
     assetStore->AddFont("charriot-font-mini", "./assets/fonts/charriot.ttf",
                         12);
@@ -154,26 +156,21 @@ void Game::LoadLevel() {
     registry->AddComponent<BoxColliderComponent>(truck, glm::vec2(32.0, 32.0));
     registry->AddComponent<HealthComponent>(truck, 100, 100);
 
-    Entity helicopter = registry->CreateEntity();
-    registry->AddTagToEntity(helicopter, "Player");
-    registry->AddComponent<TransformComponent>(helicopter, glm::vec2(10.0, 1.0),
+    Entity hero = registry->CreateEntity();
+    registry->AddTagToEntity(hero, "Player");
+    registry->AddComponent<TransformComponent>(hero, glm::vec2(10.0, 1.0),
                                                glm::vec2(1.0, 1.0), 0.0);
-    registry->AddComponent<RigidBodyComponent>(helicopter, glm::vec2(0.0, 0.0));
-    registry->AddComponent<SpriteComponent>(helicopter, "chopper", 2,
+    registry->AddComponent<RigidBodyComponent>(hero, glm::vec2(0.0, 0.0));
+    registry->AddComponent<SpriteComponent>(hero, "hero-image", 2,
                                             glm::vec2(32.0, 32.0),
-                                            glm::vec2(0.0, 1.0), false);
-    registry->AddComponent<AnimationComponent>(helicopter, 2, 1, 5, true);
-    registry->AddComponent<KeyboardControllerComponent>(
-        helicopter, glm::vec2(0.0, -100.0), glm::vec2(100.0, 0.0),
-        glm::vec2(0, 100.0), glm::vec2(-100.0, 0.0));
-    registry->AddComponent<CameraFollowComponent>(helicopter);
+                                            glm::vec2(0.0, 0.0), false);
+    registry->AddComponent<KeyboardControllerComponent>(hero, 100.0);
+    registry->AddComponent<CameraFollowComponent>(hero);
     registry->AddComponent<ProjectileEmitterComponent>(
-        helicopter, glm::vec2(100.0, 100.0), 1000, 10000, 10, true);
-    registry->AddComponent<HealthComponent>(helicopter, 100, 100);
-    registry->AddComponent<BoxColliderComponent>(helicopter,
-                                                 glm::vec2(32.0, 32.0));
-    registry->AddComponent<HealthBarComponent>(helicopter,
-                                               "charriot-font-mini");
+        hero, glm::vec2(100.0, 100.0), 1000, 10000, 10, true);
+    registry->AddComponent<HealthComponent>(hero, 100, 100);
+    registry->AddComponent<BoxColliderComponent>(hero, glm::vec2(32.0, 32.0));
+    registry->AddComponent<HealthBarComponent>(hero, "charriot-font-mini");
 
     Entity GUIWindow = registry->CreateEntity();
     registry->AddComponent<GUIWindowComponent>(
@@ -249,6 +246,7 @@ void Game::Update() {
     registry->GetSystem<CameraMovementSystem>().Update(camera);
     registry->GetSystem<ProjectileEmitterSystem>().Update(deltaTime);
     registry->GetSystem<ProjectileLifeCycleSystem>().Update();
+    registry->GetSystem<KeyboardMovementSystem>().Update();
 
     registry->Update();
 }

@@ -1,7 +1,7 @@
-#ifndef KEYPRESSEDEVENT_H
-#define KEYPRESSEDEVENT_H
+#ifndef KEYPRESSEDEVENT_HPP
+#define KEYPRESSEDEVENT_HPP
 
-#include "Event.h"
+#include "../../Events/Event.h"
 
 #include <SDL2/SDL.h>
 
