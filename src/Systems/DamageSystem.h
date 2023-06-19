@@ -4,9 +4,9 @@
 #include "../Common/ECS/System.hpp"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/HealthComponent.h"
-#include "../Components/ProjectileComponent.h"
 #include "../Events/CollisionEvent.h"
 #include "../Events/EventBus.h"
+#include "../Projectile/Components/ProjectileComponent.hpp"
 
 #include <SDL2/SDL.h>
 #include <memory>
