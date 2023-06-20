@@ -1,8 +1,6 @@
-#ifndef HEALTHBARCOMPONENT_H
-#define HEALTHBARCOMPONENT_H
+#ifndef HEALTHBARCOMPONENT_HPP
+#define HEALTHBARCOMPONENT_HPP
 
-#include <SDL2/SDL.h>
-#include <glm/glm.hpp>
 #include <string>
 
 struct HealthBarComponent {
