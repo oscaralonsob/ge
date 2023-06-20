@@ -1,6 +1,6 @@
 #include "SpriteBorderOverlayRenderSystem.hpp"
 
-#include "../../../Common/ECS/Registry.hpp"
+#include "../../ECS/Registry.hpp"
 
 void SpriteBorderOverlayRenderSystem::Update(SDL_Renderer* renderer,
                                              SDL_Rect& camera) {

@@ -7,12 +7,12 @@ SRC_FOLDER = ./src/*.cpp\
 			 ./src/Common/AssetStore/*.cpp\
 			 ./src/Common/ECS/*.cpp\
 			 ./src/Common/GUI/Systems/*.cpp\
+			 ./src/Common/Render/Systems/*.cpp\
 			 ./src/Debug/Systems/*.cpp\
 			 ./src/Events/*.cpp\
 			 ./src/Game/*.cpp\
 			 ./src/Player/Systems/*.cpp\
 			 ./src/Projectile/Systems/*.cpp\
-			 ./src/World/Tile/Systems/*.cpp\
 			 ./libs/imgui/*.cpp
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -llua5.3
 OBJ_NAME = build/gameengine

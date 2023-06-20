@@ -1,5 +1,5 @@
-#ifndef SPRITECOMPONENT_H
-#define SPRITECOMPONENT_H
+#ifndef SPRITECOMPONENT_HPP
+#define SPRITECOMPONENT_HPP
 
 #include <glm/glm.hpp>
 #include <string>
@@ -11,7 +11,10 @@ struct SpriteComponent {
     glm::vec2 offset;
     bool isFixed;
 
-    SpriteComponent(std::string textureId = "", int zIndex = 0, glm::vec2 size = glm::vec2(0.0, 0.0), glm::vec2 offset = glm::vec2(0.0, 0.0), bool isFixed = false) {
+    SpriteComponent(std::string textureId = "", int zIndex = 0,
+                    glm::vec2 size = glm::vec2(0.0, 0.0),
+                    glm::vec2 offset = glm::vec2(0.0, 0.0),
+                    bool isFixed = false) {
         this->textureId = textureId;
         this->zIndex = zIndex;
         this->size = size;
@@ -19,7 +22,7 @@ struct SpriteComponent {
         this->isFixed = isFixed;
     }
 
-    bool operator < (const SpriteComponent other) const {
+    bool operator<(const SpriteComponent other) const {
         return zIndex < other.zIndex;
     }
 };

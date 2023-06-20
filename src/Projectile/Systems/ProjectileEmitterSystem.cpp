@@ -1,9 +1,9 @@
 #include "ProjectileEmitterSystem.hpp"
 
 #include "../../Common/ECS/Registry.hpp"
+#include "../../Common/Render/Components/SpriteComponent.hpp"
 #include "../../Components/BoxColliderComponent.h"
 #include "../../Components/CameraFollowComponent.h"
-#include "../../Components/SpriteComponent.h"
 #include "../../Events/EventBus.h"
 #include "../Components/ProjectileComponent.hpp"
 

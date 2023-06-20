@@ -1,5 +1,5 @@
-#ifndef ANIMATIONCOMPONENT_H
-#define ANIMATIONCOMPONENT_H
+#ifndef ANIMATIONCOMPONENT_HPP
+#define ANIMATIONCOMPONENT_HPP
 
 #include <glm/glm.hpp>
 #include <string>
@@ -11,7 +11,8 @@ struct AnimationComponent {
     bool loop;
     double animationFrame;
 
-    AnimationComponent(int numFrames = 1, int currentFrame = 1, int frameRate = 1, bool loop = false) {
+    AnimationComponent(int numFrames = 1, int currentFrame = 1,
+                       int frameRate = 1, bool loop = false) {
         this->numFrames = numFrames;
         this->currentFrame = currentFrame;
         this->frameRate = frameRate;
