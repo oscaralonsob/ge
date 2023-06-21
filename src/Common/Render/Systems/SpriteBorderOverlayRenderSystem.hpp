@@ -2,7 +2,7 @@
 #define BOXBORDEROVERLAYCOMPONENTRENDERSYSTEM_HPP
 
 #include "../../../Common/ECS/System.hpp"
-#include "../../../Components/TransformComponent.h"
+#include "../../Physics/Components/TransformComponent.hpp"
 #include "../Components/SpriteBorderOverlayComponent.hpp"
 #include "../Components/SpriteComponent.hpp"
 

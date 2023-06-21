@@ -2,8 +2,8 @@
 #define CAMERAMOVEMENTSYSTEM_H
 
 #include "../Common/ECS/System.hpp"
+#include "../Common/Physics/Components/TransformComponent.hpp"
 #include "../Components/CameraFollowComponent.h"
-#include "../Components/TransformComponent.h"
 
 #include <SDL2/SDL.h>
 

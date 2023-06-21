@@ -2,7 +2,7 @@
 #define KEYBOARDMOVEMENTSYSTEM_HPP
 
 #include "../../Common/ECS/System.hpp"
-#include "../../Components/RigidBodyComponent.h"
+#include "../../Common/Physics/Components/RigidBodyComponent.hpp"
 #include "../Components/KeyboardControllerComponent.hpp"
 #include "../Events/KeyPressedEvent.hpp"
 #include "../Events/KeyReleasedEvent.hpp"

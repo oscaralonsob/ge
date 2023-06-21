@@ -8,6 +8,11 @@
 #include "../Common/GUI/Components/GUIWindowComponent.hpp"
 #include "../Common/GUI/Systems/GUITextLabelRenderSystem.hpp"
 #include "../Common/GUI/Systems/GUIWindowRenderSystem.hpp"
+#include "../Common/Physics/Components/BoxColliderComponent.hpp"
+#include "../Common/Physics/Components/RigidBodyComponent.hpp"
+#include "../Common/Physics/Components/TransformComponent.hpp"
+#include "../Common/Physics/Systems/CollisionSystem.hpp"
+#include "../Common/Physics/Systems/MovementSystem.hpp"
 #include "../Common/Render/Components/AnimationComponent.hpp"
 #include "../Common/Render/Components/HealthBarComponent.hpp"
 #include "../Common/Render/Components/SpriteBorderOverlayComponent.hpp"
@@ -16,10 +21,7 @@
 #include "../Common/Render/Systems/HealthBarRenderSystem.hpp"
 #include "../Common/Render/Systems/RenderSystem.hpp"
 #include "../Common/Render/Systems/SpriteBorderOverlayRenderSystem.hpp"
-#include "../Components/BoxColliderComponent.h"
 #include "../Components/CameraFollowComponent.h"
-#include "../Components/RigidBodyComponent.h"
-#include "../Components/TransformComponent.h"
 #include "../Debug/Systems/LogMousePositionSystem.hpp"
 #include "../Debug/Systems/LogSystem.hpp"
 #include "../Events/EventBus.h"
@@ -29,9 +31,7 @@
 #include "../Projectile/Components/ProjectileEmitterComponent.hpp"
 #include "../Projectile/Systems/ProjectileEmitterSystem.hpp"
 #include "../Projectile/Systems/ProjectileLifeCycleSystem.hpp"
-#include "../Systems/CollisionSystem.h"
 #include "../Systems/DamageSystem.h"
-#include "../Systems/MovementSystem.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

@@ -1,9 +1,9 @@
 #ifndef RENDERSYSTEM_HPP
 #define RENDERSYSTEM_HPP
 
-#include "../../../Components/TransformComponent.h"
 #include "../../AssetStore/AssetStore.hpp"
 #include "../../ECS/System.hpp"
+#include "../../Physics/Components/TransformComponent.hpp"
 #include "../Components/SpriteComponent.hpp"
 
 #include <SDL2/SDL.h>

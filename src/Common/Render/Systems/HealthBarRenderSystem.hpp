@@ -2,9 +2,9 @@
 #define HEALTHBARRENDERSYSTEM_HPP
 
 #include "../../../Components/HealthComponent.h"
-#include "../../../Components/TransformComponent.h"
 #include "../../AssetStore/AssetStore.hpp"
 #include "../../ECS/System.hpp"
+#include "../../Physics/Components/TransformComponent.hpp"
 #include "../Components/HealthBarComponent.hpp"
 
 #include <SDL2/SDL.h>

@@ -2,9 +2,9 @@
 #define DAMAGESYSTEM_H
 
 #include "../Common/ECS/System.hpp"
-#include "../Components/BoxColliderComponent.h"
+#include "../Common/Physics/Components/BoxColliderComponent.hpp"
+#include "../Common/Physics/Events/CollisionEvent.hpp"
 #include "../Components/HealthComponent.h"
-#include "../Events/CollisionEvent.h"
 #include "../Events/EventBus.h"
 #include "../Projectile/Components/ProjectileComponent.hpp"
 

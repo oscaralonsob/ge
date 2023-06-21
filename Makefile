@@ -6,8 +6,7 @@ INCLUDE_PATH = -I"./libs"
 SRC_FOLDER = ./src/*.cpp\
 			 ./src/Common/AssetStore/*.cpp\
 			 ./src/Common/ECS/*.cpp\
-			 ./src/Common/GUI/Systems/*.cpp\
-			 ./src/Common/Render/Systems/*.cpp\
+			 ./src/Common/*/Systems/*.cpp\
 			 ./src/Debug/Systems/*.cpp\
 			 ./src/Events/*.cpp\
 			 ./src/Game/*.cpp\

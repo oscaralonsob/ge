@@ -2,8 +2,8 @@
 #define PROJECTILEEMITTERSYSTEM_HPP
 
 #include "../../Common/ECS/System.hpp"
-#include "../../Components/RigidBodyComponent.h"
-#include "../../Components/TransformComponent.h"
+#include "../../Common/Physics/Components/RigidBodyComponent.hpp"
+#include "../../Common/Physics/Components/TransformComponent.hpp"
 #include "../../Player/Events/KeyPressedEvent.hpp"
 #include "../Components/ProjectileEmitterComponent.hpp"
 

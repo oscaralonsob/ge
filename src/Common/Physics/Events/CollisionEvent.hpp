@@ -1,7 +1,7 @@
-#ifndef COLLISIONEVENT_H
-#define COLLISIONEVENT_H
+#ifndef COLLISIONEVENT_HPP
+#define COLLISIONEVENT_HPP
 
-#include "../Common/ECS/Entity.hpp"
+#include "../../ECS/Entity.hpp"
 
 class CollisionEvent : public Event {
 public:
