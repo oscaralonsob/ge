@@ -240,7 +240,7 @@ void Game::Update() {
     registry->GetSystem<LogSystem>().SubscribeToEvents();
 
     // TODO: update in registry maybe?
-    registry->GetSystem<CollisionSystem>().Update(eventBus);
+    registry->GetSystem<CollisionSystem>().Update();
     registry->GetSystem<MovementSystem>().Update(deltaTime);
     registry->GetSystem<AnimationSystem>().Update(deltaTime);
     registry->GetSystem<CameraMovementSystem>().Update(camera);

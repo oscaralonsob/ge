@@ -13,7 +13,7 @@ public:
         RequireComponent<BoxColliderComponent>();
     }
 
-    void Update(std::shared_ptr<EventBus>& eventBus);
+    void Update();
 };
 
 #endif

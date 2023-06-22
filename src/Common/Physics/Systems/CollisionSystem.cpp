@@ -3,7 +3,7 @@
 #include "../../ECS/Registry.hpp"
 #include "../Events/CollisionEvent.hpp"
 
-void CollisionSystem::Update(std::shared_ptr<EventBus>& eventBus) {
+void CollisionSystem::Update() {
     std::vector<Entity> entities = GetSystemEntities();
     for (std::vector<Entity>::iterator i = entities.begin();
          i != entities.end(); i++) {
