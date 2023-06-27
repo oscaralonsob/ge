@@ -7,7 +7,8 @@
 
 class AnimationSystem : public System {
 public:
-    AnimationSystem(Registry* registry, std::shared_ptr<EventBus> eventBus)
+    AnimationSystem(std::shared_ptr<Registry> registry,
+                    std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<AnimationComponent>();
         RequireComponent<SpriteComponent>();

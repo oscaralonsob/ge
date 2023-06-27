@@ -7,7 +7,7 @@
 
 class GUITextLabelRenderSystem : public System {
 public:
-    GUITextLabelRenderSystem(Registry* registry,
+    GUITextLabelRenderSystem(std::shared_ptr<Registry> registry,
                              std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<GUITextLabelComponent>();

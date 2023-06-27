@@ -11,7 +11,7 @@
 
 class SpriteBorderOverlayRenderSystem : public System {
 public:
-    SpriteBorderOverlayRenderSystem(Registry* registry,
+    SpriteBorderOverlayRenderSystem(std::shared_ptr<Registry> registry,
                                     std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<TransformComponent>();

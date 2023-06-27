@@ -17,7 +17,7 @@ private:
     void SwitchFlags(SDL_Keycode symbol, bool isPressed);
 
 public:
-    KeyboardMovementSystem(Registry* registry,
+    KeyboardMovementSystem(std::shared_ptr<Registry> registry,
                            std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<KeyboardControllerComponent>();

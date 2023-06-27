@@ -11,7 +11,7 @@
 
 class HealthBarRenderSystem : public System {
 public:
-    HealthBarRenderSystem(Registry* registry,
+    HealthBarRenderSystem(std::shared_ptr<Registry> registry,
                           std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<TransformComponent>();

@@ -9,7 +9,7 @@
 
 class ProjectileEmitterSystem : public System {
 public:
-    ProjectileEmitterSystem(Registry* registry,
+    ProjectileEmitterSystem(std::shared_ptr<Registry> registry,
                             std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<TransformComponent>();

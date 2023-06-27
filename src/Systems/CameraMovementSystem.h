@@ -9,7 +9,8 @@
 
 class CameraMovementSystem : public System {
 public:
-    CameraMovementSystem(Registry* registry, std::shared_ptr<EventBus> eventBus)
+    CameraMovementSystem(std::shared_ptr<Registry> registry,
+                         std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<CameraFollowComponent>();
         RequireComponent<TransformComponent>();

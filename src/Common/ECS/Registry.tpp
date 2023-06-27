@@ -55,10 +55,10 @@ T& Registry::GetComponent(Entity entity) const {
         ->Get(entityId);
 }
 
-template <typename T, typename... TArgs>
-void Registry::AddSystem(TArgs&&... args) {
+template <typename T>
+void Registry::AddSystem() {
     std::shared_ptr<T> newSystem =
-        std::make_shared<T>(this, eventBus, std::forward<TArgs>(args)...);
+        std::make_shared<T>(shared_from_this(), eventBus);
     systems.insert(std::make_pair(std::type_index(typeid(T)), newSystem));
 }
 

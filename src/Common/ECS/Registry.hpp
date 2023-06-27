@@ -16,7 +16,7 @@
 #include <unordered_map>
 #include <vector>
 
-class Registry {
+class Registry : public std::enable_shared_from_this<Registry> {
 private:
     int numEntities = 0;
 
@@ -57,8 +57,8 @@ public:
     template <typename T>
     T& GetComponent(Entity entity) const;
 
-    template <typename T, typename... TArgs>
-    void AddSystem(TArgs&&... args);
+    template <typename T>
+    void AddSystem();
     template <typename T>
     void RemoveSystem();
     template <typename T>

@@ -5,7 +5,7 @@
 
 class LogMousePositionSystem : public System {
 public:
-    LogMousePositionSystem(Registry* registry,
+    LogMousePositionSystem(std::shared_ptr<Registry> registry,
                            std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
     }

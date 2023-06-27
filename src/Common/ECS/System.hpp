@@ -20,11 +20,12 @@ private:
     std::vector<Entity> entities;
 
 protected:
-    class Registry* registry;
+    std::shared_ptr<class Registry> registry;
     std::shared_ptr<EventBus> eventBus;
 
 public:
-    System(Registry* registry, std::shared_ptr<EventBus> eventBus);
+    System(std::shared_ptr<Registry> registry,
+           std::shared_ptr<EventBus> eventBus);
     ~System() = default;
 
     void AddEntityToSystem(Entity entity);

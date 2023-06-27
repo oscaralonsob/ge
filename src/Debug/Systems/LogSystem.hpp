@@ -15,7 +15,8 @@ private:
     }
 
 public:
-    LogSystem(Registry* registry, std::shared_ptr<EventBus> eventBus)
+    LogSystem(std::shared_ptr<Registry> registry,
+              std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
     }
 

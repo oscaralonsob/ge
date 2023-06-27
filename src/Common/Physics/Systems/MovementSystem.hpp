@@ -7,7 +7,8 @@
 
 class MovementSystem : public System {
 public:
-    MovementSystem(Registry* registry, std::shared_ptr<EventBus> eventBus)
+    MovementSystem(std::shared_ptr<Registry> registry,
+                   std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<TransformComponent>();
         RequireComponent<RigidBodyComponent>();

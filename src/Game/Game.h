@@ -54,7 +54,7 @@ private:
     bool isDebug;
     int milisecsPrevoiusFrame;
 
-    std::unique_ptr<Registry> registry;
+    std::shared_ptr<Registry> registry;
     std::unique_ptr<AssetStore> assetStore;
     std::shared_ptr<EventBus> eventBus;
 

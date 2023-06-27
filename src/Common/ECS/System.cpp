@@ -1,6 +1,7 @@
 #include "System.hpp"
 
-System::System(Registry* registry, std::shared_ptr<EventBus> eventBus) {
+System::System(std::shared_ptr<Registry> registry,
+               std::shared_ptr<EventBus> eventBus) {
     this->registry = registry;
     this->eventBus = eventBus;
 }

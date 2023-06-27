@@ -7,7 +7,7 @@
 
 class GUIWindowRenderSystem : public System {
 public:
-    GUIWindowRenderSystem(Registry* registry,
+    GUIWindowRenderSystem(std::shared_ptr<Registry> registry,
                           std::shared_ptr<EventBus> eventBus)
         : System(registry, eventBus) {
         RequireComponent<GUIWindowComponent>();
