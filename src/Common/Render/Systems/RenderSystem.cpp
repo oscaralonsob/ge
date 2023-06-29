@@ -9,7 +9,7 @@
 #include <memory>
 
 void RenderSystem::Update(SDL_Renderer* renderer,
-                          std::unique_ptr<AssetStore>& assetStore,
+                          std::shared_ptr<AssetStore> assetStore,
                           SDL_Rect& camera) {
     std::vector<Entity> sortedEntites = GetSystemEntities();
     std::sort(sortedEntites.begin(), sortedEntites.end(),

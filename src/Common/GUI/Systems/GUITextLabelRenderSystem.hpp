@@ -13,8 +13,8 @@ public:
         RequireComponent<GUITextLabelComponent>();
     }
 
-    void Update(SDL_Renderer* renderer, std::unique_ptr<AssetStore>& assetStore,
-                SDL_Rect& camera);
+    void Update(SDL_Renderer* renderer,
+                const std::shared_ptr<AssetStore> assetStore, SDL_Rect& camera);
 };
 
 #endif

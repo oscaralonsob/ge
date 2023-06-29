@@ -2,9 +2,9 @@
 
 #include "../../ECS/Registry.hpp"
 
-void HealthBarRenderSystem::Update(
-    SDL_Renderer* renderer, const std::unique_ptr<AssetStore>& assetStore,
-    SDL_Rect& camera) {
+void HealthBarRenderSystem::Update(SDL_Renderer* renderer,
+                                   const std::shared_ptr<AssetStore> assetStore,
+                                   SDL_Rect& camera) {
     for (Entity entity : GetSystemEntities()) {
         TransformComponent& transform =
             registry->GetComponent<TransformComponent>(entity);

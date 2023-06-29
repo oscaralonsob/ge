@@ -21,8 +21,7 @@ public:
 
     // TODO: cpp file pls
     void Update(SDL_Renderer* renderer,
-                const std::unique_ptr<AssetStore>& assetStore,
-                SDL_Rect& camera);
+                const std::shared_ptr<AssetStore> assetStore, SDL_Rect& camera);
 };
 
 #endif

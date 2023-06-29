@@ -22,6 +22,7 @@ private:
 protected:
     std::shared_ptr<class Registry> registry;
     std::shared_ptr<EventBus> eventBus;
+    std::shared_ptr<class AssetStore> assetStore;
 
 public:
     System(std::shared_ptr<Registry> registry,

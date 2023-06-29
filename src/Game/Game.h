@@ -55,7 +55,7 @@ private:
     int milisecsPrevoiusFrame;
 
     std::shared_ptr<Registry> registry;
-    std::unique_ptr<AssetStore> assetStore;
+    std::shared_ptr<AssetStore> assetStore;
     std::shared_ptr<EventBus> eventBus;
 
     void ProcessInput();

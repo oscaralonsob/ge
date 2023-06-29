@@ -19,7 +19,7 @@ public:
     }
 
     // TODO: cpp file pls
-    void Update(SDL_Renderer* renderer, std::unique_ptr<AssetStore>& assetStore,
+    void Update(SDL_Renderer* renderer, std::shared_ptr<AssetStore> assetStore,
                 SDL_Rect& camera);
 };
 
