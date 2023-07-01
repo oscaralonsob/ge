@@ -3,6 +3,7 @@
 
 #include "../../Debug/Events/LogRequestEvent.hpp"
 #include "../../Events/EventBus.h"
+#include "../AssetStore/AssetStore.hpp"
 #include "Component.hpp"
 #include "Entity.hpp"
 #include "IPool.hpp"
@@ -38,9 +39,11 @@ private:
     std::deque<int> freeIds;
 
     std::shared_ptr<EventBus> eventBus;
+    std::shared_ptr<AssetStore> assetStore;
 
 public:
-    Registry(std::shared_ptr<EventBus> eventBus);
+    Registry(std::shared_ptr<EventBus> eventBus,
+             std::shared_ptr<AssetStore> assetStore);
     ~Registry() = default;
 
     Entity CreateEntity();

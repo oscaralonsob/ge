@@ -9,8 +9,8 @@ int Game::mapHeight;
 
 Game::Game() {
     eventBus = std::make_shared<EventBus>();
-    registry = std::make_shared<Registry>(eventBus);
     assetStore = std::make_unique<AssetStore>(eventBus);
+    registry = std::make_shared<Registry>(eventBus, assetStore);
     isRunning = false;
 }
 
