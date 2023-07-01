@@ -3,6 +3,8 @@
 
 #include "../../libs/glm/glm.hpp"
 #include "../Common/AssetStore/AssetStore.hpp"
+#include "../Common/Debug/Systems/LogMousePositionSystem.hpp"
+#include "../Common/Debug/Systems/LogSystem.hpp"
 #include "../Common/ECS/Registry.hpp"
 #include "../Common/GUI/Components/GUITextLabelComponent.hpp"
 #include "../Common/GUI/Components/GUIWindowComponent.hpp"
@@ -22,8 +24,6 @@
 #include "../Common/Render/Systems/RenderSystem.hpp"
 #include "../Common/Render/Systems/SpriteBorderOverlayRenderSystem.hpp"
 #include "../Components/CameraFollowComponent.h"
-#include "../Debug/Systems/LogMousePositionSystem.hpp"
-#include "../Debug/Systems/LogSystem.hpp"
 #include "../Events/EventBus.h"
 #include "../Player/Components/KeyboardControllerComponent.hpp"
 #include "../Player/Events/KeyPressedEvent.hpp"

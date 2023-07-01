@@ -1,7 +1,7 @@
 #ifndef LOGSYSTEM_HPP
 #define LOGSYSTEM_HPP
 
-#include "../../Common/ECS/System.hpp"
+#include "../../ECS/System.hpp"
 
 #include <imgui/imgui.h>
 

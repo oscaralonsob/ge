@@ -7,7 +7,6 @@ SRC_FOLDER = ./src/*.cpp\
 			 ./src/Common/AssetStore/*.cpp\
 			 ./src/Common/ECS/*.cpp\
 			 ./src/Common/*/Systems/*.cpp\
-			 ./src/Debug/Systems/*.cpp\
 			 ./src/Events/*.cpp\
 			 ./src/Game/*.cpp\
 			 ./src/Player/Systems/*.cpp\

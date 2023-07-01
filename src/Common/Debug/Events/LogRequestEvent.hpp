@@ -1,7 +1,7 @@
 #ifndef LOGREQUESTEVENT_HPP
 #define LOGREQUESTEVENT_HPP
 
-#include "../../Events/Event.h"
+#include "../../../Events/Event.h"
 
 #include <SDL2/SDL.h>
 #include <string>

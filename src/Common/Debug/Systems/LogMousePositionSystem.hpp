@@ -1,7 +1,7 @@
 #ifndef LOGMOUSEPOSITIONSYSTEM_HPP
 #define LOGMOUSEPOSITIONSYSTEM_HPP
 
-#include "../../Common/ECS/System.hpp"
+#include "../../ECS/System.hpp"
 
 class LogMousePositionSystem : public System {
 public:

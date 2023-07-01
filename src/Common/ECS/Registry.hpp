@@ -1,9 +1,9 @@
 #ifndef REGISTRY_HPP
 #define REGISTRY_HPP
 
-#include "../../Debug/Events/LogRequestEvent.hpp"
 #include "../../Events/EventBus.h"
 #include "../AssetStore/AssetStore.hpp"
+#include "../Debug/Events/LogRequestEvent.hpp"
 #include "Component.hpp"
 #include "Entity.hpp"
 #include "IPool.hpp"
