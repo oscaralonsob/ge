@@ -1,7 +1,7 @@
 #ifndef KEYRELEASEDEVENT_HPP
 #define KEYRELEASEDEVENT_HPP
 
-#include "../../Events/Event.h"
+#include "../../Common/Events/Event.hpp"
 
 #include <SDL2/SDL.h>
 

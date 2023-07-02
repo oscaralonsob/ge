@@ -1,8 +1,8 @@
-#ifndef EVENTBUS_H
-#define EVENTBUS_H
+#ifndef EVENTBUS_HPP
+#define EVENTBUS_HPP
 
-#include "../Common/Debug/Events/LogRequestEvent.hpp"
-#include "Event.h"
+#include "../Debug/Events/LogRequestEvent.hpp"
+#include "Event.hpp"
 
 #include <functional>
 #include <list>

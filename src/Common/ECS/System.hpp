@@ -1,7 +1,7 @@
 #ifndef SYSTEM_HPP
 #define SYSTEM_HPP
 
-#include "../../Events/EventBus.h"
+#include "../Events/EventBus.hpp"
 #include "Component.hpp"
 #include "Entity.hpp"
 

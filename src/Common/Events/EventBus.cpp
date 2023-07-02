@@ -1,4 +1,4 @@
-#include "EventBus.h"
+#include "EventBus.hpp"
 
 EventBus::EventBus() {
     EmitEvent<LogRequestEvent>("EventBus created");
