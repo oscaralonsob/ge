@@ -1,5 +1,8 @@
 #include "LogSystem.hpp"
 
+#include "../../Events/EventBus.hpp"
+#include "../Events/LogRequestEvent.hpp"
+
 void LogSystem::SubscribeToEvents() {
     eventBus->SubscribeToEvent<LogRequestEvent>(this, &LogSystem::LogRequested);
 }

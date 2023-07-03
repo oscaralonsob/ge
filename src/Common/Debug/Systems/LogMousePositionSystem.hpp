@@ -11,7 +11,7 @@ public:
         : System(registry, eventBus, assetStore) {
     }
 
-    void Update(const SDL_Rect& camera);
+    void Update(const class SDL_Rect& camera);
 };
 
 #endif

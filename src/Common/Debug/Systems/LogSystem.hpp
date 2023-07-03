@@ -22,7 +22,7 @@ public:
     }
 
     void SubscribeToEvents();
-    void LogRequested(LogRequestEvent& event);
+    void LogRequested(class LogRequestEvent& event);
     void Update();
 };
 

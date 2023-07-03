@@ -1,7 +1,6 @@
 #ifndef SYSTEM_HPP
 #define SYSTEM_HPP
 
-#include "../Events/EventBus.hpp"
 #include "Component.hpp"
 #include "Entity.hpp"
 
@@ -21,7 +20,7 @@ private:
 
 protected:
     std::shared_ptr<class Registry> registry;
-    std::shared_ptr<EventBus> eventBus;
+    std::shared_ptr<class EventBus> eventBus;
     std::shared_ptr<class AssetStore> assetStore;
 
 public:
