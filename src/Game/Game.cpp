@@ -1,7 +1,5 @@
 #include "Game.h"
 
-#include "../Systems/CameraMovementSystem.h"
-
 int Game::windowWidth;
 int Game::windowHeight;
 int Game::mapWidth;

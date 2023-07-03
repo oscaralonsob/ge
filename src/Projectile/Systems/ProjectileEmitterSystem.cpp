@@ -4,7 +4,6 @@
 #include "../../Common/Events/EventBus.hpp"
 #include "../../Common/Physics/Components/BoxColliderComponent.hpp"
 #include "../../Common/Render/Components/SpriteComponent.hpp"
-#include "../../Components/CameraFollowComponent.h"
 #include "../Components/ProjectileComponent.hpp"
 
 #include <SDL2/SDL.h>
@@ -18,8 +17,8 @@ void ProjectileEmitterSystem::SubscribeToEvents() {
 void ProjectileEmitterSystem::OnKeyPressed(KeyPressedEvent& event) {
     if (event.symbol == SDLK_SPACE) {
         for (Entity entity : GetSystemEntities()) {
-            if (!registry->HasComponent<CameraFollowComponent>(
-                    entity)) { // TODO: group and tags
+            if (entity.GetId() != registry->GetEntityByTag("Player")
+                                      .GetId()) { // TODO: group and tags
                 continue;
             }
 
