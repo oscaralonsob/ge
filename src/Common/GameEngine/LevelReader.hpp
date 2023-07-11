@@ -1,7 +1,7 @@
 #ifndef LEVELREADER_HPP
 #define LEVELREADER_HPP
 
-#include "Asset.hpp"
+#include "DTO/Asset.hpp"
 
 #include <limits>
 #include <sol/sol.hpp>

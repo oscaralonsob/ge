@@ -1,7 +1,7 @@
 #include "AssetsLoader.hpp"
 
 #include "../AssetStore/AssetStore.hpp"
-#include "Asset.hpp"
+#include "DTO/Asset.hpp"
 #include "LevelReader.hpp"
 
 AssetsLoader::AssetsLoader(std::shared_ptr<EventBus> eventBus,
