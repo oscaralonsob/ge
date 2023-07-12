@@ -58,6 +58,7 @@ private:
     std::shared_ptr<Registry> registry;
     std::shared_ptr<AssetStore> assetStore;
     std::shared_ptr<EventBus> eventBus;
+    std::shared_ptr<class LevelReader> levelReader;
 
     void ProcessInput();
     void Setup();

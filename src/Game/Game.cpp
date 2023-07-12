@@ -1,6 +1,9 @@
 #include "Game.h"
 
 #include "../Common/GameEngine/AssetsLoader.hpp"
+#include "../Common/GameEngine/LevelReader.hpp"
+
+#include <SDL2/SDL_ttf.h>
 
 int Game::windowWidth;
 int Game::windowHeight;
@@ -8,10 +11,6 @@ int Game::mapWidth;
 int Game::mapHeight;
 
 Game::Game() {
-    eventBus = std::make_shared<EventBus>();
-    assetStore = std::make_unique<AssetStore>(eventBus);
-    registry = std::make_shared<Registry>(eventBus, assetStore);
-    isRunning = false;
 }
 
 Game::~Game() {
@@ -57,6 +56,10 @@ void Game::Initialize(bool debugMode) {
         ImGui::CreateContext();
         ImGuiSDL::Initialize(renderer, windowWidth, windowHeight);
     }
+
+    eventBus = std::make_shared<EventBus>();
+    assetStore = std::make_unique<AssetStore>(eventBus, renderer);
+    registry = std::make_shared<Registry>(eventBus, assetStore);
 }
 
 void Game::ProcessInput() {
@@ -94,8 +97,9 @@ void Game::ProcessInput() {
 
 // TODO: multiple levels for example
 void Game::LoadLevel() {
+    levelReader = std::make_shared<LevelReader>("Level1");
     AssetsLoader* assetsLoader =
-        new AssetsLoader(eventBus, assetStore, renderer);
+        new AssetsLoader(eventBus, assetStore, levelReader);
 
     assetsLoader->Load();
 

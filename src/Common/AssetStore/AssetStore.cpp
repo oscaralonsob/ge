@@ -1,7 +1,12 @@
 #include "AssetStore.hpp"
 
-AssetStore::AssetStore(std::shared_ptr<EventBus> eventBus) {
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
+AssetStore::AssetStore(std::shared_ptr<EventBus> eventBus,
+                       SDL_Renderer* renderer) {
     this->eventBus = eventBus;
+    this->renderer = renderer;
     this->eventBus->EmitEvent<LogRequestEvent>("AssetStore created");
 }
 
@@ -26,8 +31,7 @@ void AssetStore::ClearAssets() {
     fonts.clear();
 }
 
-void AssetStore::AddTexture(SDL_Renderer* renderer,
-                            const std::string& textureId,
+void AssetStore::AddTexture(const std::string& textureId,
                             const std::string& filePath) {
     // TODO convert filepath to texture
     SDL_Surface* surface = IMG_Load(filePath.c_str());

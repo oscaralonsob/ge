@@ -8,17 +8,12 @@ class AssetsLoader {
 private:
     std::shared_ptr<class EventBus> eventBus;
     std::shared_ptr<class AssetStore> assetStore;
-
-    // TODO: Perf - this should be in assetStore, not here
-    SDL_Renderer* renderer;
-
-    // TODO: Perf - parameter
-    class LevelReader* levelReader;
+    std::shared_ptr<class LevelReader> levelReader;
 
 public:
     AssetsLoader(std::shared_ptr<EventBus> eventBus,
                  std::shared_ptr<AssetStore> assetStore,
-                 SDL_Renderer* renderer);
+                 std::shared_ptr<LevelReader> levelReader);
     ~AssetsLoader() = default;
 
     void Load();

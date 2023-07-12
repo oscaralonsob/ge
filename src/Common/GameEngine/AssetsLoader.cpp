@@ -6,11 +6,10 @@
 
 AssetsLoader::AssetsLoader(std::shared_ptr<EventBus> eventBus,
                            std::shared_ptr<AssetStore> assetStore,
-                           SDL_Renderer* renderer) {
+                           std::shared_ptr<LevelReader> levelReader) {
     this->eventBus = eventBus;
     this->assetStore = assetStore;
-    this->renderer = renderer;
-    this->levelReader = new LevelReader("Level1");
+    this->levelReader = levelReader;
 }
 
 void AssetsLoader::Load() {
@@ -18,7 +17,7 @@ void AssetsLoader::Load() {
 
     for (Asset asset : assets) {
         if (asset.type == "texture") {
-            assetStore->AddTexture(renderer, asset.id, asset.path);
+            assetStore->AddTexture(asset.id, asset.path);
         } else if (asset.type == "font") {
             assetStore->AddFont(asset.id, asset.path, asset.size);
         }
