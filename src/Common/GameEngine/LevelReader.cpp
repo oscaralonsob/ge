@@ -39,15 +39,12 @@ std::vector<Asset> LevelReader::GetAssets() {
             break;
         }
 
-        std::string type = table[i]["type"];
-
-        std::string id = table[i]["id"];
-        std::string path = table[i]["path"];
-        int size = table[i]["size"] ?: 0;
+        sol::table value = table[i];
         // TODO: Perf - push back is not tha efficient, but it does the work
-        assets.push_back(Asset(type, id, path, size));
+        assets.push_back(Asset(value));
         i++;
     }
+
     return assets;
 }
 

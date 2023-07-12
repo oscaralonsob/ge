@@ -16,7 +16,7 @@ AssetsLoader::AssetsLoader(std::shared_ptr<EventBus> eventBus,
 void AssetsLoader::Load() {
     std::vector<Asset> assets = levelReader->GetAssets();
 
-    for (const Asset& asset : assets) {
+    for (Asset asset : assets) {
         if (asset.type == "texture") {
             assetStore->AddTexture(renderer, asset.id, asset.path);
         } else if (asset.type == "font") {

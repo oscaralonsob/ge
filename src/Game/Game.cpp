@@ -1,5 +1,7 @@
 #include "Game.h"
 
+#include "../Common/GameEngine/AssetsLoader.hpp"
+
 int Game::windowWidth;
 int Game::windowHeight;
 int Game::mapWidth;
@@ -92,6 +94,11 @@ void Game::ProcessInput() {
 
 // TODO: multiple levels for example
 void Game::LoadLevel() {
+    AssetsLoader* assetsLoader =
+        new AssetsLoader(eventBus, assetStore, renderer);
+
+    assetsLoader->Load();
+
     registry->AddSystem<KeyboardMovementSystem>();
     registry->AddSystem<DamageSystem>();
     registry->AddSystem<CollisionSystem>();
@@ -118,17 +125,6 @@ void Game::LoadLevel() {
     }
 
     LoadTileMap();
-
-    assetStore->AddTexture(renderer, "tank-image",
-                           "./assets/images/tank-panther-right.png");
-    assetStore->AddTexture(renderer, "truck-image",
-                           "./assets/images/truck-ford-right.png");
-    assetStore->AddTexture(renderer, "bullet-image",
-                           "./assets/images/bullet.png");
-    assetStore->AddTexture(renderer, "hero-image", "./assets/images/hero.png");
-    assetStore->AddFont("charriot-font", "./assets/fonts/charriot.ttf", 32);
-    assetStore->AddFont("charriot-font-mini", "./assets/fonts/charriot.ttf",
-                        12);
 
     Entity tank = registry->CreateEntity();
     registry->AddGroupToEntity(tank, "Enemies");
@@ -182,7 +178,6 @@ void Game::LoadLevel() {
 
 // TODO: tilemap component?
 void Game::LoadTileMap() {
-    assetStore->AddTexture(renderer, "tilemap", "./assets/tilemaps/jungle.png");
     std::ifstream myfile("./assets/tilemaps/jungle.map");
     std::string line;
     size_t pos = 0;
