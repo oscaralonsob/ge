@@ -48,5 +48,28 @@ std::vector<Asset> LevelReader::GetAssets() {
     return assets;
 }
 
-void LevelReader::GetEntities() {
+std::vector<Unit> LevelReader::GetUnits() {
+    std::vector<Unit> units;
+    sol::table level = lua["level"];
+    sol::table table = level["units"];
+
+    sol::optional<sol::table> hasUnit = table;
+    if (hasUnit == sol::nullopt) {
+        return units;
+    }
+
+    int i = 1;
+    while (true) {
+        sol::optional<sol::table> isValid = table[i];
+        if (isValid == sol::nullopt) {
+            break;
+        }
+
+        sol::table value = table[i];
+        // TODO: Perf - push back is not tha efficient, but it does the work
+        units.push_back(Unit(value));
+        i++;
+    }
+
+    return units;
 }

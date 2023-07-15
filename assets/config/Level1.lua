@@ -9,7 +9,9 @@ level = {
        {type = "font", id = "charriot-font-mini", path = "./assets/fonts/charriot.ttf", size = 12},
     },
 
-    entities = {
-        {name = "player"}
+    units = {
+        {name = "player"},
+        {name = "enemyTank1"},
+        {name = "enemyTank2"},
     }
 }

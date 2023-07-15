@@ -2,6 +2,7 @@
 
 #include "../Common/GameEngine/AssetsLoader.hpp"
 #include "../Common/GameEngine/LevelReader.hpp"
+#include "../Common/GameEngine/UnitsLoader.hpp"
 
 #include <SDL2/SDL_ttf.h>
 
@@ -101,7 +102,11 @@ void Game::LoadLevel() {
     AssetsLoader* assetsLoader =
         new AssetsLoader(eventBus, assetStore, levelReader);
 
+    UnitsLoader* unitsLoader =
+        new UnitsLoader(eventBus, assetStore, levelReader);
+
     assetsLoader->Load();
+    unitsLoader->Load();
 
     registry->AddSystem<KeyboardMovementSystem>();
     registry->AddSystem<DamageSystem>();

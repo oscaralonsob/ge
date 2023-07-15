@@ -2,6 +2,7 @@
 #define LEVELREADER_HPP
 
 #include "DTO/Asset.hpp"
+#include "DTO/Unit.hpp"
 
 #include <limits>
 #include <sol/sol.hpp>
@@ -18,7 +19,7 @@ public:
 
     void GetSystems();
     std::vector<Asset> GetAssets();
-    void GetEntities();
+    std::vector<Unit> GetUnits();
 };
 
 #endif
