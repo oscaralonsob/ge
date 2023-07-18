@@ -10,8 +10,40 @@ level = {
     },
 
     units = {
-        {name = "player"},
-        {name = "enemyTank1"},
-        {name = "enemyTank2"},
+        {
+            name = "player",
+            tag = "player",
+            group = "ally",
+            components = {
+                transform = {
+                    position = {x = 0.0, y = 0.0},
+                    size = {x = 0.0, y = 0.0},
+                    rotation = 0.0,
+                },
+                sprite = {
+                    "hero-image"
+                },
+            }
+        },
+        {
+            name = "enemyTank1",
+            tag = "",
+            group = "enemy",
+            components = {
+                sprite = {
+                    "hero-image"
+                },
+            }
+        },
+        {
+            name = "enemyTank2",
+            tag = "",
+            group = "enemy",
+            components = {
+                sprite = {
+                    "hero-image"
+                },
+            }
+        },
     }
 }

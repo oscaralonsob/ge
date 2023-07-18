@@ -102,8 +102,7 @@ void Game::LoadLevel() {
     AssetsLoader* assetsLoader =
         new AssetsLoader(eventBus, assetStore, levelReader);
 
-    UnitsLoader* unitsLoader =
-        new UnitsLoader(eventBus, assetStore, levelReader);
+    UnitsLoader* unitsLoader = new UnitsLoader(eventBus, levelReader);
 
     assetsLoader->Load();
     unitsLoader->Load();
