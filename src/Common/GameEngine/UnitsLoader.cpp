@@ -1,10 +1,13 @@
 #include "UnitsLoader.hpp"
 
+#include "../../Components/HealthComponent.h"
+#include "../../Player/Components/KeyboardControllerComponent.hpp"
 #include "../AssetStore/AssetStore.hpp"
 #include "../Camera/Components/CameraFollowComponent.hpp"
 #include "../ECS/Registry.hpp"
 #include "../Physics/Components/RigidBodyComponent.hpp"
 #include "../Physics/Components/TransformComponent.hpp"
+#include "../Render/Components/HealthBarComponent.hpp"
 #include "../Render/Components/SpriteComponent.hpp"
 #include "DTO/Unit.hpp"
 #include "DTO/UnitComponent.hpp"
@@ -65,5 +68,18 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
         registry->AddComponent<RigidBodyComponent>(unit, velocity);
     } else if (unitComponent.type == "cameraFollow") {
         registry->AddComponent<CameraFollowComponent>(unit);
+    } else if (unitComponent.type == "keyboardController") {
+        float velocity = std::stod(unitComponent.values.at("velocity"));
+
+        registry->AddComponent<KeyboardControllerComponent>(unit, velocity);
+    } else if (unitComponent.type == "health") {
+        int max = std::stoi(unitComponent.values.at("max"));
+        int current = std::stoi(unitComponent.values.at("current"));
+
+        registry->AddComponent<HealthComponent>(unit, max, current);
+    } else if (unitComponent.type == "healthBar") {
+        std::string font = unitComponent.values.at("font");
+
+        registry->AddComponent<HealthBarComponent>(unit, font);
     }
 }

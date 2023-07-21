@@ -28,6 +28,16 @@ level = {
                 },
                 cameraFollow = {
                 },
+                keyboardController = {
+                    velocity = 100.0
+                },
+                health = {
+                    max = 100,
+                    current = 100
+                },
+                healthBar = {
+                    font = "charriot-font-mini"
+                }
             }
         },
         {
