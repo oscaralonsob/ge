@@ -1,6 +1,7 @@
 #include "UnitsLoader.hpp"
 
 #include "../AssetStore/AssetStore.hpp"
+#include "../Camera/Components/CameraFollowComponent.hpp"
 #include "../ECS/Registry.hpp"
 #include "../Physics/Components/RigidBodyComponent.hpp"
 #include "../Physics/Components/TransformComponent.hpp"
@@ -62,5 +63,7 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
         velocity.y = std::stod(unitComponent.values.at("velocity.y"));
 
         registry->AddComponent<RigidBodyComponent>(unit, velocity);
+    } else if (unitComponent.type == "cameraFollow") {
+        registry->AddComponent<CameraFollowComponent>(unit);
     }
 }

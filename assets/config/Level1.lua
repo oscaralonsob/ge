@@ -24,7 +24,9 @@ level = {
                     texture = "hero-image"
                 },
                 rigidbody = {
-                    velocity = {x = 00.0, y = 0.0},
+                    velocity = {x = 100.0, y = 00.0},
+                },
+                cameraFollow = {
                 },
             }
         },
