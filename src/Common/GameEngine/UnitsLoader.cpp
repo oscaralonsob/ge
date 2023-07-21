@@ -2,9 +2,11 @@
 
 #include "../../Components/HealthComponent.h"
 #include "../../Player/Components/KeyboardControllerComponent.hpp"
+#include "../../Projectile/Components/ProjectileEmitterComponent.hpp"
 #include "../AssetStore/AssetStore.hpp"
 #include "../Camera/Components/CameraFollowComponent.hpp"
 #include "../ECS/Registry.hpp"
+#include "../Physics/Components/BoxColliderComponent.hpp"
 #include "../Physics/Components/RigidBodyComponent.hpp"
 #include "../Physics/Components/TransformComponent.hpp"
 #include "../Render/Components/HealthBarComponent.hpp"
@@ -81,5 +83,36 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
         std::string font = unitComponent.values.at("font");
 
         registry->AddComponent<HealthBarComponent>(unit, font);
+    } else if (unitComponent.type == "boxCollider") {
+        glm::vec2 size;
+        glm::vec2 offset;
+
+        size.x = std::stod(unitComponent.values.at("size.x"));
+        size.y = std::stod(unitComponent.values.at("size.y"));
+        offset.x = std::stod(unitComponent.values.at("offset.x"));
+        offset.y = std::stod(unitComponent.values.at("offset.y"));
+
+        registry->AddComponent<BoxColliderComponent>(unit, size, offset);
+    } else if (unitComponent.type == "projectileEmitter") {
+        glm::vec2 projectileVelocity;
+        int projectileFrequency;
+        int projectileDuration;
+        int hitDamage;
+        bool isFriendly;
+
+        projectileVelocity.x =
+            std::stod(unitComponent.values.at("projectileVelocity.x"));
+        projectileVelocity.y =
+            std::stod(unitComponent.values.at("projectileVelocity.y"));
+        projectileFrequency =
+            std::stoi(unitComponent.values.at("projectileFrequency"));
+        projectileDuration =
+            std::stoi(unitComponent.values.at("projectileDuration"));
+        hitDamage = std::stoi(unitComponent.values.at("hitDamage"));
+        isFriendly = unitComponent.values.at("isFriendly") == "1";
+
+        registry->AddComponent<ProjectileEmitterComponent>(
+            unit, projectileVelocity, projectileFrequency, projectileDuration,
+            hitDamage, isFriendly);
     }
 }

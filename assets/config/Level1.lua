@@ -12,13 +12,17 @@ level = {
     units = {
         {
             name = "player",
-            tag = "player",
-            group = "ally",
+            tag = "Player",
+            group = "Ally",
             components = {
                 transform = {
                     position = {x = 50.0, y = 50.0},
                     size = {x = 1.0, y = 1.0},
                     rotation = 0.0,
+                },
+                boxCollider = {
+                    offset = {x = 0.0, y = 0.0},
+                    size = {x = 32.0, y = 32.0},
                 },
                 sprite = {
                     texture = "hero-image"
@@ -37,13 +41,20 @@ level = {
                 },
                 healthBar = {
                     font = "charriot-font-mini"
+                },
+                projectileEmitter = {
+                    projectileVelocity = {x = 100.0, y = 100.0},
+                    projectileFrequency = 1000,
+                    projectileDuration = 10000,
+                    hitDamage = 10,
+                    isFriendly = 1,
                 }
             }
         },
         {
             name = "enemyTank1",
             tag = "",
-            group = "enemy",
+            group = "Enemies",
             components = {
                 transform = {
                     position = {x = 50.0, y = 50.0},
@@ -56,12 +67,23 @@ level = {
                 rigidbody = {
                     velocity = {x = 0.0, y = 0.0},
                 },
+                boxCollider = {
+                    offset = {x = 0.0, y = 0.0},
+                    size = {x = 32.0, y = 32.0},
+                },
+                health = {
+                    max = 100,
+                    current = 100
+                },
+                healthBar = {
+                    font = "charriot-font-mini"
+                },
             }
         },
         {
             name = "enemyTank2",
             tag = "",
-            group = "enemy",
+            group = "Enemies",
             components = {
                 transform = {
                     position = {x = 10.0, y = 10.0},
@@ -73,6 +95,17 @@ level = {
                 },
                 rigidbody = {
                     velocity = {x = 0.0, y = 0.0},
+                },
+                boxCollider = {
+                    offset = {x = 0.0, y = 0.0},
+                    size = {x = 32.0, y = 32.0},
+                },
+                health = {
+                    max = 100,
+                    current = 100
+                },
+                healthBar = {
+                    font = "charriot-font-mini"
                 },
             }
         },

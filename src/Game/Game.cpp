@@ -133,55 +133,6 @@ void Game::LoadLevel() {
     }
 
     LoadTileMap();
-
-    /*Entity tank = registry->CreateEntity();
-    registry->AddGroupToEntity(tank, "Enemies");
-    registry->AddComponent<TransformComponent>(tank, glm::vec2(100.0, 1.0),
-                                               glm::vec2(1.0, 1.0), 0.0);
-    registry->AddComponent<RigidBodyComponent>(tank, glm::vec2(0.0, 0.0));
-    registry->AddComponent<SpriteComponent>(tank, "tank-image", 1,
-                                            glm::vec2(32.0, 32.0),
-                                            glm::vec2(0.0, 0.0), false);
-    registry->AddComponent<BoxColliderComponent>(tank, glm::vec2(32.0, 32.0));
-    registry->AddComponent<HealthComponent>(tank, 100, 100);
-    registry->AddComponent<ProjectileEmitterComponent>(
-        tank, glm::vec2(100.0, 100.0), 1000, 10000, 10, false);
-
-    Entity truck = registry->CreateEntity();
-    registry->AddGroupToEntity(truck, "Enemies");
-    registry->AddComponent<TransformComponent>(truck, glm::vec2(10.0, 1.0),
-                                               glm::vec2(1.0, 1.0), 0.0);
-    registry->AddComponent<RigidBodyComponent>(truck, glm::vec2(0.0, 0.0));
-    registry->AddComponent<SpriteComponent>(truck, "truck-image", 1,
-                                            glm::vec2(32.0, 32.0),
-                                            glm::vec2(0.0, 0.0), false);
-    registry->AddComponent<BoxColliderComponent>(truck, glm::vec2(32.0, 32.0));
-    registry->AddComponent<HealthComponent>(truck, 100, 100);
-
-    Entity hero = registry->CreateEntity();
-    registry->AddTagToEntity(hero, "Player");
-    registry->AddComponent<TransformComponent>(hero, glm::vec2(10.0, 1.0),
-                                               glm::vec2(1.0, 1.0), 0.0);
-    registry->AddComponent<RigidBodyComponent>(hero, glm::vec2(0.0, 0.0));
-    registry->AddComponent<SpriteComponent>(hero, "hero-image", 2,
-                                            glm::vec2(32.0, 32.0),
-                                            glm::vec2(0.0, 0.0), false);
-    registry->AddComponent<KeyboardControllerComponent>(hero, 100.0);
-    registry->AddComponent<CameraFollowComponent>(hero);
-    registry->AddComponent<ProjectileEmitterComponent>(
-        hero, glm::vec2(100.0, 100.0), 1000, 10000, 10, true);
-    registry->AddComponent<HealthComponent>(hero, 100, 100);
-    registry->AddComponent<BoxColliderComponent>(hero, glm::vec2(32.0, 32.0));
-    registry->AddComponent<HealthBarComponent>(hero, "charriot-font-mini");
-
-    Entity GUIWindow = registry->CreateEntity();
-    registry->AddComponent<GUIWindowComponent>(
-        GUIWindow, glm::vec2(200.0, 200.0), glm::vec2(100.0, 500.0));
-
-    Entity GUIViewLabel = registry->CreateEntity();
-    registry->AddComponent<GUITextLabelComponent>(
-        GUIViewLabel, glm::vec2(100.0, 100.0), glm::vec2(100.0, 100.0),
-        "Text test", "charriot-font");*/
 }
 
 // TODO: tilemap component?
