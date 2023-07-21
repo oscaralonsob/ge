@@ -16,12 +16,15 @@ level = {
             group = "ally",
             components = {
                 transform = {
-                    position = {x = 0.0, y = 0.0},
-                    size = {x = 0.0, y = 0.0},
+                    position = {x = 50.0, y = 50.0},
+                    size = {x = 1.0, y = 1.0},
                     rotation = 0.0,
                 },
                 sprite = {
-                    "hero-image"
+                    texture = "hero-image"
+                },
+                rigidbody = {
+                    velocity = {x = 00.0, y = 0.0},
                 },
             }
         },
@@ -30,8 +33,16 @@ level = {
             tag = "",
             group = "enemy",
             components = {
+                transform = {
+                    position = {x = 50.0, y = 50.0},
+                    size = {x = 1.0, y = 1.0},
+                    rotation = 0.0,
+                },
                 sprite = {
-                    "hero-image"
+                    texture = "tank-image"
+                },
+                rigidbody = {
+                    velocity = {x = 0.0, y = 0.0},
                 },
             }
         },
@@ -40,8 +51,16 @@ level = {
             tag = "",
             group = "enemy",
             components = {
+                transform = {
+                    position = {x = 10.0, y = 10.0},
+                    size = {x = 1.0, y = 1.0},
+                    rotation = 0.0,
+                },
                 sprite = {
-                    "hero-image"
+                    texture = "tank-image"
+                },
+                rigidbody = {
+                    velocity = {x = 0.0, y = 0.0},
                 },
             }
         },

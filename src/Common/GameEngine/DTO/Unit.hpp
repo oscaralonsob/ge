@@ -31,7 +31,7 @@ struct Unit {
             components.push_back(UnitComponent(key.as<std::string>(), value));
         }
 
-        return std::vector<UnitComponent>();
+        return components;
     }
 };
 

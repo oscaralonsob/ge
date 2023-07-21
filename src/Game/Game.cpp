@@ -102,7 +102,7 @@ void Game::LoadLevel() {
     AssetsLoader* assetsLoader =
         new AssetsLoader(eventBus, assetStore, levelReader);
 
-    UnitsLoader* unitsLoader = new UnitsLoader(eventBus, levelReader);
+    UnitsLoader* unitsLoader = new UnitsLoader(eventBus, registry, levelReader);
 
     assetsLoader->Load();
     unitsLoader->Load();
@@ -134,7 +134,7 @@ void Game::LoadLevel() {
 
     LoadTileMap();
 
-    Entity tank = registry->CreateEntity();
+    /*Entity tank = registry->CreateEntity();
     registry->AddGroupToEntity(tank, "Enemies");
     registry->AddComponent<TransformComponent>(tank, glm::vec2(100.0, 1.0),
                                                glm::vec2(1.0, 1.0), 0.0);
@@ -181,7 +181,7 @@ void Game::LoadLevel() {
     Entity GUIViewLabel = registry->CreateEntity();
     registry->AddComponent<GUITextLabelComponent>(
         GUIViewLabel, glm::vec2(100.0, 100.0), glm::vec2(100.0, 100.0),
-        "Text test", "charriot-font");
+        "Text test", "charriot-font");*/
 }
 
 // TODO: tilemap component?
