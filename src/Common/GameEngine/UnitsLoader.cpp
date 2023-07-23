@@ -1,6 +1,7 @@
 #include "UnitsLoader.hpp"
 
 #include "../../Components/HealthComponent.h"
+#include "../../Enemy/Components/TargetMovementComponent.hpp"
 #include "../../Player/Components/KeyboardControllerComponent.hpp"
 #include "../../Projectile/Components/ProjectileEmitterComponent.hpp"
 #include "../AssetStore/AssetStore.hpp"
@@ -114,5 +115,10 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
         registry->AddComponent<ProjectileEmitterComponent>(
             unit, projectileVelocity, projectileFrequency, projectileDuration,
             hitDamage, isFriendly);
+    } else if (unitComponent.type == "targetMovement") {
+        float velocity = std::stod(unitComponent.values.at("velocity"));
+        std::string tag = unitComponent.values.at("tag");
+
+        registry->AddComponent<TargetMovementComponent>(unit, velocity, tag);
     }
 }

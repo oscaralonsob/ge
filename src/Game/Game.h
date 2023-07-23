@@ -26,6 +26,7 @@
 #include "../Common/Render/Systems/HealthBarRenderSystem.hpp"
 #include "../Common/Render/Systems/RenderSystem.hpp"
 #include "../Common/Render/Systems/SpriteBorderOverlayRenderSystem.hpp"
+#include "../Enemy/Systems/TargetMovementSystem.hpp"
 #include "../Player/Components/KeyboardControllerComponent.hpp"
 #include "../Player/Events/KeyPressedEvent.hpp"
 #include "../Player/Systems/KeyboardMovementSystem.hpp"

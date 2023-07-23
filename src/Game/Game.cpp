@@ -108,6 +108,7 @@ void Game::LoadLevel() {
     unitsLoader->Load();
 
     registry->AddSystem<KeyboardMovementSystem>();
+    registry->AddSystem<TargetMovementSystem>();
     registry->AddSystem<DamageSystem>();
     registry->AddSystem<CollisionSystem>();
     registry->AddSystem<MovementSystem>();
@@ -199,6 +200,7 @@ void Game::Update() {
     registry->GetSystem<ProjectileEmitterSystem>().Update(deltaTime);
     registry->GetSystem<ProjectileLifeCycleSystem>().Update();
     registry->GetSystem<KeyboardMovementSystem>().Update();
+    registry->GetSystem<TargetMovementSystem>().Update();
 
     registry->Update();
 }

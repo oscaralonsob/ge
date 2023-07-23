@@ -78,6 +78,10 @@ level = {
                 healthBar = {
                     font = "charriot-font-mini"
                 },
+                targetMovement = {
+                    velocity = 50,
+                    tag = "Player"
+                },
             }
         },
         {

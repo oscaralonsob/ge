@@ -10,6 +10,7 @@ SRC_FOLDER = ./src/*.cpp\
 			 ./src/Common/Events/*.cpp\
 			 ./src/Common/GameEngine/*.cpp\
 			 ./src/Game/*.cpp\
+			 ./src/Enemy/Systems/*.cpp\
 			 ./src/Player/Systems/*.cpp\
 			 ./src/Projectile/Systems/*.cpp\
 			 ./libs/imgui/*.cpp
