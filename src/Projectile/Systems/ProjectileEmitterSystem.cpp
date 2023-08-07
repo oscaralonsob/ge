@@ -4,6 +4,8 @@
 #include "../../Common/Events/EventBus.hpp"
 #include "../../Common/Physics/Components/BoxColliderComponent.hpp"
 #include "../../Common/Render/Components/SpriteComponent.hpp"
+#include "../../Health/Components/DamageComponent.hpp"
+#include "../../Health/Components/HitPointComponent.hpp"
 #include "../Components/ProjectileComponent.hpp"
 
 #include <SDL2/SDL.h>
@@ -58,7 +60,15 @@ void ProjectileEmitterSystem::CreateProjectile(
     const TransformComponent transformComponent,
     ProjectileEmitterComponent& projectileEmitterComponent,
     const RigidBodyComponent& rigidBodyComponent) {
+    std::string groupPrefix = "";
     glm::vec2 projectileDirection = glm::vec2(0, 0);
+
+    if (projectileEmitterComponent.isFriendly) {
+        groupPrefix = "Ally";
+    } else {
+        groupPrefix = "Enemy";
+    }
+
     projectileDirection.x =
         (rigidBodyComponent.velocity.x > 0)
             ? projectileEmitterComponent.projectileVelocity.x
@@ -82,7 +92,7 @@ void ProjectileEmitterSystem::CreateProjectile(
     }
 
     Entity projectile = registry->CreateEntity();
-    registry->AddGroupToEntity(projectile, "Projectiles");
+    registry->AddGroupToEntity(projectile, groupPrefix + "Projectiles");
     registry->AddComponent<TransformComponent>(
         projectile, transformComponent.position, glm::vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(projectile, projectileDirection);
@@ -92,6 +102,8 @@ void ProjectileEmitterSystem::CreateProjectile(
                                                  glm::vec2(0, 0));
     registry->AddComponent<ProjectileComponent>(
         projectile, projectileEmitterComponent.projectileDuration,
-        projectileEmitterComponent.hitDamage,
-        projectileEmitterComponent.isFriendly);
+        projectileEmitterComponent.hitDamage);
+    registry->AddComponent<DamageComponent>(
+        projectile, projectileEmitterComponent.hitDamage);
+    registry->AddComponent<HitPointComponent>(projectile, 1, 1);
 }

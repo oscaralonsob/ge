@@ -1,5 +1,5 @@
-#ifndef HEALTHCOMPONENT_H
-#define HEALTHCOMPONENT_H
+#ifndef HEALTHCOMPONENT_HPP
+#define HEALTHCOMPONENT_HPP
 
 #include <glm/glm.hpp>
 

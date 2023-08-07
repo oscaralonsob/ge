@@ -13,6 +13,7 @@ SRC_FOLDER = ./src/*.cpp\
 			 ./src/Enemy/Systems/*.cpp\
 			 ./src/Player/Systems/*.cpp\
 			 ./src/Projectile/Systems/*.cpp\
+			 ./src/Health/Systems/*.cpp\
 			 ./libs/imgui/*.cpp
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -llua5.3
 OBJ_NAME = build/gameengine

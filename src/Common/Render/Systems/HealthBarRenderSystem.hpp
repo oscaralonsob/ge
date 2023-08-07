@@ -1,7 +1,7 @@
 #ifndef HEALTHBARRENDERSYSTEM_HPP
 #define HEALTHBARRENDERSYSTEM_HPP
 
-#include "../../../Components/HealthComponent.h"
+#include "../../../Health/Components/HealthComponent.hpp"
 #include "../../AssetStore/AssetStore.hpp"
 #include "../../ECS/System.hpp"
 #include "../../Physics/Components/TransformComponent.hpp"
@@ -20,7 +20,6 @@ public:
         RequireComponent<HealthBarComponent>();
     }
 
-    // TODO: cpp file pls
     void Update(SDL_Renderer* renderer,
                 const std::shared_ptr<AssetStore> assetStore, SDL_Rect& camera);
 };

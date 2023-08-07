@@ -27,13 +27,13 @@
 #include "../Common/Render/Systems/RenderSystem.hpp"
 #include "../Common/Render/Systems/SpriteBorderOverlayRenderSystem.hpp"
 #include "../Enemy/Systems/TargetMovementSystem.hpp"
+#include "../Health/Systems/DamageSystem.hpp"
 #include "../Player/Components/KeyboardControllerComponent.hpp"
 #include "../Player/Events/KeyPressedEvent.hpp"
 #include "../Player/Systems/KeyboardMovementSystem.hpp"
 #include "../Projectile/Components/ProjectileEmitterComponent.hpp"
 #include "../Projectile/Systems/ProjectileEmitterSystem.hpp"
 #include "../Projectile/Systems/ProjectileLifeCycleSystem.hpp"
-#include "../Systems/DamageSystem.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

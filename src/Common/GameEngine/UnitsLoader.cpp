@@ -1,7 +1,7 @@
 #include "UnitsLoader.hpp"
 
-#include "../../Components/HealthComponent.h"
 #include "../../Enemy/Components/TargetMovementComponent.hpp"
+#include "../../Health/Components/HealthComponent.hpp"
 #include "../../Player/Components/KeyboardControllerComponent.hpp"
 #include "../../Projectile/Components/ProjectileEmitterComponent.hpp"
 #include "../AssetStore/AssetStore.hpp"
