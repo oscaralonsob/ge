@@ -6,11 +6,6 @@
 
 #include <SDL2/SDL_ttf.h>
 
-int Game::windowWidth;
-int Game::windowHeight;
-int Game::mapWidth;
-int Game::mapHeight;
-
 Game::Game() {
 }
 
@@ -196,7 +191,8 @@ void Game::Update() {
     registry->GetSystem<CollisionSystem>().Update();
     registry->GetSystem<MovementSystem>().Update(deltaTime);
     registry->GetSystem<AnimationSystem>().Update(deltaTime);
-    registry->GetSystem<CameraMovementSystem>().Update(camera);
+    registry->GetSystem<CameraMovementSystem>().Update(
+        camera, mapWidth, mapHeight, windowWidth, windowHeight);
     registry->GetSystem<ProjectileEmitterSystem>().Update(deltaTime);
     registry->GetSystem<ProjectileLifeCycleSystem>().Update();
     registry->GetSystem<KeyboardMovementSystem>().Update();

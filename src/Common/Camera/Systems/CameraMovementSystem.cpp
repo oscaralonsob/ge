@@ -5,17 +5,18 @@
 
 #include <SDL2/SDL.h>
 
-void CameraMovementSystem::Update(SDL_Rect& camera) {
+void CameraMovementSystem::Update(SDL_Rect& camera, int mapWidth, int mapHeight,
+                                  int windowWidth, int windowHeight) {
     for (Entity entity : GetSystemEntities()) {
         TransformComponent& transformComponent =
             registry->GetComponent<TransformComponent>(entity);
 
-        if (transformComponent.position.x + (camera.w / 2) < Game::mapWidth) {
-            camera.x = transformComponent.position.x - Game::windowWidth / 2;
+        if (transformComponent.position.x + (camera.w / 2) < mapWidth) {
+            camera.x = transformComponent.position.x - windowWidth / 2;
         }
 
-        if (transformComponent.position.y + (camera.h / 2) < Game::mapHeight) {
-            camera.y = transformComponent.position.y - Game::windowHeight / 2;
+        if (transformComponent.position.y + (camera.h / 2) < mapHeight) {
+            camera.y = transformComponent.position.y - windowHeight / 2;
         }
 
         camera.x = camera.x < 0 ? 0 : camera.x;

@@ -15,7 +15,8 @@ public:
         RequireComponent<TransformComponent>();
     }
 
-    void Update(class SDL_Rect& camera);
+    void Update(class SDL_Rect& camera, int mapWidth, int mapHeight,
+                int windowWidth, int windowHeight);
 };
 
 #endif

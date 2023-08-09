@@ -56,6 +56,11 @@ private:
     bool isDebug;
     int milisecsPrevoiusFrame;
 
+    int mapWidth;
+    int mapHeight;
+    int windowWidth;
+    int windowHeight;
+
     std::shared_ptr<Registry> registry;
     std::shared_ptr<AssetStore> assetStore;
     std::shared_ptr<EventBus> eventBus;
@@ -71,11 +76,6 @@ private:
 public:
     Game();
     ~Game();
-
-    static int mapWidth;
-    static int mapHeight;
-    static int windowWidth;
-    static int windowHeight;
 
     void Initialize(bool debugMode);
     void Run();
