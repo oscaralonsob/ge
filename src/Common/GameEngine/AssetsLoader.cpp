@@ -6,10 +6,8 @@
 
 AssetsLoader::AssetsLoader(std::shared_ptr<EventBus> eventBus,
                            std::shared_ptr<AssetStore> assetStore,
-                           std::shared_ptr<LevelReader> levelReader) {
-    this->eventBus = eventBus;
-    this->assetStore = assetStore;
-    this->levelReader = levelReader;
+                           std::shared_ptr<LevelReader> levelReader)
+    : eventBus(eventBus), assetStore(assetStore), levelReader(levelReader) {
 }
 
 void AssetsLoader::Load() {

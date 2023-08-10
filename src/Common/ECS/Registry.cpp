@@ -1,9 +1,8 @@
 #include "Registry.hpp"
 
 Registry::Registry(std::shared_ptr<EventBus> eventBus,
-                   std::shared_ptr<AssetStore> assetStore) {
-    this->eventBus = eventBus;
-    this->assetStore = assetStore;
+                   std::shared_ptr<AssetStore> assetStore)
+    : eventBus(eventBus), assetStore(assetStore) {
 }
 
 Entity Registry::CreateEntity() {

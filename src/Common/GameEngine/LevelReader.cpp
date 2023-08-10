@@ -1,6 +1,6 @@
 #include "LevelReader.hpp"
 
-LevelReader::LevelReader(std::string file) {
+LevelReader::LevelReader(const std::string file) {
     lua.open_libraries(sol::lib::base);
     std::string filePath = "./assets/config/" + file + ".lua";
     sol::load_result script = lua.load_file(filePath);

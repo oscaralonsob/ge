@@ -18,10 +18,8 @@
 
 UnitsLoader::UnitsLoader(std::shared_ptr<EventBus> eventBus,
                          std::shared_ptr<Registry> registry,
-                         std::shared_ptr<LevelReader> levelReader) {
-    this->eventBus = eventBus;
-    this->registry = registry;
-    this->levelReader = levelReader;
+                         std::shared_ptr<LevelReader> levelReader)
+    : eventBus(eventBus), registry(registry), levelReader(levelReader) {
 }
 
 void UnitsLoader::Load() {

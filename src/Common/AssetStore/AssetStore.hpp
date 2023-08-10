@@ -11,8 +11,8 @@
 
 class AssetStore {
 private:
-    class SDL_Renderer* renderer;
     std::shared_ptr<EventBus> eventBus;
+    class SDL_Renderer* renderer;
 
     std::map<std::string, class SDL_Texture*> textures;
     std::map<std::string, TTF_Font*> fonts;

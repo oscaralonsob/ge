@@ -1,7 +1,6 @@
 #include "Entity.hpp"
 
-Entity::Entity(int id) {
-    this->id = id;
+Entity::Entity(int id) : id(id) {
 }
 
 int Entity::GetId() const {

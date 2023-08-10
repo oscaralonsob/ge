@@ -2,10 +2,8 @@
 
 System::System(std::shared_ptr<Registry> registry,
                std::shared_ptr<EventBus> eventBus,
-               std::shared_ptr<AssetStore> assetStore) {
-    this->registry = registry;
-    this->eventBus = eventBus;
-    this->assetStore = assetStore;
+               std::shared_ptr<AssetStore> assetStore)
+    : registry(registry), eventBus(eventBus), assetStore(assetStore) {
 }
 
 void System::AddEntityToSystem(Entity entity) {

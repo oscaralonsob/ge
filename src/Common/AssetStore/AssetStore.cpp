@@ -4,9 +4,8 @@
 #include <SDL2/SDL_image.h>
 
 AssetStore::AssetStore(std::shared_ptr<EventBus> eventBus,
-                       SDL_Renderer* renderer) {
-    this->eventBus = eventBus;
-    this->renderer = renderer;
+                       SDL_Renderer* renderer)
+    : eventBus(eventBus), renderer(renderer) {
     this->eventBus->EmitEvent<LogRequestEvent>("AssetStore created");
 }
 

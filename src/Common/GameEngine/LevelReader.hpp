@@ -14,7 +14,7 @@ private:
     sol::state lua;
 
 public:
-    LevelReader(std::string file);
+    LevelReader(const std::string file);
     ~LevelReader();
 
     void GetSystems();
