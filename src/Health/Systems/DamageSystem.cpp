@@ -26,7 +26,7 @@ void DamageSystem::OnCollision(CollisionEvent& event) {
         ResolveCollision(event.b, event.a);
     }
 }
-
+// TODO: I think entity could be const...
 bool DamageSystem::CheckCollision(Entity entityA, Entity entityB) {
     // TODO: group of groups
     bool collision =

@@ -5,8 +5,9 @@
 
 #include <SDL2/SDL.h>
 
-void CameraMovementSystem::Update(SDL_Rect& camera, int mapWidth, int mapHeight,
-                                  int windowWidth, int windowHeight) {
+void CameraMovementSystem::Update(SDL_Rect& camera, const int mapWidth,
+                                  const int mapHeight, const int windowWidth,
+                                  const int windowHeight) {
     for (Entity entity : GetSystemEntities()) {
         TransformComponent& transformComponent =
             registry->GetComponent<TransformComponent>(entity);

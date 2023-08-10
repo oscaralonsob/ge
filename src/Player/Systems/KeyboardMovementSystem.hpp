@@ -26,8 +26,8 @@ public:
     }
 
     void SubscribeToEvents();
-    void OnKeyPressed(KeyPressedEvent& event);
-    void OnKeyReleased(KeyReleasedEvent& event);
+    void OnKeyPressed(const KeyPressedEvent& event);
+    void OnKeyReleased(const KeyReleasedEvent& event);
     void Update();
 };
 

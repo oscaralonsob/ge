@@ -2,7 +2,7 @@
 
 #include "../../ECS/Registry.hpp"
 
-void MovementSystem::Update(double deltaTime) {
+void MovementSystem::Update(const double deltaTime) {
     for (Entity entity : GetSystemEntities()) {
         TransformComponent& transform =
             registry->GetComponent<TransformComponent>(entity);

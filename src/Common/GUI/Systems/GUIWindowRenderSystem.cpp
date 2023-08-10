@@ -5,7 +5,8 @@
 #include <SDL2/SDL.h>
 #include <memory>
 
-void GUIWindowRenderSystem::Update(SDL_Renderer* renderer, SDL_Rect& camera) {
+void GUIWindowRenderSystem::Update(SDL_Renderer* renderer,
+                                   const SDL_Rect& camera) {
     for (Entity entity : GetSystemEntities()) {
         GUIWindowComponent& window =
             registry->GetComponent<GUIWindowComponent>(entity);

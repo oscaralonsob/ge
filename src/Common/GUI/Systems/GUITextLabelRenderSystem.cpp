@@ -7,7 +7,7 @@
 
 void GUITextLabelRenderSystem::Update(
     SDL_Renderer* renderer, const std::shared_ptr<AssetStore> assetStore,
-    SDL_Rect& camera) {
+    const SDL_Rect& camera) {
     for (Entity entity : GetSystemEntities()) {
         GUITextLabelComponent& textLabel =
             registry->GetComponent<GUITextLabelComponent>(entity);

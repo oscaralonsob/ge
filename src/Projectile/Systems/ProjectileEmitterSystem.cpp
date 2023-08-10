@@ -12,11 +12,11 @@
 #include <glm/glm.hpp>
 
 void ProjectileEmitterSystem::SubscribeToEvents() {
-    eventBus->SubscribeToEvent<KeyPressedEvent>(
+    eventBus->SubscribeToEvent<const KeyPressedEvent>(
         this, &ProjectileEmitterSystem::OnKeyPressed);
 }
 
-void ProjectileEmitterSystem::OnKeyPressed(KeyPressedEvent& event) {
+void ProjectileEmitterSystem::OnKeyPressed(const KeyPressedEvent& event) {
     if (event.symbol == SDLK_SPACE) {
         for (Entity entity : GetSystemEntities()) {
             if (entity.GetId() != registry->GetEntityByTag("Player")
@@ -37,7 +37,7 @@ void ProjectileEmitterSystem::OnKeyPressed(KeyPressedEvent& event) {
     }
 }
 
-void ProjectileEmitterSystem::Update(double deltaTime) {
+void ProjectileEmitterSystem::Update(const double deltaTime) {
     int currentTicks = SDL_GetTicks();
     for (Entity entity : GetSystemEntities()) {
         const TransformComponent transformComponent =
@@ -58,7 +58,7 @@ void ProjectileEmitterSystem::Update(double deltaTime) {
 
 void ProjectileEmitterSystem::CreateProjectile(
     const TransformComponent transformComponent,
-    ProjectileEmitterComponent& projectileEmitterComponent,
+    const ProjectileEmitterComponent& projectileEmitterComponent,
     const RigidBodyComponent& rigidBodyComponent) {
     std::string groupPrefix = "";
     glm::vec2 projectileDirection = glm::vec2(0, 0);

@@ -3,7 +3,7 @@
 #include "../../ECS/Registry.hpp"
 
 void SpriteBorderOverlayRenderSystem::Update(SDL_Renderer* renderer,
-                                             SDL_Rect& camera) {
+                                             const SDL_Rect& camera) {
     for (auto entity : GetSystemEntities()) {
         const auto transform =
             registry->GetComponent<TransformComponent>(entity);

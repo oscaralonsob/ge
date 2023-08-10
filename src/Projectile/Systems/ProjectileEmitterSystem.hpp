@@ -18,12 +18,12 @@ public:
     }
 
     void SubscribeToEvents();
-    void OnKeyPressed(KeyPressedEvent& event);
-    void Update(double deltaTime);
-    void
-    CreateProjectile(const TransformComponent transformComponent,
-                     ProjectileEmitterComponent& projectileEmitterComponent,
-                     const RigidBodyComponent& rigidBodyComponent);
+    void OnKeyPressed(const KeyPressedEvent& event);
+    void Update(const double deltaTime);
+    void CreateProjectile(
+        const TransformComponent transformComponent,
+        const ProjectileEmitterComponent& projectileEmitterComponent,
+        const RigidBodyComponent& rigidBodyComponent);
 };
 
 #endif

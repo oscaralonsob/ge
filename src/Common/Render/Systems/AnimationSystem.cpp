@@ -5,7 +5,7 @@
 #include "../Components/AnimationComponent.hpp"
 #include "../Components/SpriteComponent.hpp"
 
-void AnimationSystem::Update(double deltaTime) {
+void AnimationSystem::Update(const double deltaTime) {
     for (Entity entity : GetSystemEntities()) {
         AnimationComponent& animationComponent =
             registry->GetComponent<AnimationComponent>(entity);

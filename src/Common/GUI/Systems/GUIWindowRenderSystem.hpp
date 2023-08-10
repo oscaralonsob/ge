@@ -14,7 +14,7 @@ public:
         RequireComponent<GUIWindowComponent>();
     }
 
-    void Update(SDL_Renderer* renderer, SDL_Rect& camera);
+    void Update(SDL_Renderer* renderer, const SDL_Rect& camera);
 };
 
 #endif

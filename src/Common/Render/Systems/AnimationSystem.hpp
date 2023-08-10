@@ -15,7 +15,7 @@ public:
         RequireComponent<SpriteComponent>();
     }
 
-    void Update(double deltaTime);
+    void Update(const double deltaTime);
 };
 
 #endif

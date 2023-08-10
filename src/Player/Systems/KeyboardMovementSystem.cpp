@@ -3,17 +3,17 @@
 #include "../../Common/ECS/Registry.hpp"
 
 void KeyboardMovementSystem::SubscribeToEvents() {
-    eventBus->SubscribeToEvent<KeyPressedEvent>(
+    eventBus->SubscribeToEvent<const KeyPressedEvent>(
         this, &KeyboardMovementSystem::OnKeyPressed);
-    eventBus->SubscribeToEvent<KeyReleasedEvent>(
+    eventBus->SubscribeToEvent<const KeyReleasedEvent>(
         this, &KeyboardMovementSystem::OnKeyReleased);
 }
 
-void KeyboardMovementSystem::OnKeyPressed(KeyPressedEvent& event) {
+void KeyboardMovementSystem::OnKeyPressed(const KeyPressedEvent& event) {
     SwitchFlags(event.symbol, true);
 }
 
-void KeyboardMovementSystem::OnKeyReleased(KeyReleasedEvent& event) {
+void KeyboardMovementSystem::OnKeyReleased(const KeyReleasedEvent& event) {
     SwitchFlags(event.symbol, false);
 }
 

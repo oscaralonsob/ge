@@ -15,7 +15,7 @@ public:
         RequireComponent<RigidBodyComponent>();
     }
 
-    void Update(double deltaTime);
+    void Update(const double deltaTime);
 };
 
 #endif

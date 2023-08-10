@@ -9,8 +9,8 @@
 #include <memory>
 
 void RenderSystem::Update(SDL_Renderer* renderer,
-                          std::shared_ptr<AssetStore> assetStore,
-                          SDL_Rect& camera) {
+                          const std::shared_ptr<AssetStore> assetStore,
+                          const SDL_Rect& camera) {
     std::vector<Entity> sortedEntites = GetSystemEntities();
     std::sort(sortedEntites.begin(), sortedEntites.end(),
               [this](const Entity entity1, const Entity entity2) -> bool {
