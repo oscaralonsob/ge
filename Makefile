@@ -15,7 +15,7 @@ SRC_FOLDER = ./src/*.cpp\
 			 ./src/Projectile/Systems/*.cpp\
 			 ./src/Health/Systems/*.cpp\
 			 ./libs/imgui/*.cpp
-LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf -llua5.3
+LINKER_FLAGS = `sdl2-config --libs` -lSDL2_image -lSDL2_ttf -llua5.3 
 OBJ_NAME = build/gameengine
 RUN_VARIABLES = -d
 

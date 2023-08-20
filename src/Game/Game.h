@@ -39,8 +39,8 @@
 #include <SDL2/SDL_image.h>
 #include <fstream>
 #include <imgui/imgui.h>
-#include <imgui/imgui_impl_sdl.h>
-#include <imgui/imgui_sdl.h>
+#include <imgui/imgui_impl_sdl2.h>
+#include <imgui/imgui_impl_sdlrenderer2.h>
 #include <iostream>
 
 const double MILISENCOS_TO_SECONDS = 1000.0f;

@@ -50,7 +50,8 @@ void Game::Initialize(bool debugMode) {
 
     if (isDebug) {
         ImGui::CreateContext();
-        ImGuiSDL::Initialize(renderer, windowWidth, windowHeight);
+        ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+        ImGui_ImplSDLRenderer2_Init(renderer);
     }
 
     eventBus = std::make_shared<EventBus>();
@@ -215,13 +216,15 @@ void Game::Render() {
                                                            camera);
     registry->GetSystem<GUIWindowRenderSystem>().Update(renderer, camera);
     if (isDebug) {
+        ImGui_ImplSDLRenderer2_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
 
         registry->GetSystem<LogSystem>().Update();
         registry->GetSystem<LogMousePositionSystem>().Update(camera);
 
         ImGui::Render();
-        ImGuiSDL::Render(ImGui::GetDrawData());
+        ImGui_ImplSDLRenderer2_RenderDrawData(ImGui::GetDrawData());
     }
 
     SDL_RenderPresent(renderer);
@@ -238,7 +241,8 @@ void Game::Run() {
 
 void Game::Destroy() {
     if (isDebug) {
-        ImGuiSDL::Deinitialize();
+        ImGui_ImplSDLRenderer2_Shutdown();
+        ImGui_ImplSDL2_Shutdown();
         ImGui::DestroyContext();
     }
     SDL_DestroyRenderer(renderer);
