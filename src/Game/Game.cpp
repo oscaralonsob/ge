@@ -108,6 +108,7 @@ void Game::LoadLevel() {
     registry->AddSystem<DamageSystem>();
     registry->AddSystem<CollisionSystem>();
     registry->AddSystem<MovementSystem>();
+    registry->AddSystem<RenderMapSystem>();
     registry->AddSystem<RenderSystem>();
     registry->AddSystem<HealthBarRenderSystem>();
     registry->AddSystem<AnimationSystem>();
@@ -134,6 +135,9 @@ void Game::LoadLevel() {
 
 // TODO: tilemap component?
 void Game::LoadTileMap() {
+    Entity map = registry->CreateEntity();
+    std::vector<glm::vec2> mapVector(10, glm::vec2(-1, -1));
+    int index = 0;
     std::ifstream myfile("./assets/tilemaps/jungle.map");
     std::string line;
     size_t pos = 0;
@@ -143,26 +147,26 @@ void Game::LoadTileMap() {
     int x = 0;
     int y = 0;
     while (std::getline(myfile, line)) {
+        x = 0;
         while ((pos = line.find(delimiter)) != std::string::npos) {
             token = line.substr(0, pos);
             line.erase(0, pos + delimiter.length());
-            Entity tile = registry->CreateEntity();
-            registry->AddGroupToEntity(tile, "tiles");
-            registry->AddComponent<TransformComponent>(
-                tile, glm::vec2(x * tileSize * 3.0, y * tileSize * 3.0),
-                glm::vec2(3.0, 3.0), 0.0);
-            registry->AddComponent<SpriteComponent>(
-                tile, "tilemap", 0, glm::vec2(tileSize, tileSize),
-                glm::vec2(std::stoi(token.substr(1, 2)),
-                          std::stoi(token.substr(0, 1))));
-            registry->AddComponent<SpriteBorderOverlayComponent>(tile);
+
+            if (index == mapVector.size()) {
+                mapVector.resize(mapVector.size() * 2, glm::vec2(-1, -1));
+            }
+            mapVector[index] = glm::vec2(std::stoi(token.substr(1, 2)),
+                                         std::stoi(token.substr(0, 1)));
+            index++;
             x++;
         }
         mapWidth = x * tileSize * 3;
-        x = 0;
         y++;
     }
     mapHeight = y * tileSize * 3;
+    // TODO: add scale
+    registry->AddComponent<MapComponent>(
+        map, "tilemap", glm::vec2(tileSize, tileSize), mapVector, x - 1);
 }
 
 void Game::Setup() {
@@ -206,6 +210,8 @@ void Game::Render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+    registry->GetSystem<RenderMapSystem>().Update(renderer, assetStore, camera);
 
     registry->GetSystem<RenderSystem>().Update(renderer, assetStore, camera);
     registry->GetSystem<HealthBarRenderSystem>().Update(renderer, assetStore,
