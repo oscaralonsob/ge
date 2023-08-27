@@ -134,6 +134,8 @@ void Game::LoadLevel() {
 }
 
 // TODO: tilemap component?
+// TODO: map height is not needed
+// TODO: there is an error when reading, but will be solved when migrated to sol
 void Game::LoadTileMap() {
     Entity map = registry->CreateEntity();
     std::vector<glm::vec2> mapVector(10, glm::vec2(-1, -1));
@@ -166,7 +168,7 @@ void Game::LoadTileMap() {
     mapHeight = y * tileSize * 3;
     // TODO: add scale
     registry->AddComponent<MapComponent>(
-        map, "tilemap", glm::vec2(tileSize, tileSize), mapVector, x - 1);
+        map, "tilemap", glm::vec2(tileSize, tileSize), mapVector, x);
 }
 
 void Game::Setup() {

@@ -34,7 +34,7 @@ void RenderMapSystem::Update(SDL_Renderer* renderer,
                              assetStore->GetTexture(mapComponent.textureId),
                              &srcRect, &dstRect, 0.0, NULL, SDL_FLIP_NONE);
             x++;
-            if (x > mapComponent.width) {
+            if (x >= mapComponent.width) {
                 x = 0;
                 y++;
             }
