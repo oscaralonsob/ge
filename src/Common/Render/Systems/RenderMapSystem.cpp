@@ -25,14 +25,10 @@ void RenderMapSystem::Update(SDL_Renderer* renderer,
                 static_cast<int>(mapComponent.tileSize.x),
                 static_cast<int>(mapComponent.tileSize.y)};
             SDL_Rect dstRect = {
-                static_cast<int>(x * mapComponent.tileSize.x *
-                                 3 - camera.x),
-                static_cast<int>(y * mapComponent.tileSize.y *
-                                 3 - camera.y),
-                static_cast<int>(mapComponent.tileSize.x *
-                                 3),
-                static_cast<int>(mapComponent.tileSize.y *
-                                 3)};
+                static_cast<int>(x * mapComponent.tileSize.x * 3 - camera.x),
+                static_cast<int>(y * mapComponent.tileSize.y * 3 - camera.y),
+                static_cast<int>(mapComponent.tileSize.x * 3),
+                static_cast<int>(mapComponent.tileSize.y * 3)};
 
             SDL_RenderCopyEx(renderer,
                              assetStore->GetTexture(mapComponent.textureId),
