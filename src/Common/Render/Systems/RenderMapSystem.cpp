@@ -16,28 +16,41 @@ void RenderMapSystem::Update(SDL_Renderer* renderer,
         MapComponent& mapComponent =
             registry->GetComponent<MapComponent>(entity);
 
-        int x = 0;
-        int y = 0;
-        for (glm::vec2 tile : mapComponent.tiles) {
-            SDL_Rect srcRect = {
-                static_cast<int>(tile.x * mapComponent.tileSize.x),
-                static_cast<int>(tile.y * mapComponent.tileSize.y),
-                static_cast<int>(mapComponent.tileSize.x),
-                static_cast<int>(mapComponent.tileSize.y)};
-            SDL_Rect dstRect = {
-                static_cast<int>(x * mapComponent.tileSize.x * 3 - camera.x),
-                static_cast<int>(y * mapComponent.tileSize.y * 3 - camera.y),
-                static_cast<int>(mapComponent.tileSize.x * 3),
-                static_cast<int>(mapComponent.tileSize.y * 3)};
+        int currentX = -camera.w / 2 - mapComponent.tileSize.x;
+        int currentY = -camera.h / 2 - mapComponent.tileSize.y;
+        int maxX = camera.w / 2 + mapComponent.tileSize.x;
+        int maxY = camera.h / 2 + mapComponent.tileSize.y;
+        int indexX = 0;
+        int indexY = 0;
 
-            SDL_RenderCopyEx(renderer,
-                             assetStore->GetTexture(mapComponent.textureId),
-                             &srcRect, &dstRect, 0.0, NULL, SDL_FLIP_NONE);
-            x++;
-            if (x >= mapComponent.width) {
-                x = 0;
-                y++;
+        // TODO: add position to mapComponent (or add position component)
+        while (currentY < maxY) {
+            while (currentX < maxX) {
+                glm::vec2 tile =
+                    mapComponent.tiles[indexX + indexY * mapComponent.width];
+
+                SDL_Rect srcRect = {
+                    static_cast<int>(tile.x * mapComponent.tileSize.x),
+                    static_cast<int>(tile.y * mapComponent.tileSize.y),
+                    static_cast<int>(mapComponent.tileSize.x),
+                    static_cast<int>(mapComponent.tileSize.y)};
+                SDL_Rect dstRect = {
+                    static_cast<int>(currentX - camera.x),
+                    static_cast<int>(currentY - camera.y),
+                    static_cast<int>(mapComponent.tileSize.x * 3),
+                    static_cast<int>(mapComponent.tileSize.y * 3)};
+
+                SDL_RenderCopyEx(renderer,
+                                 assetStore->GetTexture(mapComponent.textureId),
+                                 &srcRect, &dstRect, 0.0, NULL, SDL_FLIP_NONE);
+
+                currentX += mapComponent.tileSize.x * 3;
+                indexX = indexX >= mapComponent.width ? 0 : indexX + 1;
             }
+            indexX = 0;
+            currentX = -camera.w / 2 - mapComponent.tileSize.x;
+            indexY = indexY >= mapComponent.width ? 0 : indexY + 1;
+            currentY += mapComponent.tileSize.y * 3;
         }
     }
 }
