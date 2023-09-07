@@ -3,6 +3,7 @@
 
 #include "../../AssetStore/AssetStore.hpp"
 #include "../../ECS/System.hpp"
+#include "../../Physics/Components/TransformComponent.hpp"
 #include "../Components/MapComponent.hpp"
 
 #include <SDL2/SDL.h>
@@ -15,6 +16,7 @@ public:
                     std::shared_ptr<AssetStore> assetStore)
         : System(registry, eventBus, assetStore) {
         RequireComponent<MapComponent>();
+        RequireComponent<TransformComponent>();
     }
 
     void Update(SDL_Renderer* renderer,

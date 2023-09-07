@@ -9,21 +9,27 @@
 #include <glm/glm.hpp>
 #include <memory>
 
+// TODO: move with camera somehow (not follow camera but draw new parts)
 void RenderMapSystem::Update(SDL_Renderer* renderer,
                              const std::shared_ptr<AssetStore> assetStore,
                              const SDL_Rect& camera) {
     for (Entity entity : GetSystemEntities()) {
-        MapComponent& mapComponent =
+        const MapComponent& mapComponent =
             registry->GetComponent<MapComponent>(entity);
+        const TransformComponent& transformComponent =
+            registry->GetComponent<TransformComponent>(entity);
 
-        int currentX = -camera.w / 2 - mapComponent.tileSize.x;
-        int currentY = -camera.h / 2 - mapComponent.tileSize.y;
-        int maxX = camera.w / 2 + mapComponent.tileSize.x;
-        int maxY = camera.h / 2 + mapComponent.tileSize.y;
+        int currentX = transformComponent.position.x - camera.w / 2 -
+                       mapComponent.tileSize.x * transformComponent.scale.x;
+        int currentY = transformComponent.position.y - camera.h / 2 -
+                       mapComponent.tileSize.y * transformComponent.scale.y;
+        int maxX =
+            camera.w / 2 + mapComponent.tileSize.x * transformComponent.scale.x;
+        int maxY =
+            camera.h / 2 + mapComponent.tileSize.y * transformComponent.scale.y;
         int indexX = 0;
         int indexY = 0;
 
-        // TODO: add position to mapComponent (or add position component)
         while (currentY < maxY) {
             while (currentX < maxX) {
                 glm::vec2 tile =
@@ -37,20 +43,24 @@ void RenderMapSystem::Update(SDL_Renderer* renderer,
                 SDL_Rect dstRect = {
                     static_cast<int>(currentX - camera.x),
                     static_cast<int>(currentY - camera.y),
-                    static_cast<int>(mapComponent.tileSize.x * 3),
-                    static_cast<int>(mapComponent.tileSize.y * 3)};
+                    static_cast<int>(mapComponent.tileSize.x *
+                                     transformComponent.scale.x),
+                    static_cast<int>(mapComponent.tileSize.y *
+                                     transformComponent.scale.y)};
 
                 SDL_RenderCopyEx(renderer,
                                  assetStore->GetTexture(mapComponent.textureId),
                                  &srcRect, &dstRect, 0.0, NULL, SDL_FLIP_NONE);
 
-                currentX += mapComponent.tileSize.x * 3;
+                currentX +=
+                    mapComponent.tileSize.x * transformComponent.scale.x;
                 indexX = indexX >= mapComponent.width ? 0 : indexX + 1;
             }
             indexX = 0;
-            currentX = -camera.w / 2 - mapComponent.tileSize.x;
+            currentX = transformComponent.position.x - camera.w / 2 -
+                       mapComponent.tileSize.x * transformComponent.scale.x;
             indexY = indexY >= mapComponent.width ? 0 : indexY + 1;
-            currentY += mapComponent.tileSize.y * 3;
+            currentY += mapComponent.tileSize.y * transformComponent.scale.y;
         }
     }
 }

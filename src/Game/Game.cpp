@@ -133,7 +133,6 @@ void Game::LoadLevel() {
     LoadTileMap();
 }
 
-// TODO: tilemap component?
 // TODO: map height is not needed
 // TODO: there is an error when reading, but will be solved when migrated to sol
 void Game::LoadTileMap() {
@@ -166,9 +165,11 @@ void Game::LoadTileMap() {
         y++;
     }
     mapHeight = y * tileSize * 3;
-    // TODO: add scale
+    // TODO: add to lua reader
     registry->AddComponent<MapComponent>(
         map, "tilemap", glm::vec2(tileSize, tileSize), mapVector, x);
+    registry->AddComponent<TransformComponent>(map, glm::vec2(0.0, 0.0),
+                                               glm::vec2(3.0, 3.0), 0.0);
 }
 
 void Game::Setup() {
