@@ -9,7 +9,6 @@
 #include <glm/glm.hpp>
 #include <memory>
 
-// TODO: move with camera somehow (not follow camera but draw new parts)
 void RenderMapSystem::Update(SDL_Renderer* renderer,
                              const std::shared_ptr<AssetStore> assetStore,
                              const SDL_Rect& camera) {

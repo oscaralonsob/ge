@@ -118,5 +118,5 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
         std::string tag = unitComponent.values.at("tag");
 
         registry->AddComponent<TargetMovementComponent>(unit, velocity, tag);
-    }
+    } // TODO: add the map renderer
 }
