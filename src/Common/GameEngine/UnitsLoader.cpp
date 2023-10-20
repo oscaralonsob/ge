@@ -2,6 +2,7 @@
 
 #include "../../Enemy/Components/TargetMovementComponent.hpp"
 #include "../../Health/Components/HealthComponent.hpp"
+#include "../../Physics2D/Vec2.hpp"
 #include "../../Player/Components/KeyboardControllerComponent.hpp"
 #include "../../Projectile/Components/ProjectileEmitterComponent.hpp"
 #include "../AssetStore/AssetStore.hpp"
@@ -15,6 +16,8 @@
 #include "DTO/Unit.hpp"
 #include "DTO/UnitComponent.hpp"
 #include "LevelReader.hpp"
+
+using namespace ge::physics2d;
 
 UnitsLoader::UnitsLoader(std::shared_ptr<EventBus> eventBus,
                          std::shared_ptr<Registry> registry,
@@ -49,8 +52,8 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
             unit, unitComponent.values.at("texture"), 1, glm::vec2(32.0, 32.0),
             glm::vec2(0.0, 0.0), false);
     } else if (unitComponent.type == "transform") {
-        glm::vec2 pos;
-        glm::vec2 size;
+        Vec2 pos;
+        Vec2 size;
         double rotation;
 
         rotation = std::stod(unitComponent.values.at("rotation"));
@@ -61,7 +64,7 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
 
         registry->AddComponent<TransformComponent>(unit, pos, size, rotation);
     } else if (unitComponent.type == "rigidbody") {
-        glm::vec2 velocity;
+        Vec2 velocity;
 
         velocity.x = std::stod(unitComponent.values.at("velocity.x"));
         velocity.y = std::stod(unitComponent.values.at("velocity.y"));
@@ -83,8 +86,8 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
 
         registry->AddComponent<HealthBarComponent>(unit, font);
     } else if (unitComponent.type == "boxCollider") {
-        glm::vec2 size;
-        glm::vec2 offset;
+        Vec2 size;
+        Vec2 offset;
 
         size.x = std::stod(unitComponent.values.at("size.x"));
         size.y = std::stod(unitComponent.values.at("size.y"));
@@ -93,7 +96,7 @@ void UnitsLoader::LoadComponent(Entity unit, UnitComponent unitComponent) {
 
         registry->AddComponent<BoxColliderComponent>(unit, size, offset);
     } else if (unitComponent.type == "projectileEmitter") {
-        glm::vec2 projectileVelocity;
+        Vec2 projectileVelocity;
         int projectileFrequency;
         int projectileDuration;
         int hitDamage;

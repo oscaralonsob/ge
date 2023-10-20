@@ -1,12 +1,14 @@
 #ifndef RIGIDBODYCOMPONENT_HPP
 #define RIGIDBODYCOMPONENT_HPP
 
-#include <glm/glm.hpp>
+#include "../../../Physics2D/Vec2.hpp"
+
+using namespace ge::physics2d;
 
 struct RigidBodyComponent {
-    glm::vec2 velocity;
+    Vec2 velocity;
 
-    RigidBodyComponent(glm::vec2 velocity = glm::vec2(0.0, 0.0)) {
+    RigidBodyComponent(Vec2 velocity = Vec2(0.0, 0.0)) {
         this->velocity = velocity;
     }
 };

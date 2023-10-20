@@ -3,8 +3,11 @@
 #include "../Common/GameEngine/AssetsLoader.hpp"
 #include "../Common/GameEngine/LevelReader.hpp"
 #include "../Common/GameEngine/UnitsLoader.hpp"
+#include "../Physics2D/Vec2.hpp"
 
 #include <SDL2/SDL_ttf.h>
+
+using namespace ge::physics2d;
 
 Game::Game() {
 }
@@ -168,8 +171,8 @@ void Game::LoadTileMap() {
     // TODO: add to lua reader
     registry->AddComponent<MapComponent>(
         map, "tilemap", glm::vec2(tileSize, tileSize), mapVector, x);
-    registry->AddComponent<TransformComponent>(map, glm::vec2(0.0, 0.0),
-                                               glm::vec2(3.0, 3.0), 0.0);
+    registry->AddComponent<TransformComponent>(map, Vec2(0.0, 0.0),
+                                               Vec2(3.0, 3.0), 0.0);
 }
 
 void Game::Setup() {

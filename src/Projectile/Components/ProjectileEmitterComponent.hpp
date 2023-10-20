@@ -1,19 +1,21 @@
 #ifndef PROJECTILEEMITTERCOMPONENT_H
 #define PROJECTILEEMITTERCOMPONENT_H
 
+#include "../../Physics2D/Vec2.hpp"
+
 #include <SDL2/SDL.h>
-#include <glm/glm.hpp>
+
+using namespace ge::physics2d;
 
 struct ProjectileEmitterComponent {
-    glm::vec2 projectileVelocity;
+    Vec2 projectileVelocity;
     int projectileFrequency;
     int projectileDuration;
     int hitDamage;
     bool isFriendly; // TODO: migrate to tags aand gruops maybe
     int lastEmissionTime;
-
-    ProjectileEmitterComponent(glm::vec2 projectileVelocity = glm::vec2(0.0,
-                                                                        0.0),
+    // TODO: correct init
+    ProjectileEmitterComponent(Vec2 projectileVelocity = Vec2(0.0, 0.0),
                                int projectileFrequency = 0,
                                int projectileDuration = 10000,
                                int hitDamage = 10, bool isFriendly = false) {

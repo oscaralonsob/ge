@@ -6,10 +6,13 @@
 #include "../../Common/Render/Components/SpriteComponent.hpp"
 #include "../../Health/Components/DamageComponent.hpp"
 #include "../../Health/Components/HitPointComponent.hpp"
+#include "../../Physics2D/Vec2.hpp"
 #include "../Components/ProjectileComponent.hpp"
 
 #include <SDL2/SDL.h>
 #include <glm/glm.hpp>
+
+using namespace ge::physics2d;
 
 void ProjectileEmitterSystem::SubscribeToEvents() {
     eventBus->SubscribeToEvent<const KeyPressedEvent>(
@@ -61,7 +64,7 @@ void ProjectileEmitterSystem::CreateProjectile(
     const ProjectileEmitterComponent& projectileEmitterComponent,
     const RigidBodyComponent& rigidBodyComponent) {
     std::string groupPrefix = "";
-    glm::vec2 projectileDirection = glm::vec2(0, 0);
+    Vec2 projectileDirection = Vec2(0, 0);
 
     if (projectileEmitterComponent.isFriendly) {
         groupPrefix = "Ally";
@@ -94,12 +97,12 @@ void ProjectileEmitterSystem::CreateProjectile(
     Entity projectile = registry->CreateEntity();
     registry->AddGroupToEntity(projectile, groupPrefix + "Projectiles");
     registry->AddComponent<TransformComponent>(
-        projectile, transformComponent.position, glm::vec2(1.0, 1.0), 0.0);
+        projectile, transformComponent.position, Vec2(1.0, 1.0), 0.0);
     registry->AddComponent<RigidBodyComponent>(projectile, projectileDirection);
     registry->AddComponent<SpriteComponent>(projectile, "bullet-image", 4,
                                             glm::vec2(3.0, 3.0));
-    registry->AddComponent<BoxColliderComponent>(projectile, glm::vec2(3, 3),
-                                                 glm::vec2(0, 0));
+    registry->AddComponent<BoxColliderComponent>(projectile, Vec2(3, 3),
+                                                 Vec2(0, 0));
     registry->AddComponent<ProjectileComponent>(
         projectile, projectileEmitterComponent.projectileDuration,
         projectileEmitterComponent.hitDamage);

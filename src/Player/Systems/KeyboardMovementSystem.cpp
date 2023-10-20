@@ -1,6 +1,9 @@
 #include "KeyboardMovementSystem.hpp"
 
 #include "../../Common/ECS/Registry.hpp"
+#include "../../Physics2D/Vec2.hpp"
+
+using namespace ge::physics2d;
 
 void KeyboardMovementSystem::SubscribeToEvents() {
     eventBus->SubscribeToEvent<const KeyPressedEvent>(
@@ -24,26 +27,26 @@ void KeyboardMovementSystem::Update() {
         RigidBodyComponent& rigidBodyComponent =
             registry->GetComponent<RigidBodyComponent>(entity);
 
-        glm::vec2 calculatedVelocity = glm::vec2(0.0, 0.0);
+        Vec2 calculatedVelocity = Vec2(0.0, 0.0);
 
         if (isUpBeingPressed) {
-            calculatedVelocity += glm::vec2(0.0, -1.0);
+            calculatedVelocity = calculatedVelocity + Vec2(0.0, -1.0);
         }
 
         if (isRightBeingPressed) {
-            calculatedVelocity += glm::vec2(1.0, 0.0);
+            calculatedVelocity = calculatedVelocity + Vec2(1.0, 0.0);
         }
 
         if (isDownBeingPressed) {
-            calculatedVelocity += glm::vec2(0.0, 1.0);
+            calculatedVelocity = calculatedVelocity + Vec2(0.0, 1.0);
         }
 
         if (isLeftBeingPressed) {
-            calculatedVelocity += glm::vec2(-1.0, 0.0);
+            calculatedVelocity = calculatedVelocity + Vec2(-1.0, 0.0);
         }
 
         rigidBodyComponent.velocity =
-            keyboardControllerComponent.velocity * calculatedVelocity;
+            calculatedVelocity * keyboardControllerComponent.velocity;
     }
 }
 

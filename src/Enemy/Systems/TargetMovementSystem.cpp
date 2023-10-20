@@ -1,6 +1,9 @@
 #include "TargetMovementSystem.hpp"
 
 #include "../../Common/ECS/Registry.hpp"
+#include "../../Physics2D/Vec2.hpp"
+
+using namespace ge::physics2d;
 
 void TargetMovementSystem::Update() {
     for (Entity entity : GetSystemEntities()) {
@@ -17,12 +20,12 @@ void TargetMovementSystem::Update() {
         const TransformComponent targetTransformComponent =
             registry->GetComponent<TransformComponent>(targetEntity);
 
-        glm::vec2 calculatedVelocity =
+        Vec2 calculatedVelocity =
             targetTransformComponent.position - transformComponent.position;
 
-        calculatedVelocity = glm::normalize(calculatedVelocity);
+        calculatedVelocity = calculatedVelocity.Normalize();
 
         rigidBodyComponent.velocity =
-            targetMovementComponent.velocity * calculatedVelocity;
+            calculatedVelocity * targetMovementComponent.velocity;
     }
 }

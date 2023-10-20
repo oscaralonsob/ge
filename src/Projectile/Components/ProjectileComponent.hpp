@@ -8,6 +8,7 @@ struct ProjectileComponent {
     int hitDamage;
     int startTime;
 
+    // TODO: correct init
     ProjectileComponent(int duration = 0, int hitDamage = 0) {
         this->projectileDuration = duration;
         this->hitDamage = hitDamage;
